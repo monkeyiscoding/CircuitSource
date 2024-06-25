@@ -1,0 +1,500 @@
+:root {
+    --primary-color: orangered;
+    --secondary-color: #f4f4f4;
+    --shadow-color: #e6e3e3;
+    --font-default: Sans-serif;
+    --bg: white;
+    --color: black;
+    --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  body {
+    margin: 0px;
+    background-color: white;
+  }
+
+  .toolbar{
+    display: flex;
+    padding-left: 20PX;
+    width: 100%;
+    position: fixed;
+    margin-top: 0px;
+    top: 0px;
+    z-index: 10;
+    height: 80px;
+    align-items: center;
+    align-content: center;
+    background-color: white;
+    box-shadow: 0px 5px 5px var(--shadow-color);
+  }
+
+  .login-box{
+    margin-right: 25px;
+    width: 100px;
+    border: solid 1px grey;
+    border-radius: 100px;
+    height: 40px;
+    padding-left: 5px;
+    display:flex;
+    align-content: center;
+    align-items: center;
+    transition: 0.5s;
+  }
+
+  .login-box:hover {
+    background-color: black;
+    color: white;
+    border: solid 1px black;
+  }
+
+
+  .banner{
+    width: 96%;
+ 
+    height: 500px;
+    border-radius: 20px;
+    margin-top: 50px;
+    background-color: rgb(225, 224, 224);
+  }
+  .a-menu-active{
+    padding-bottom: 5px;
+    text-underline-offset: 15%;
+    color: var(--primary-color);
+  }
+
+  .a-menu{
+    text-decoration: none;
+    color: black;
+  }
+
+  .cart-container {
+    position: relative;
+    display: inline-block;
+    font-size: 24px; /* Adjust the size of the cart icon */
+    color: #333; /* Color of the cart icon */
+}
+
+.cart-indicator {
+    position: absolute;
+    top: -10px; /* Position the badge above the cart icon */
+    right: -10px; /* Position the badge to the right of the cart icon */
+    background-color: var(--primary-color); /* Background color of the badge */
+    color: white; /* Text color of the badge */
+    border-radius: 50%; /* Make the badge round */
+    padding: 2px 6px; /* Padding around the badge text */
+    font-size: 12px; /* Font size of the badge text */
+    font-weight: bold; /* Make the badge text bold */
+}
+
+.product-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 50px;
+  
+}
+
+.product-image img {
+  width: 300px;
+  height: 300px;
+  background-color:rgb(229, 228, 228);
+  padding: 30px;
+  border-radius: 20px;
+
+}
+.product-container {
+  display: flex;
+  background-color:white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 130px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  max-width: 1200px;
+}
+
+.product-details {
+  flex: 1;
+  padding: 20px;
+  padding-top: 50px;
+  padding-left: 30px;
+}
+
+.product-details h1 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.product-details p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+button i {
+  margin-left: 5px;
+}
+
+.add-to-cart {
+  background-color: black;
+  color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.buy-now {
+  background-color: white;
+  color: black;
+  border: 1px solid grey;
+  border-radius: 15px;
+  
+}
+
+
+.main-div{
+  width:80%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+/* Hover animation for buttons */
+.wrapper {
+  padding: 0;
+  filter: url('#goo');
+}
+
+.button {
+  display: inline-block;
+  text-align: center;
+  background: var(--primary-color);
+  color: var(--bg);
+  font-weight: bold;
+  padding: 1.0em 1.32em 1.03em;
+  line-height: 1;
+  border-radius: 0px;
+  position: relative;
+  min-width: 8.23em;
+  text-decoration: none;
+  font-family: var(--font);
+  font-size: 18px;
+}
+
+.button:before,
+.button:after {
+  width: 4.4em;
+  height: 2.95em;
+  position: absolute;
+  content: "";
+  display: inline-block;
+  background: var(--primary-color);
+  border-radius: 50%;
+  transition: transform 1s ease;
+  transform: scale(0);
+  z-index: -1;
+}
+
+.button:before {
+  top: -25%;
+  left: 20%;
+}
+
+.button:after {
+  bottom: -25%;
+  right: 20%;
+}
+
+.button:hover:before,
+.button:hover:after {
+  transform: none;
+}
+
+
+.home-products-div{
+
+  margin-top: 30px;
+  margin-bottom: 50px;
+  white-space: nowrap; /* Prevent line breaks */
+  overflow-x: auto;
+}
+
+
+.product-div-one{
+  display: inline-block;
+  
+  width: 150px;
+  margin-right: 20px;
+  height: 220px;
+  border-radius: 10px;
+  align-items: center;
+  justify-self: center;
+  text-align: center;
+  padding-top: 20px;
+  background-color: var(--secondary-color);
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999; /* Optional: Adjust the color of the strike-through */
+}
+.discounted-price {
+  color: red; /* Optional: Adjust the color of the discounted price */
+}
+
+.details-div-one{
+  width: 100%;
+  height: 450px;
+  border-radius: 50px;
+  background-color: var(--secondary-color);
+  display: flex;
+}
+
+.whyus-div{
+  text-align: center;
+  margin-bottom: 50px;
+
+}
+
+.whyus-div-one{
+  width: 20%;
+  height: 150px;
+  padding-top: 50px;
+  max-width: 300px;
+  padding-bottom: 50p;
+  background-color: white;
+  border-radius: 10px;
+  margin-right: 20px;
+  padding: 20px;
+  border: 1px solid grey;
+  margin-left: 20px;
+  box-shadow: 0px 0px 10px var(--shadow-color);
+}
+
+.whyus-div-two{
+  width: 25%;
+  height: 200px;
+  padding-top: 50px;
+  max-width: 300px;
+  padding-bottom: 50p;
+  margin-left: 20px;
+  background-color: white;
+  margin-right: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid grey;
+  box-shadow: 0px 0px 10px var(--shadow-color);
+}
+
+
+.how-div{
+  background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20230722/pngtree-reflections-on-office-desk-close-up-of-computer-screen-and-supplies-image_3783611.jpg"); /* Specify the path to your image */
+  background-size: cover; /* Optional: Cover the entire div */
+  background-position: center; /* Optional: Center the image */
+  width: 100%; /* Example width */
+  height: auto; /* Example height */
+
+}
+
+.how-div-fader {
+  width: 100%; /* Example width */
+  height: auto; /* Example height */
+  padding-top: 20px;
+  background-color: rgba(0, 0, 0, 0.383);
+  text-align: left;
+  padding-bottom: 30px;
+}
+
+.blur-div{
+  padding: 35px;
+  backdrop-filter: blur(8px); /* Adjust the blur radius */
+            -webkit-backdrop-filter: blur(8px); /* For Safari */
+            background-color: rgba(255, 255, 255, 0.329); 
+            border-radius: 20px;
+}
+
+.video-button{
+  background-color: rgba(0, 0, 0, 0.412);
+  border-radius: 100px;
+  border: 1px solid white;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+
+
+/* slide show */
+
+
+/*
+PURE RESPONSIVE CSS3 SLIDESHOW GALLERY by Roko C. buljan
+http://stackoverflow.com/a/34696029/383904
+*/
+
+.CSSgal {
+  position: relative;
+  overflow: hidden;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 100px rgb(226, 225, 225);
+
+  /* Or set a fixed height */
+}
+
+/* SLIDER */
+
+.CSSgal .slider {
+  height: 100%;
+  white-space: nowrap;
+  font-size: 0;
+  transition: 0.8s;
+}
+
+/* SLIDES */
+
+.CSSgal .slider > * {
+  font-size: 1rem;
+  display: inline-block;
+  white-space: normal;
+  vertical-align: top;
+  height: 100%;
+  width: 100%;
+  background: none 50% no-repeat;
+  background-size: cover;
+}
+
+/* PREV/NEXT, CONTAINERS & ANCHORS */
+
+.CSSgal .prevNext {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  width: 100%;
+  height: 0;
+}
+
+.CSSgal .prevNext > div+div {
+  visibility: hidden; /* Hide all but first P/N container */
+}
+
+.CSSgal .prevNext a {
+  background: #fff;
+  position: absolute;
+  width:       60px;
+  height:      60px;
+  line-height: 60px; /* If you want to place numbers */
+  text-align: center;
+  opacity: 0.7;
+  -webkit-transition: 0.3s;
+          transition: 0.3s;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: 0;
+}
+.CSSgal .prevNext a:hover {
+  opacity: 1;
+}
+.CSSgal .prevNext a+a {
+  left: auto;
+  right: 0;
+}
+
+/* NAVIGATION */
+
+.CSSgal .bullets {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+.CSSgal .bullets > a {
+  display: inline-block;
+  width:       30px;
+  height:      30px;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  background: rgba(255, 255, 255, 1);
+  -webkit-transition: 0.3s;
+          transition: 0.3s;
+}
+.CSSgal .bullets > a+a {
+  background: rgba(255, 255, 255, 0.5); /* Dim all but first */
+}
+.CSSgal .bullets > a:hover {
+  background: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* NAVIGATION BUTTONS */
+/* ALL: */
+.CSSgal >s:target ~ .bullets >* {      background: rgba(255, 255, 255, 0.5);}
+/* ACTIVE */
+#s1:target ~ .bullets >*:nth-child(1) {background: rgba(255, 255, 255,   1);}
+#s2:target ~ .bullets >*:nth-child(2) {background: rgba(255, 255, 255,   1);}
+#s3:target ~ .bullets >*:nth-child(3) {background: rgba(255, 255, 255,   1);}
+#s4:target ~ .bullets >*:nth-child(4) {background: rgba(255, 255, 255,   1);}
+/* More slides? Add here more rules */
+
+/* PREV/NEXT CONTAINERS VISIBILITY */
+/* ALL: */
+.CSSgal >s:target ~ .prevNext >* {      visibility: hidden;}
+/* ACTIVE: */
+#s1:target ~ .prevNext >*:nth-child(1) {visibility: visible;}
+#s2:target ~ .prevNext >*:nth-child(2) {visibility: visible;}
+#s3:target ~ .prevNext >*:nth-child(3) {visibility: visible;}
+#s4:target ~ .prevNext >*:nth-child(4) {visibility: visible;}
+/* More slides? Add here more rules */
+
+/* SLIDER ANIMATION POSITIONS */
+
+#s1:target ~ .slider {transform: translateX(   0%); -webkit-transform: translateX(   0%);}
+#s2:target ~ .slider {transform: translateX(-100%); -webkit-transform: translateX(-100%);}
+#s3:target ~ .slider {transform: translateX(-200%); -webkit-transform: translateX(-200%);}
+#s4:target ~ .slider {transform: translateX(-300%); -webkit-transform: translateX(-300%);}
+/* More slides? Add here more rules */
+
+
+/* YOU'RE THE DESIGNER! 
+   ____________________
+   All above was mainly to get it working :)
+   CSSgal CUSTOM STYLES / OVERRIDES HERE: */
+
+.CSSgal{
+  color: #fff;  
+  text-align: center;
+  
+  height: 400px;
+}
+.CSSgal .slider h2 {
+  margin-top: 40vh;
+  font-weight: 200;
+  letter-spacing: -0.06em;
+  word-spacing: 0.2em;
+  font-size: 3em;
+}
+.CSSgal a {
+  border-radius: 50%;
+  margin: 0 3px;
+  color: rgba(0,0,0,0.8);
+  text-decoration: none;
+}
+
+
