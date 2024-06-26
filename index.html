@@ -12,26 +12,35 @@
 
     <link rel="stylesheet" href="[path/to/css/feathericon.min.css" />
     <script src="https://unpkg.com/feather-icons"></script>
-    <link rel="stylesheet" href="Style/home.css" />
+    <link rel="stylesheet" href="Style/home.css"/>
+    <link rel="icon" href="Images/logo.png" type="image/png">
 </head>
 <body>
-  <div class="toolbar">
-    <i class="fa-solid fa-briefcase fa-xl" style="color: orangered;"></i>
-    <h3 style="padding-left: 10px; font-family: Sans-serif; color: orangered;">PCBHUB</h3>
-    <div style="width: 100%; height: 5px;">
+   <div class="toolbar">
+    <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px;">
+      <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
+    </div>
+    <h3 style="padding-left: 10px; font-family: Sans-serif; color: orangered;">CircuitSource.in</h3>
+
+    <div style="width: 700px; height: 30px; border: 1px solid grey; border-radius: 100px; margin-left: 20px; display: flex; align-items: center; justify-content: center;">
+
+      <i class="fa-solid fa-search" style="color: grey; margin-right: 8px;"></i>
+      <h5 style="font-family: sans-serif; font-weight: normal; color: gray;">Search Here..</h5>
+    </div>
+    <div style="width: 100%; height: 5px; ">
      
     </div>
     
 
     <h4 style=" font-family: Sans-serif; font-weight: 200; font-weight: bold; color: orangered; margin-right: 20px;"> <a class="a-menu-active" href="">Home</a></h4>
     <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
-    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="">Products</a></h4>
+    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="products.html">Products</a></h4>
     <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
     <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200;  max-lines: 1; margin-right: 20px;"><a class="a-menu" href="">Cart</a></h4>
     <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
     <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="">About</a></h4>
   
-    <div style="width: 100%; height: 5px;">
+    <div style="width: 100%; height: 5px; margin-left: 150px;">
     
     </div>
 
@@ -59,33 +68,35 @@
     
   </div>
 
+  <div id="all-data-div" style="display: none;">
+ 
+
   <div class="main-div" style="width:80%; padding-left: 10%; padding-right: 10%;">
  
     <main>
-      <div class="product-container banner">
-          <div class="product-details">
-              <h1 style="font-family: Sans-serif;">DSO WITH 3 CHANNEL FULL FUNCTIONAL FOR PCB BOARD SIGNAL READING</h1>
-              <p style="font-family: Sans-serif; font-weight: 200; font-size: 14px;">DSO WITH 3 CHANNEL FULL FUNCTIONAL FOR PCB BOARD SIGNAL READING</p>
-            
-              <div class="wrapper" style="margin-top: 60px;">
-                <a class="button" href="#">Add To Cart <i style="margin-left: 10px;" class="fas fa-shopping-cart"></i></a>
-            </div>
-            
-            <!-- Filter: https://css-tricks.com/gooey-effect/ -->
-            <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <defs>
-                    <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />    
-                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                        <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-                    </filter>
-                </defs>
-            </svg>
-              <button class="buy-now" style="font-family: Sans-serif; font-size: 13px;">BUY NOW</button>
-          </div>
-          <div class="product-image">
-              <img src="https://i.ebayimg.com/images/g/6BoAAOSwG2dhAhKM/s-l400.jpg" alt="Product Image">
-          </div>
-
+      <div id="banner-div" class="product-container banner">
+        <div class="product-details">
+          <h1 style="font-family: Sans-serif;">Loading....</h1>
+          <p style="font-family: Sans-serif; font-weight: 200; font-size: 14px;">Updating the product please wait...</p>
+        
+          <div class="wrapper" style="margin-top: 60px;">
+            <a class="button" href="#">Add To Cart <i style="margin-left: 10px;" class="fas fa-shopping-cart"></i></a>
+        </div>
+        
+        <!-- Filter: https://css-tricks.com/gooey-effect/ -->
+        <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <defs>
+                <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />    
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                    <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+                </filter>
+            </defs>
+        </svg>
+          <button class="buy-now" style="font-family: Sans-serif; font-size: 13px;">BUY NOW</button>
+      </div>
+      <div class="product-image" >
+          <img style="border-radius: 20px;" src="https://cdn.sparkfun.com/assets/7/a/6/9/c/51c0d009ce395feb33000000.jpg" alt="Product Image">
+      </div>
           
       </div>
   </main>
@@ -163,8 +174,9 @@
     </svg>
       
   </div>
-  <div class="product-image" style="display: inline;">
+  <div class="product-image" style="display: inline; text-align: right;">
       <img style="background-color: white;" src="Images/microcontroller.png" alt="Product Image">
+      
   </div>
 
   </div>
@@ -318,7 +330,7 @@
   </div>
 
   </div>
-  <div style="width: 100%; height: 800px; background-color: rgb(251, 245, 238); text-align: center; padding-top: 50px; align-items: center; justify-content: center;">
+  <div style="width: 100%; height: 700px; background-color: rgb(251, 245, 238); text-align: center; padding-top: 50px; align-items: center; justify-content: center;">
 
     <h1 style="font-size: 60px; font-family: sans-serif; margin-top: 50px; color: rgb(118, 98, 73);">See what our customer said about us</h1>
 
@@ -405,13 +417,112 @@
 
  
   
+  <footer class="footer">
+    <div class="footer__addr">
+      <h1 class="footer__logo">Something</h1>
+          
+      <h2>Contact</h2>
+      
+      <address>
+        5534 Somewhere In. The World 22193-10212<br>
+            
+        <a class="footer__btn" href="mailto:example@gmail.com">Email Us</a>
+      </address>
+    </div>
+    
+    <ul class="footer__nav">
+      <li class="nav__item">
+        <h2 class="nav__title">Media</h2>
+  
+        <ul class="nav__ul">
+          <li>
+            <a href="#">Online</a>
+          </li>
+  
+          <li>
+            <a href="#">Print</a>
+          </li>
+              
+          <li>
+            <a href="#">Alternative Ads</a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="nav__item nav__item--extra">
+        <h2 class="nav__title">Technology</h2>
+        
+        <ul class="nav__ul nav__ul--extra">
+          <li>
+            <a href="#">Hardware Design</a>
+          </li>
+          
+          <li>
+            <a href="#">Software Design</a>
+          </li>
+          
+          <li>
+            <a href="#">Digital Signage</a>
+          </li>
+          
+          <li>
+            <a href="#">Automation</a>
+          </li>
+          
+          <li>
+            <a href="#">Artificial Intelligence</a>
+          </li>
+          
+          <li>
+            <a href="#">IoT</a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="nav__item">
+        <h2 class="nav__title">Legal</h2>
+        
+        <ul class="nav__ul">
+          <li>
+            <a href="#">Privacy Policy</a>
+          </li>
+          
+          <li>
+            <a href="#">Terms of Use</a>
+          </li>
+          
+          <li>
+            <a href="#">Sitemap</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    
+    <div class="legal">
+      <p>&copy; 2019 Something. All rights reserved.</p>
+      
+      <div class="legal__links">
+        <span>Made with <span class="heart">♥</span> remotely from Anywhere</span>
+      </div>
+    </div>
+  </footer>
+
+
+  </div>
+  
+
+  <div id="loader" style="width: 100%; height: 100vh; display: flex; align-items: center; text-align: center; justify-content: center;" >
+
+    <span class="loader"></span>
+
+  </div>
 
 
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="Script/home.js" charset="utf-8"></script>
 
 </body>
