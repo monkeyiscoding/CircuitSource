@@ -151,7 +151,7 @@ function codeverify() {
   }).catch(function() {
     $("#error2").html("Invalid OTP");
     $("#error2").css("visibility", "visible");
-      $("#loader2").fadeOut();
+      $("#loader-otp").fadeOut();
   })
 }
 
