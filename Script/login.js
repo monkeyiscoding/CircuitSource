@@ -49,7 +49,6 @@ $("#login").click(function() {
   //   $("#error").css("visibility", "visible");
   // }
   else {
-    $("#login").css("display", "none");
     $("#loader").css("visibility","visible");
     
     checkUser(number);
@@ -73,7 +72,7 @@ function checkUser(number) {
 
 
  
-  $("#login").css("display", "flex");
+  
       $("#loader").fadeOut();
       phoneAuth(number);
       $("#error").css("visibility", "hidden");
