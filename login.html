@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuit Source/Login</title>
+
+    <script
+      src="https://kit.fontawesome.com/3b2cf0bb84.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="[path/to/css/feathericon.min.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="Style/login.css" />
+    <link rel="icon" href="Images/logo.png" type="image/png">
+    <style>
+
+
+      
+    </style>
+<body>
+
+    <div class="main-div">
+
+        <div class="div-left">
+
+
+            
+            <div style="display: inline-block;">
+                <img src="Images/welcome.png" style="width: 250px; height: 250px;" alt="">
+                 <h1 style="font-size: 40px; font-family: sans-serif; margin-top: 50px; color: rgb(118, 98, 73);">Welcome In Circuit Source</h1>
+
+    <h5 style="font-size: 20px; font-family: sans-serif; margin-top: 10px; color: rgb(118, 98, 73); font-weight: normal; margin-right: 150px; margin-left: 150px;">Welcome in CircuitSource explore indias first platform that provide all type of components, tools, programmers, Ic etc.. at your doorstep</h5>
+
+            </div>
+           
+        </div>
+
+        <div id="div-phone" class="div-right">
+
+            <h2 style="font-weight: normal; margin-bottom: 0px;">Account Verification</h2>
+            <h5 style="font-weight: normal; color: gray; margin-top: 0px;">Enter your phone number for account verification</h5>
+
+            
+            <input id="phone" type="text" class="input-with-border" placeholder="Phone Number">
+            <h4 id="error" class="error" style="visibility: hidden; color: red; font-weight: normal;">Invalid Number</h4>
+      
+            <div id="recaptcha-container" class="recaptcha-container" data-badge="inline"></div>
+      
+            <button id="login" class="otp-button">Get OTP </button>
+
+            <div id="loader" class="loader" style="margin-left: auto; margin-right: auto; margin-top: 10px; visibility: hidden;"></div>
+
+        </div>
+
+        <div id="div-otp" class="div-right" style="display: none;">
+
+            <h2 style="font-weight: normal; margin-bottom: 0px;">OTP Verification</h2>
+            <h5 style="font-weight: normal; color: gray; margin-top: 0px;">Enter 6 Digit OTP that we have send to you enterd phone number</h5>
+
+            
+            <input id="otp" type="text" class="input-with-border" placeholder="OTP">
+            <h4 id="error" class="error" style="visibility: hidden; color: red; font-weight: normal;">Invalid Number</h4>
+      
+            <div class="recaptcha-container" data-badge="inline"></div>
+      
+            <button id="login" class="otp-button">Verify OTP </button>
+
+            <div id="loader2" class="loader" style="margin-left: auto; margin-right: auto; margin-top: 10px; visibility: hidden;"></div>
+
+        </div>
+
+        
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="Script/login.js" charset="utf-8"></script>
+  
+    
+</body>
+</html>

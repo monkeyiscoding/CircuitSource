@@ -16,8 +16,19 @@ var dataRef = firebase.database().ref("All");
 loadTools();
 loadComponents();
 
-var a = 0;
-function loadTools() {
+loadProductOne();
+
+
+
+var query = firebase.database().ref("CircuitSource/top_category/1");
+
+query.update({
+  title: "Multimeter",
+  description: "Digital Multimeter, Can Multimeter, AMM Multimeter"
+})
+
+ var a = 0;
+ function loadTools() {
     var query = firebase.database().ref("Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products");
     query.once("value", function (snapshot) {
       
@@ -59,7 +70,7 @@ function loadTools() {
   }
 
 
-function loadComponents() {
+ function loadComponents() {
     var query = firebase.database().ref("Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products");
     query.once("value", function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
@@ -99,7 +110,6 @@ function loadComponents() {
   }
 
 
-   loadProductOne();
 
   function loadProductOne(){
     var query = firebase.database().ref("Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/top_key");
@@ -149,53 +159,6 @@ function loadComponents() {
   }
 
 
-  loadSearchProduct();
-
-  function loadSearchProduct() {
-    var query = firebase.database().ref("Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products");
-    query.once("value", function (snapshot) {
-      snapshot.forEach(function (childSnapshot) {
-        var mydiv = document.getElementById("items-div");
-
-        var title = childSnapshot.val().title;
-        var price = childSnapshot.val().price;
-        var discount = childSnapshot.val().discount;
-        var thumbnail = childSnapshot.val().thumbnail_url;
-
-        var discPrice = price - discount;
-        a++;
-        $("#loader-product").css("display","none")
-        mydiv.classList.add('grid-container');
-         mydiv.innerHTML += 
-         `<div class="product-div-one-search fade-in" style="background-color: white; border-radius: 5px; border: 0.2px solid grey;">
-
-      
-            <div  style="margin-right: auto;background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px;  align-items: center; text-align: center; justify-content: color: #000; margin-left: 10px"><i class="fa-regular fa-heart" style="margin-top:7px;"></i></div>
-        
-      <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="130px" alt="">
-
-    
-      <h6 style=" height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal;text-align: center; margin-bottom: 0px;overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
-
-      <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
-      <h5  style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold;text-align: center;">₹${discPrice}</h5>
-      <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal;text-align: center;">₹${price}</h5>
-      </div>
-      
-      <!-- <div style="color: white; background-color: orangered; margin: 0px;">
-        <h6>20% OFF</h6>
-      </div> -->
-      
-      <button style="background-color: orangered; color: white; font-size: 10px; justify-self: center;text-align:center;margin-left: auto; margin-right: auto;"> Add to cart</button>
-           
-        
-   
-
-    
-
-  </div>
-         `;
   
-      });
-    });
-  }
+
+ 

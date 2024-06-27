@@ -1,0 +1,82 @@
+
+body{
+    margin: 0px;
+    font-family: sans-serif;
+}
+
+
+.main-div{
+    display: flex;
+    height: 100vh;
+
+}
+
+.div-left{
+    width: 70%;
+    align-items: center;
+    display: flex;
+    text-align: center;
+
+    justify-content: center;
+    height: 100vh;
+    background-color: rgb(251, 248, 238);
+}
+
+.div-right{
+    width: 25%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-left: 30px;
+}
+
+.input-with-border {
+    border: 0.5px solid gray; /* Border style (1px width, solid line, gray color) */
+    padding: 8px; /* Padding inside the input field */
+    width: 300px; /* Width of the input field */
+    font-size: 16px;
+    height: 50px; /* Font size of the text inside */
+    border-radius: 4px; /* Optional: Rounded corners for a softer look */
+    box-sizing: border-box; /* Ensure padding and border are included in the total width */
+}
+
+.input-with-border:focus {
+    border: 1px solid orangered;
+     /* Change border color to blue when focused */
+    /* You can also add other styles here, like box-shadow */
+}
+
+.otp-button{
+    background-color: black;
+    color: white;
+    margin-top: 20px;
+    border: none;
+    font-size: 18px;
+    font-size: 15px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+
+    padding-right: 20px;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 60px;
+    aspect-ratio: 2;
+    --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
+    background: 
+      var(--_g) 0%   50%,
+      var(--_g) 50%  50%,
+      var(--_g) 100% 50%;
+    background-size: calc(100%/3) 50%;
+    animation: l3 1s infinite linear;
+  }
+  @keyframes l3 {
+      20%{background-position:0%   0%, 50%  50%,100%  50%}
+      40%{background-position:0% 100%, 50%   0%,100%  50%}
+      60%{background-position:0%  50%, 50% 100%,100%   0%}
+      80%{background-position:0%  50%, 50%  50%,100% 100%}
+  }
