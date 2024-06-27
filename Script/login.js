@@ -107,6 +107,7 @@ function phoneAuth(number) {
 
 $("#verify").click(function() {
     $("#loader-otp").css("visibility", "visible");
+    $("#verify").css("display", "none");
   $("#loader-otp").fadeIn();
   codeverify()
 })
@@ -149,8 +150,10 @@ function codeverify() {
 
 
   }).catch(function() {
+    $("#verify").css("display", "block");
     $("#error2").html("Invalid OTP");
     $("#error2").css("visibility", "visible");
+    $("#loader-otp").css("visibility", "hidden");
       $("#loader-otp").fadeOut();
   })
 }
