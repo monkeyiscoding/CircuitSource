@@ -150,7 +150,7 @@ function codeverify() {
 
 
   }).catch(function() {
-    $("#verify").css("display", "block");
+    $("#verify").css("display", "flex");
     $("#error2").html("Invalid OTP");
     $("#error2").css("visibility", "visible");
     $("#loader-otp").css("visibility", "hidden");
