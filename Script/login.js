@@ -15,7 +15,7 @@ const firebaseConfig = {
   var dataRef = firebase.database().ref("All");
 
 
-  var query = firebase.database().ref("CeicuitSource/Users");
+  var query = firebase.database().ref("CircuitSource/Users");
 
 
 var capta = false;
@@ -49,7 +49,7 @@ $("#login").click(function() {
   //   $("#error").css("visibility", "visible");
   // }
   else {
-    $("#loader").css("display","block");
+    $("#loader").css("visibility","visible");
     
     checkUser(number);
   }
@@ -131,25 +131,26 @@ function codeverify() {
     var ref = firebase.database().ref().push();
     var key = ref.key;
 
-    var query = firebase.database().ref("WebUsers/"+number);
-
-    query.once('value', function(snapshot) {
-      var name = snapshot.val().name;
-      $("#loader").fadeOut();
-      localStorage.setItem("login", "true");
-      localStorage.setItem("username", name);
+    
+    firebase.database().ref("CircuitSource/Users/"+number).update({
+        number: number,
+    }, function (value){
+         $("#loader2").fadeOut();
+      localStorage.setItem("userislogin", "true");
       localStorage.setItem("number", number);
       myFunction("Login successfully")
       window.location.replace("index.html");
-    })
+    });
+     
+    
 
 
 
 
   }).catch(function() {
-    $("#error").html("Invalid OTP");
-    $("#error").css("visibility", "visible");
-      $("#loader").fadeOut();
+    $("#error2").html("Invalid OTP");
+    $("#error2").css("visibility", "visible");
+      $("#loader2").fadeOut();
   })
 }
 
