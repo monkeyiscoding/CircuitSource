@@ -106,7 +106,8 @@ function phoneAuth(number) {
 }
 
 $("#verify").click(function() {
-  $("#loader2").fadeIn();
+    $("#loader-otp").css("visibility", "visible");
+  $("#loader-otp").fadeIn();
   codeverify()
 })
 
