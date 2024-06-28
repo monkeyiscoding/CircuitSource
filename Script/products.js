@@ -13,6 +13,32 @@ const firebaseConfig = {
   var dataRef = firebase.database().ref("All");
 
 
+  checkLogin();
+
+
+function checkLogin(){
+  var lc = localStorage.getItem("userislogin");
+  var name = localStorage.getItem("username");
+  var email = localStorage.getItem("email");
+  var number = localStorage.getItem("number");
+
+  
+
+  if(lc == "true"){
+    $("#login-pending").css("display","none");
+    $("#login-done").css("display","flex");
+    $("#name").html(name);
+    $("#number").html(number);
+  }
+
+
+  else{
+    $("#login-pending").css("display","flex");
+    $("#login-done").css("display","none");
+  }
+
+}
+
 
   $("#loader-product-main").css("display","flex")
   loadMostSearchd();
@@ -295,4 +321,26 @@ function loadSuggestions() {
 
   }
   
-
+ // Get the dropdown elements
+ const dropdownButton = document.getElementById('login-done');
+ const dropdownContent = document.getElementById('profile');
+ 
+ 
+ 
+ 
+ // Function to show dropdown
+ const showDropdown = () => {
+     dropdownContent.style.display = 'block';
+ };
+ 
+ // Function to hide dropdown
+ const hideDropdown = () => {
+     dropdownContent.style.display = 'none';
+ };
+ 
+ // Event listeners for hover
+ dropdownButton.addEventListener('mouseover', showDropdown);
+ 
+ dropdownContent.addEventListener('mouseover', showDropdown);
+ dropdownContent.addEventListener('mouseout', hideDropdown);
+   
