@@ -1,4 +1,3 @@
-
 const firebaseConfig = {
   apiKey: "AIzaSyBpRrmTK4449iHbUW_jNE1CjaWYTdmGdaY",
   authDomain: "qphix-training-193c9.firebaseapp.com",
@@ -15,8 +14,27 @@ var dataRef = firebase.database().ref("All");
 
 loadTools();
 loadComponents();
-
 loadProductOne();
+checkLogin();
+
+
+
+function checkLogin(){
+  var lc = localStorage.getItem("userislogin");
+
+  if(lc == "true"){
+    $("#login-pending").css("display","none");
+    $("#login-done").css("display","flex");
+  }
+
+  else{
+    $("#login-pending").css("display","flex");
+    $("#login-done").css("display","none");
+  }
+}
+
+
+
 
 
 
