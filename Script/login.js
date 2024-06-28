@@ -134,7 +134,7 @@ $("#save").click(function() {
         firebase.database().ref("CircuitSource/Users/"+fullNumber).update({
             number: fullNumber,
             email: email,
-            username: username,
+            username: name,
         }, function (value){
           
          
@@ -227,8 +227,8 @@ function saveData(email, username, number){
     $("#loader2").fadeOut();
       localStorage.setItem("userislogin", "true");
       localStorage.setItem("number", number);
-      ocalStorage.setItem("email", email);
-      ocalStorage.setItem("username", username);
+      localStorage.setItem("email", email);
+      localStorage.setItem("username", username);
       myFunction("Login successfully")
       window.location.replace("index.html");
 }
