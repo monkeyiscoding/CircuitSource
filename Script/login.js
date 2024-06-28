@@ -113,6 +113,39 @@ $("#verify").click(function() {
   codeverify()
 })
 
+$("#save").click(function() {
+    var name = $("#username").val();
+    var email = $("#email").val();
+    if(name.trim().length < 4){
+    $("#erro3").html("Enter Full name");
+    $("#error3").css("visibility", "visible");
+    }
+    else if(!email.includes("@")){
+        $("#erro3").html("Enter valid email address");
+    $("#error3").css("visibility", "visible");
+    }
+
+    else{
+        $("#loader-details").css("visibility", "visible");
+        $("#save").css("display", "none");
+        $("#loader-details").fadeIn();
+
+        firebase.database().ref("CircuitSource/Users/"+number).update({
+            number: number,
+            email: email,
+            username: username,
+        }, function (value){
+          
+         
+            saveData(email, username, number);
+            
+          
+        });
+         
+    }
+
+})
+
 function codeverify() {
   var number = "";
 
@@ -138,11 +171,24 @@ function codeverify() {
     firebase.database().ref("CircuitSource/Users/"+number).update({
         number: number,
     }, function (value){
-         $("#loader2").fadeOut();
-      localStorage.setItem("userislogin", "true");
-      localStorage.setItem("number", number);
-      myFunction("Login successfully")
-      window.location.replace("index.html");
+      
+        var query = firebase.database().ref("CircuitSource/Users/"+number)
+
+        query.once('value', function(snapshot) {
+            if (snapshot.hasChild("email")) {
+                var email = snapshot.val().email;
+                var username = snapshot.val().username;
+
+                saveData(email, username, number)
+            } else {
+                $("#div-otp").css("display","none");
+                $("#div-details").css("display","block");
+                $("#div-details").fadeIn();
+            }
+          })
+        
+        
+      
     });
      
     
@@ -168,4 +214,18 @@ function myFunction(text) {
 
   // After 3 seconds, remove the show class from DIV
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function getEmail(){
+     
+}
+
+function saveData(email, username, number){
+    $("#loader2").fadeOut();
+      localStorage.setItem("userislogin", "true");
+      localStorage.setItem("number", number);
+      ocalStorage.setItem("email", email);
+      ocalStorage.setItem("username", username);
+      myFunction("Login successfully")
+      window.location.replace("index.html");
 }

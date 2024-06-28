@@ -15,7 +15,7 @@ var dataRef = firebase.database().ref("All");
 loadTools();
 loadComponents();
 loadProductOne();
-checkLogin();
+//checkLogin();
 
 
 
@@ -177,6 +177,28 @@ query.update({
   }
 
 
+  // Get the dropdown elements
+const dropdownButton = document.getElementById('login-done');
+const dropdownContent = document.getElementById('profile');
+
+
+
+
+// Function to show dropdown
+const showDropdown = () => {
+    dropdownContent.style.display = 'block';
+};
+
+// Function to hide dropdown
+const hideDropdown = () => {
+    dropdownContent.style.display = 'none';
+};
+
+// Event listeners for hover
+dropdownButton.addEventListener('mouseover', showDropdown);
+
+dropdownContent.addEventListener('mouseover', showDropdown);
+dropdownContent.addEventListener('mouseout', hideDropdown);
   
 
  
