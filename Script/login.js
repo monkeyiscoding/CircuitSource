@@ -19,6 +19,7 @@ const firebaseConfig = {
 
 
 var capta = false;
+var fullNumber = "";
 render();
 
 function render() {
@@ -130,14 +131,14 @@ $("#save").click(function() {
         $("#save").css("display", "none");
         $("#loader-details").fadeIn();
 
-        firebase.database().ref("CircuitSource/Users/"+number).update({
-            number: number,
+        firebase.database().ref("CircuitSource/Users/"+fullNumber).update({
+            number: fullNumber,
             email: email,
             username: username,
         }, function (value){
           
          
-            saveData(email, username, number);
+            saveData(email, username, fullNumber);
             
           
         });
@@ -171,6 +172,8 @@ function codeverify() {
     firebase.database().ref("CircuitSource/Users/"+number).update({
         number: number,
     }, function (value){
+
+        fullNumber = number;
       
         var query = firebase.database().ref("CircuitSource/Users/"+number)
 
