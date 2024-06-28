@@ -15,7 +15,7 @@ var dataRef = firebase.database().ref("All");
 loadTools();
 loadComponents();
 loadProductOne();
-//checkLogin();
+checkLogin();
 
 
 
