@@ -34,7 +34,6 @@ function checkLogin(){
   }
 
 
-
   else{
     $("#login-pending").css("display","flex");
     $("#login-done").css("display","none");

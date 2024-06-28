@@ -138,7 +138,7 @@ $("#save").click(function() {
         }, function (value){
           
          
-            saveData(email, username, fullNumber);
+            saveData(email, name, fullNumber);
             
           
         });
