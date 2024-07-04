@@ -166,47 +166,58 @@ function loadProduct() {
       document.querySelectorAll('.add-to-cart-btn').forEach(button => {
           button.addEventListener('click', function(event) {
               event.stopPropagation(); // Prevent the click from triggering the product open
-              var productKey = this.getAttribute('data-key');
-              var cTitle = this.getAttribute('data-title');
-              var price = this.getAttribute('data-price');
-              var discount = this.getAttribute('data-discount');
-              var thumbnail_url = this.getAttribute('data-thumbnail');
-              var quantity = 1; // Assuming default quantity is 1
-              var number = localStorage.getItem("number");
 
-              var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
-
-              // Check if product is already in cart
-              query.once("value", snapshot => {
-                  if (snapshot.exists()) {
-                      myFunction("Already in cart");
-                  } else {
-                      $("#cart-text", this).css("display", "none");
-                      $("#cart-i", this).css("display", "none");
-                      $("#cart-loader", this).css("display", "flex");
-
-                      query.update({
-                          title: cTitle,
-                          description: '',
-                          key: productKey,
-                          quantity: quantity,
-                          price: price,
-                          discount: discount,
-                          thumbnail_url: thumbnail_url,
-                      }, function(error) {
-                          $("#cart-text", this).css("display", "flex");
-                          $("#cart-i", this).css("display", "flex");
-                          $("#cart-loader", this).css("display", "none");
-
-                          if (error) {
-                              console.error('Error adding to cart: ', error);
-                              myFunction("Error adding to cart");
-                          } else {
-                              myFunction("Added to cart");
-                          }
-                      }.bind(this));
-                  }
-              });
+                // Check if user is logged in
+                var lc = localStorage.getItem("userislogin");
+                if (lc !== "true") {
+                    window.location.href = "login.html"; // Redirect to login page
+                    return;
+                }
+  
+                else{
+                  
+                var productKey = this.getAttribute('data-key');
+                var cTitle = this.getAttribute('data-title');
+                var price = this.getAttribute('data-price');
+                var discount = this.getAttribute('data-discount');
+                var thumbnail_url = this.getAttribute('data-thumbnail');
+                var quantity = 1; // Assuming default quantity is 1
+                var number = localStorage.getItem("number");
+  
+                var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+  
+                // Check if product is already in cart
+                query.once("value", snapshot => {
+                    if (snapshot.exists()) {
+                        myFunction("Already in cart");
+                    } else {
+                        $("#cart-text", this).css("display", "none");
+                        $("#cart-i", this).css("display", "none");
+                        $("#cart-loader", this).css("display", "flex");
+  
+                        query.update({
+                            title: cTitle,
+                            description: '',
+                            key: productKey,
+                            quantity: quantity,
+                            price: price,
+                            discount: discount,
+                            thumbnail_url: thumbnail_url,
+                        }, function(error) {
+                            $("#cart-text", this).css("display", "flex");
+                            $("#cart-i", this).css("display", "flex");
+                            $("#cart-loader", this).css("display", "none");
+  
+                            if (error) {
+                                console.error('Error adding to cart: ', error);
+                                myFunction("Error adding to cart");
+                            } else {
+                                myFunction("Added to cart");
+                            }
+                        }.bind(this));
+                    }
+                });
+                }
           });
       });
   }).catch(function(error) {
@@ -219,6 +230,7 @@ function loadProduct() {
 }
 
 
+
 function loadSearchProduct(value) {
   var query = firebase.database().ref("CircuitSource/all_products");
   var mydiv = document.getElementById("items-div");
@@ -227,7 +239,7 @@ function loadSearchProduct(value) {
 
   $("#loader-product").css("display", "flex");
   mydiv.classList.remove('grid-container');
-  
+
   query.once("value", function(snapshot) {
       if (!snapshot.exists()) {
           $("#loader-product").css("display", "none");
@@ -291,6 +303,16 @@ function loadSearchProduct(value) {
       document.querySelectorAll('.add-to-cart-btn').forEach(button => {
           button.addEventListener('click', function(event) {
               event.stopPropagation(); // Prevent the click from triggering the product open
+
+              // Check if user is logged in
+              var lc = localStorage.getItem("userislogin");
+              if (lc !== "true") {
+                  window.location.href = "login.html"; // Redirect to login page
+                  return;
+              }
+
+              else{
+                
               var productKey = this.getAttribute('data-key');
               var cTitle = this.getAttribute('data-title');
               var price = this.getAttribute('data-price');
@@ -332,6 +354,8 @@ function loadSearchProduct(value) {
                       }.bind(this));
                   }
               });
+              }
+
           });
       });
   }).catch(function(error) {
@@ -342,6 +366,7 @@ function loadSearchProduct(value) {
       mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
   });
 }
+
 
 
 
