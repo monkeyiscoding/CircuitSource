@@ -521,7 +521,7 @@ function myFunction(text) {
 
 
 function checkSearch(){
-  var st = localStorage.getItem("recent-search");
+  var st = localStorage.getItem("recent-search").toString();
   if(st.trim() != ""){
     previousSearch = st;
     loadSearchProduct(st);
