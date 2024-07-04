@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Circuit Source</title>
-
+    <title>Overview</title>
+    <link rel="icon" href="Images/logo.png" type="image/png">
+    
     <script
       src="https://kit.fontawesome.com/3b2cf0bb84.js"
       crossorigin="anonymous"
     ></script>
 
-    <link rel="stylesheet" href="[path/to/css/feathericon.min.css" />
+    
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="Style/home.css" />
-    <link rel="icon" href="Images/logo.png" type="image/png">
     <style>
 
 
@@ -22,6 +22,7 @@
       }
     </style>
 </head>
+
 <body style="overflow: hidden;">
    <div class="toolbar" style="box-shadow: 0px 0px 0px white; border: 1px solid rgb(161, 161, 161);">
     <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px;">
@@ -29,10 +30,9 @@
     </div>
     <h3 style="padding-left: 10px; font-family: Sans-serif; color: orangered;">CircuitSource.in</h3>
 
-
-
+   
     <div style="width: 100%; height: 5px; ">
-
+     
     </div>
     
 
@@ -101,38 +101,17 @@
     
   </div>
 
-  <div id="all-data-div-product" style=" margin-top: 80px; display: none; background-color: rgb(255, 255, 255); height: 100vh;">
-
-    <div style="background-color: white; height: 100vh; width: 17%; padding-left: 30px; padding-top: 30px; box-shadow: 5px 10px 7px rgb(199, 198, 198); color: black; position: fixed; z-index: 5;">
+  <div id="all-data-div-product" style=" margin-top: 80px; display: block; background-color: rgb(255, 255, 255); height: 100vh;">
 
 
-        <h3>MOST SEARCHED</h3>
-
-        <div id="most-searched-div" style="display: block;">
 
 
-            
-       
-        
-        </div>
-
-
-        <h4 style="margin-top: 40px;">BY CATEGORY</h4>
-
-        <div id="category-div">
-
-        </div>
-        
-        
-    </div>
-
-
-    <div style="width: 80%; margin-left: 17%;">
+    <div id="main" style="width: 100%; margin-left: 0%; display: none; overflow-y: auto; height: 100vh;">
 
         <div style="width: 100%; border: 0px solid gray; height: 70px; box-shadow: 0px 0px 10px rgb(199, 198, 198); display: flex; align-items: center; padding-left: 50px; background-color: white; position: fixed; z-index: 4;">
 
             <i class="fa-solid fa-search"></i>
-            <input id="searchInput" type="text" placeholder="Search..." class="search-input" style="float: right;">
+            <input id="searchInput" type="text" placeholder="Microcontroller, Multimeter, DOS... " class="search-input" style="float: right; width: 80%;">
 
             <Button id="search" style="background-color: orangered; color: white; margin-left: 0px; margin-right: 30px; border-radius: 100px; position: fixed; right: 0px;">Search</Button>
         
@@ -140,75 +119,96 @@
 
 
 
+          <div style="padding-top: 75px; display: flex; margin: 50px; padding-top: 70px;">
 
 
+            <div class="image-div-left">
 
-          <div style="padding-top: 75px; ">
-
-
-
-            <div id="top-suggestion-div" style="display: flex; margin-left: 70px; align-items: center; ">
-
-              
-             
+                <div id="all-images"  style="display: block; margin-left: 20px;">
+                    
+                </div>
+                <img id="full-image" class="product-image" src="https://firebasestorage.googleapis.com/v0/b/qphix-training-193c9.appspot.com/o/Ecommerce%2F-NRfRbyH9Gf467AqMJVH?alt=media&token=9cb37353-5a70-4518-8237-0a023a2e528e" alt="">
                 
 
             </div>
 
+            <div class="details-div-right">
 
-        <div id="loader-product" style="width: 100%; height: 80vh; display: flex; align-items: center; text-align: center; justify-content: center;" >
+                <h3 id="title">title</h3>
+                <h5 id="des" style="color: gray; font-weight: normal;">description</h5>
 
-          <span class="loader" style="margin-bottom: 100px;"></span>
+                <div style="display: flex;">
+                    <h2 id="price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 0px; margin-right: 0px; font-weight: bold;">₹23000</h2>
+                    <h3 id="mrp" class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: 200;">₹28000</h3>
 
-          
-          
-      
-        </div>
+                    <div id="discount" style="color: white; background-color: orangered; margin: 0px; height: 40px; padding-left: 10px; padding-right: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center;">
+                        <h3>20% OFF</h3>
+                      </div>
+                    </div>
+                    
+                    <div id="points-div" style="width: 400px; height: auto; border: 0.5px solid black; margin-top: 30px; border-radius: 10px; padding: 20px;"> 
 
-        <div id="not-found" style="width: 100%; height: 80vh; align-items: center; text-align: center; justify-content: center; display: none; " >
-
-
-          <img src="gif/search.gif" style="width: 100px; height: 100px; margin-top: 100px;"  alt="">
-
-          <h3 style="font-weight: 300; color: gray;">Serach Not Found</h3>
-
-          
-          
-      
-        </div>
-
-            <div id="items-div" style="display: grid; padding-left:20px ; background-color: rgb(255, 255, 255);margin-bottom: 30px; overflow-y: auto; height: 70vh; padding-bottom: 20px;">
+                      
+                    </div>
 
 
-          
+                    <div style="display: flex; align-items: center;text-align: left; text-align: center; margin-top: 20px;">
+                        <input min="1" id="quantity" style=" width: 60px; height: 30px; margin-top: 0px; border-radius: 5px; border: 0.5px solid grey; text-align: center; justify-content: center;" type="number">
+
+                        <h5 id="note-quantity" style=" display: none; color: red; font-weight: normal; margin-left: 10px; justify-self: center; margin-top: 15px;">Minimum Order 10</h5>
+
+                    </div>
+
+                    <button id="add-to-cart" style="border-radius: 10px; display: flex; height: 60px;" class="button"> <h4 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h4><i id="cart-i" class="fa-solid fa-shopping-cart">  </i> <div style="margin-left: auto; margin-right: auto; display: none;" id="cart-loader" class="loader-dots"></div></button>
+                    
             </div>
 
           </div>
         
+
+          <div style="margin: 50px; margin-left: 80px; margin-top: 80px;">
+            <h2>Related Products</h2>
+
+              <div id="items-div" style="overflow-x: auto; width: 100%; margin-left: 0px; margin-top: 30px; display: none; padding-left:0px ; background-color: rgb(255, 255, 255);margin-bottom: 100px; height: auto; padding-bottom: 20px;">
+
+
+          
+              </div>
+
+              <div id="loader-product" style="width: 100%; height: 200px; align-items: center; text-align: center; justify-content: center; display: flex;" >
+
+                <span class="loader"></span>
+            
+              </div>
+          </div>
+          
+
+          
         
 
     </div>
-    
-  </div>
-  
 
-  <div id="loader-product-main" style="width: 100%; height: 100vh; align-items: center; text-align: center; justify-content: center;" >
+    
+    
+
+  <div id="loader-product-main" style="width: 100%; height: 80vh; align-items: center; text-align: center; justify-content: center; display: flex;" >
 
     <span class="loader"></span>
 
   </div>
+  </div>
+  
 
-  <!-- The actual snackbar -->
-<div id="snackbar">Some text some message..</div>
+   <!-- The actual snackbar -->
+   <div id="snackbar">Some text some message..</div>
 
- 
 
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="Script/products.js" charset="utf-8"></script>
+  <script src="Script/productoverview.js" charset="utf-8"></script>
 
 </body>
 </html>

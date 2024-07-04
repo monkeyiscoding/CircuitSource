@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+
+    <script
+      src="https://kit.fontawesome.com/3b2cf0bb84.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="[path/to/css/feathericon.min.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="Style/home.css"/>
+    <link rel="stylesheet" href="Style/cart.css"/>
+    <link rel="icon" href="Images/logo.png" type="image/png">
+</head>
+<body>
+    <div class="toolbar">
+    <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px;">
+      <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
+    </div>
+    <h3 style="padding-left: 10px; font-family: Sans-serif; color: orangered;">CircuitSourse.in</h3>
+
+    <div style="width: 700px; height: 30px; border: 1px solid grey; border-radius: 100px; margin-left: 20px; display: flex; align-items: center; justify-content: center;">
+
+      <i class="fa-solid fa-search" style="color: grey; margin-right: 8px;"></i>
+      <h5 style="font-family: sans-serif; font-weight: normal; color: gray;">Search Here..</h5>
+    </div>
+    <div style="width: 100%; height: 5px; ">
+     
+    </div>
+    
+
+    <h4 style=" font-family: Sans-serif; font-weight: 200; font-weight: 200; color: orangered; margin-right: 20px;"> <a class="a-menu" href="index.html">Home</a></h4>
+    <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
+    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="products.html">Products</a></h4>
+    <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
+    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200;  max-lines: 1; margin-right: 20px;"><a class="a-menu" href="address.html">Address</a></h4>
+    <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
+    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="">About</a></h4>
+  
+    <div style="width: 100%; height: 5px; margin-left: 150px;">
+    
+    </div>
+
+
+    <a href="cart.html">
+
+        <div>
+         
+         <div class="cart-container" >
+           <i class="fa-solid fa-cart-arrow-down"></i>
+           <span class="cart-indicator">0</span>
+     </div>
+ 
+     </a>
+     
+
+
+  </div>
+    <a id="login-pending" href="login.html" class="a-menu" style="width: 150px; margin-left: 20px; margin-right: 20px; display: flex;">
+      <div class="login-box">
+      <h4 style="margin-left: 10px; font-weight: 200;">Sign In</h4>
+      <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
+    </div></a>
+
+
+    <a id="login-done" class="a-menu dropdown" style="width: 108px; margin-left: 20px; margin-right: 20px; display: none; cursor: pointer;">
+      <div class="login-box">
+      <h4 id="name-of-user" style="margin-left: 10px; font-weight: 200;">Me</h4>
+      <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
+    </div>
+
+    <div id="profile" class="" style=" border-radius: 10px; box-shadow: 0px 0px 10px rgb(197, 196, 196); width: 200px; height: auto; position: absolute; background-color: rgb(255, 255, 255); margin-top: 50px; right: 45px; padding: 10px; display: none;">
+
+      <div style="display: flex; justify-content: center; align-items: center;">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGFjsxZCvbMuKnsJHFywAKXzJh6SsPWVsifY_z36wVT9p38WQ3IQPDPDjhFPDyxv6YQY&usqp=CAU" alt="" style="width: 40px; height: 40px;">
+
+      <div style="display: block;">
+         <h5 id="name" style="margin-left: 10px; margin-top: 5px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">Ayush Soni</h5>
+      <h6 id="number" style="margin-left: 10px; margin-top: 0px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">+91 9521532447</h6>
+   
+      </div>
+
+      <i style="margin-left: auto;" class="fa-solid fa-right-from-bracket"></i>
+
+
+      </div>
+      
+      
+      </div>
+   
+
+    
+
+
+  </a>
+
+
+  
+
+ 
+    
+  </div>
+  <div style="display: flex; width: 100%; margin-top: 60px; margin-left: 40px;">
+
+    <div class="div-left-cart">
+        <div style="margin: 30px;">
+             <h3 id="item-count"></h3>
+
+           
+
+        <div id="loader-items" style="width: 100%; height: 80vh; display: flex; align-items: center; text-align: center; justify-content: center;" >
+
+            <span class="loader" style="margin-bottom: 100px;"></span>
+  
+            
+            
+        
+          </div>
+             <div id="cart-items-div" style="display: none;">
+                
+               
+             </div>
+
+             <div id="no-cart" class="no-address">
+                <img style="width: 100px; margin-top: 100px;" src="Images/emptycart.png" alt="">
+                <h4 style="margin: 0px;">No Items in cart</h4>
+                <h6 style="font-weight: normal; margin: 0px;">Add a address to view and edit here</h6>
+              </div>
+        </div>
+   
+
+    </div>
+    <div class="div-right-cart">
+        <h4 style="color: gray; font-weight: 500;">Address Details</h4>
+
+        <div class="address-box">
+            <h5 id="default-address" style="font-weight: normal; margin-left: 10px; margin-top: 10px; margin-right: 30px;">No Address Added...
+            </h5>
+
+
+            <button onclick="openDialogCheck()" style=" color: black; font-size: 10px; background-color: white; border: 1px solid black; margin-left: 10px;">Add Or Change Address</button>
+        </div>
+
+
+        <h4 style="color: gray; font-weight: 500;">Payment Overview</h4>
+        <hr style="border: 1px dashed rgb(223, 222, 222);">
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0px; height: 30px;align-items: center;" >
+
+            <h5 style="color: gray; font-weight: normal;">Item Total</h5>
+            <h5 id="item-total">0.00</h5>
+
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0px; height: 30px;align-items: center;" >
+
+            <h5 style="color: gray; font-weight: normal;">Total Discount</h5>
+            <h5 id="total-discount">0.00</h5>
+
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0px; height: 30px;align-items: center;" >
+
+            <h5 style="color: gray; font-weight: normal;">GST(18%)</h5>
+            <h5 id="total-tax">0.00</h5>
+
+        </div>
+
+        <hr style="border: 1px dashed rgb(223, 222, 222);">
+
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0px; height: 30px; align-items: center;" >
+
+            <h5 style="color: gray; font-weight: normal;">Total Amount</h5>
+            <h5 id="total-amount">0.00</h5>
+
+        </div>
+        <hr style="border: 1px dashed rgb(223, 222, 222);">
+
+        <button style="background-color: orangered; width: 100%; color: white; margin-top: 10px; box-shadow: 0px 0px 10px rgb(220, 219, 219);">Checkout</button>
+        <div class="overlay" id="overlay">
+            <div class="dialog">
+              <h2>Enter Address Details</h2>
+              <form id="addressForm">
+                <div class="form-group">
+                  <label for="fullName">Full Name:</label>
+                  <input type="text" id="fullName" name="fullName" required>
+                </div>
+          
+                <div class="form-group">
+                  <label for="addressLine" >Address Line:</label>
+                  <textarea id="addressLine" name="addressLine" rows="7" required style="border: 0.5px solid gray; width: 95%; border-radius: 5px; padding: 10px; margin-right: 15px;"></textarea>
+      </div>
+          
+                <div class="form-group">
+                  <label for="landmark">Landmark:</label>
+                  <input type="text" id="landmark" name="landmark" required>
+                </div>
+          
+                <div class="form-group">
+                  <label for="state">State:</label>
+                  <input type="text" id="state" name="state" required>
+                </div>
+          
+                
+          
+                <div style="display: flex; justify-content: space-between;">
+<div class="form-group">
+                  <label for="city">City:</label>
+                  <input type="text" id="city" name="city" required>
+                </div> 
+                <div class="form-group">
+                  <label for="pincode">Pin Code:</label>
+                  <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" required>
+                </div>
+                </div>
+               
+          
+                <div class="form-group">
+                  <label for="mobileNumber">Mobile Number:</label>
+                  <input type="text" id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="checkbox-container" style="display: flex; justify-content: left; align-items: left;">
+                    <input type="checkbox" id="agreeCheckbox" name="agreeCheckbox" checked style="background-color: orangered;">
+                    <label for="agreeCheckbox" style="margin-top: 5px; margin-left: 5px;">Set this default</label>
+                  </div>
+                  
+          
+                <div class="button-container">
+                  <button type="button" style="background-color: orangered;" onclick="closeDialog()">Cancel</button>
+                  <button type="submit" style="background-color: orangered; margin-left: 10px;">Save Address</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+         
+          
+    </div>
+  </div>
+<!-- The actual snackbar -->
+<div id="snackbar">Some text some message..</div>
+
+ 
+  
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="Script/cart.js" charset="utf-8"></script>
+
+</body>
+</html>
+
+
+

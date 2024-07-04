@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="Style/home.css"/>
     <link rel="icon" href="Images/logo.png" type="image/png">
 </head>
+
+
+
+
 <body>
    <div class="toolbar">
     <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px;">
@@ -36,7 +40,7 @@
     <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
     <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="products.html">Products</a></h4>
     <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
-    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200;  max-lines: 1; margin-right: 20px;"><a class="a-menu" href="">Cart</a></h4>
+    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200;  max-lines: 1; margin-right: 20px;"><a class="a-menu" href="address.html">Address</a></h4>
     <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
     <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="">About</a></h4>
   
@@ -45,17 +49,16 @@
     </div>
 
 
-    <a href="">
+    <a href="cart.html">
 
        <div>
+        
         <div class="cart-container" >
           <i class="fa-solid fa-cart-arrow-down"></i>
-          <span class="cart-indicator">6</span>
-  
+          <span class="cart-indicator">0</span>
     </div>
 
     </a>
-   
     
 
 
@@ -66,9 +69,10 @@
       <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
     </div></a>
 
+
     <a id="login-done" class="a-menu dropdown" style="width: 108px; margin-left: 20px; margin-right: 20px; display: none; cursor: pointer;">
       <div class="login-box">
-      <h4 style="margin-left: 10px; font-weight: 200;">Me</h4>
+      <h4 id="name-of-user" style="margin-left: 10px; font-weight: 200;">Me</h4>
       <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
     </div>
 
@@ -77,16 +81,17 @@
       <div style="display: flex; justify-content: center; align-items: center;">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGFjsxZCvbMuKnsJHFywAKXzJh6SsPWVsifY_z36wVT9p38WQ3IQPDPDjhFPDyxv6YQY&usqp=CAU" alt="" style="width: 40px; height: 40px;">
 
-      <div style="display: inline-block;">
-         <h5 id="name" style="margin-left: 10px; margin-top: 5px; font-family: sans-serif; font-weight: normal; display: inline-block; margin-bottom: 0px;">Ayush Soni</h5>
-      <h6 id="number" style="margin-left: 10px; margin-top: 0px; font-family: sans-serif; font-weight: normal; display: inline-block; margin-bottom: 0px;">+91 9521532447</h6>
+      <div style="display: block;">
+         <h5 id="name" style="margin-left: 10px; margin-top: 5px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">Ayush Soni</h5>
+      <h6 id="number" style="margin-left: 10px; margin-top: 0px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">+91 9521532447</h6>
    
       </div>
 
-      <i class="fa-solid fa-right-from-bracket"></i>
+      <i style="margin-left: auto;" class="fa-solid fa-right-from-bracket"></i>
+
 
       </div>
-
+      
       
       </div>
    
@@ -124,7 +129,7 @@
         </svg>
           <button class="buy-now" style="font-family: Sans-serif; font-size: 13px;">BUY NOW</button>
       </div>
-      <div class="product-image" >
+      <div class="product-image" style="background-color: white;"> 
           <img style="border-radius: 20px;" src="https://cdn.sparkfun.com/assets/7/a/6/9/c/51c0d009ce395feb33000000.jpg" alt="Product Image">
       </div>
           
@@ -239,7 +244,7 @@
 
 
   <div class="whyus-div">
-    <p style="font-size: 80px;">Why Choose Us</p>
+    <p style="font-size: 80px; font-family: Bona Nova SC, serif;">Why Choose Us</p>
 
     <div style="display: flex; align-items: center; justify-content: center;">
 

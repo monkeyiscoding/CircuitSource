@@ -16,6 +16,27 @@ loadTools();
 loadComponents();
 loadProductOne();
 checkLogin();
+loardCartCount();
+
+
+
+
+function loardCartCount(){
+    number = localStorage.getItem("number");
+    query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
+    query.on("value", function(snapshot) { 
+        var childrenCount = snapshot.numChildren();
+        if(snapshot.exists){
+            $(".cart-indicator").html(childrenCount);
+        }
+
+        else{
+            $(".cart-indicator").html("0");
+        }
+        
+    });
+
+}
 
 
 function checkLogin(){
@@ -24,13 +45,14 @@ function checkLogin(){
   var email = localStorage.getItem("email");
   var number = localStorage.getItem("number");
 
-  
+
 
   if(lc == "true"){
     $("#login-pending").css("display","none");
     $("#login-done").css("display","flex");
     $("#name").html(name);
     $("#number").html(number);
+
   }
 
 
@@ -40,9 +62,6 @@ function checkLogin(){
   }
 
 }
-
-
-
 
 
 
@@ -89,8 +108,7 @@ query.update({
 
   </div>
          `;
-         $("#all-data-div").css("display", "block");
-         $("#loader").css("display", "none");
+         
       });
     });
   }
@@ -154,7 +172,7 @@ query.update({
 
           var discPrice = price - discount;
   
-          mydiv.innerHTML = `  <div class="product-details">
+          mydiv.innerHTML = `  <div class="product-details fade-in">
               <h1 style="font-family: Sans-serif;">${title}</h1>
               <p style="font-family: Sans-serif; font-weight: 200; font-size: 14px;">${des}</p>
             
@@ -171,13 +189,14 @@ query.update({
                     </filter>
                 </defs>
             </svg>
-              <button class="buy-now" style="font-family: Sans-serif; font-size: 13px;">BUY NOW</button>
+              <button class="buy-now" style="font-family: Sans-serif; font-size: 13px;">View Product</button>
           </div>
-          <div class="product-image" >
-              <img style="border-radius: 20px;" src="${thumbnail}" alt="Product Image">
+          <div class="product-image" style="background-color: white;">
+              <img style="border-radius: 20px; margin-top: 20px;" src="${thumbnail}" alt="Product Image">
           </div>
   `
-  
+  $("#all-data-div").css("display", "block");
+         $("#loader").css("display", "none");
        
       })
     
