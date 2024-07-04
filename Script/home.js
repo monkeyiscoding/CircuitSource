@@ -11,6 +11,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 var dataRef = firebase.database().ref("All");
+localStorage.setItem("recent-search","");
 
 loadTools();
 loadComponents();
