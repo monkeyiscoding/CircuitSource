@@ -258,3 +258,13 @@ function openDialog() {
     // After 3 seconds, remove the show class from DIV
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   }
+
+  function openDialogCheck(){
+    var lc = localStorage.getItem("userislogin");
+    if(lc == "true"){
+        openDialog();
+    }
+    else{
+        window.location.href = "login.html";
+    }
+  }

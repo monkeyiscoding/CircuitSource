@@ -286,12 +286,20 @@ function loadCartProduct() {
   
 
   function openDialogCheck(){
-    if(addressCheck){
-        window.location.href = "address.html";
+
+    var lc = localStorage.getItem("userislogin");
+    if(lc == "true"){
+        if(addressCheck){
+            window.location.href = "address.html";
+        }
+        else{
+            openDialog();
+        }
     }
     else{
-        openDialog()
-;    }
+        window.location.href = "login.html";
+    }
+    
   }
 
   function openDialog() {
