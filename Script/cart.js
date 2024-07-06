@@ -68,7 +68,7 @@ var cartTotalDiscount = 0;
 var totaltax = 0;
 
 loadCartProduct();
-updateCart();
+//updateCart();
 loardCartCount();
 
 
@@ -156,7 +156,7 @@ function loadCartProduct() {
             <div style="display: flex; align-items: center;">
               <div style="display: flex; align-items: center;">
                 <h5 style="font-weight: 200; color: rgb(200, 196, 196); margin-right: 10px;">Quantity</h5>
-                <input class="quantity-input" value="${quantity}" data-initial-value="${quantity}" style="width: 60px; height: 30px; border-radius: 5px; border: 0.5px solid grey; text-align: center;" type="number">
+                <input min="1" class="quantity-input" value="${quantity}" data-initial-value="${quantity}" style="width: 60px; height: 30px; border-radius: 5px; border: 0.5px solid grey; text-align: center;" type="number">
                 <button class="delete-button" style="background-color: transparent; border: none; margin-left: 10px; cursor: pointer; margin-bottom: 5px; text-align: center;">
                   <i  class="fas fa-trash-alt" style="color: red; font-size: 20px; border: 1px solid white; width: 30px; height: 30px; border-radius: 100px; padding: 10px;"></i>
                 </button>

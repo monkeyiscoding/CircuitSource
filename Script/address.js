@@ -177,7 +177,7 @@ function loadAllAddress(key) {
                 var adKey = this.getAttribute('data-key');
                 firebase.database().ref("CircuitSource/Users/" + number + "/primary_address").set(adKey)
                 .then(function() {
-                    myFunctionn('Primary address updated successfully');
+                    myFunction('Primary address updated successfully');
                     loadAllAddress(adKey); // Refresh the address list to update the UI
                 })
                 .catch(function(error) {

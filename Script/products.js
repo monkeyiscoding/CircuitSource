@@ -153,7 +153,6 @@ function loadProduct() {
                   </div>
                   <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
                       <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
-                      <i id="cart-i" class="fa-solid fa-shopping-cart"></i>
                       <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
                   </button>
               </div>
@@ -283,7 +282,7 @@ function loadSearchProduct(value) {
                       </div>
                       <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
                           <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
-                          <i id="cart-i" class="fa-solid fa-shopping-cart"></i>
+                          
                           <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
                       </button>
                   </div>

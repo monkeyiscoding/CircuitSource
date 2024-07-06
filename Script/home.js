@@ -154,6 +154,47 @@ query.update({
     });
   }
 
+  loadComponentsMobile();
+  function loadComponentsMobile() {
+    var query = firebase.database().ref("Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products");
+    query.once("value", function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+        var mydiv = document.getElementById("products-div-tools-m");
+
+        var title = childSnapshot.val().title;
+        var price = childSnapshot.val().price;
+        var discount = childSnapshot.val().discount;
+        var thumbnail = childSnapshot.val().thumbnail_url;
+
+        var discPrice = price - discount;
+        a++;
+         mydiv.innerHTML += 
+         `<div class="product-div-one">
+
+      
+      <img style="border-radius: 10px;" src="${thumbnail}" height="100px" width="100px" alt="">
+
+      <h6 style=" height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal;text-align: left; margin-bottom: 0px;overflow: hidden; text-overflow: ellipsis; max-lines: 3; width: 100px; white-space: normal;">${title}</h6>
+
+      <div style="display: flex; align-items: center;">
+<h5  style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold;text-align: left;">₹${discPrice}</h5>
+<h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal;text-align: left;">₹${price}</h5>
+
+      </div>
+      
+      <!-- <div style="color: white; background-color: orangered; margin: 0px;">
+        <h6>20% OFF</h6>
+      </div> -->
+    </div>
+
+  </div>
+         `;
+  
+      });
+    });
+  }
+
+
 
 
   function loadProductOne(){

@@ -14,19 +14,22 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="Style/home.css"/>
     <link rel="icon" href="Images/logo.png" type="image/png">
+    
 </head>
 
 
 
 
 <body>
-   <div class="toolbar">
+
+  <div id="div-pc">
+ <div class="toolbar">
     <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px;">
       <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
     </div>
     <h3 style="padding-left: 10px; font-family: Sans-serif; color: orangered;">CircuitSourse.in</h3>
 
-    <div style="width: 700px; height: 30px; border: 1px solid grey; border-radius: 100px; margin-left: 20px; display: flex; align-items: center; justify-content: center;">
+    <div class="" style="width: 700px; height: 30px; border: 1px solid grey; border-radius: 100px; margin-left: 20px; display: flex; align-items: center; justify-content: center;">
 
       <i class="fa-solid fa-search" style="color: grey; margin-right: 8px;"></i>
       <h5 style="font-family: sans-serif; font-weight: normal; color: gray;">Search Here..</h5>
@@ -63,11 +66,14 @@
 
 
   </div>
+  
+
     <a id="login-pending" href="login.html" class="a-menu" style="width: 150px; margin-left: 20px; margin-right: 20px; display: flex;">
       <div class="login-box">
       <h4 style="margin-left: 10px; font-weight: 200;">Sign In</h4>
       <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
-    </div></a>
+    </div>
+  </a>
 
 
     <a id="login-done" class="a-menu dropdown" style="width: 108px; margin-left: 20px; margin-right: 20px; display: none; cursor: pointer;">
@@ -552,6 +558,93 @@
 
   </div>
 
+
+  </div>
+
+
+
+  <div id="div-mobile"> 
+
+    <div class="toolbar-m">
+      <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px;">
+        <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
+      </div>
+      
+    <a href="cart.html" style="margin-left: auto;">
+
+ 
+       
+       <div class="cart-container" >
+         <i class="fa-solid fa-cart-arrow-down"></i>
+         <span class="cart-indicator">0</span>
+   </div>
+
+   </a>
+
+
+      <div style="height: 40px; width: 40px; background-color: rgb(244, 244, 244); margin-left: 15px; margin-right: 20px; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px; display: flex; align-items: center; justify-content: center;">
+        <i class="fa-solid fa-bars fa-xl"></i>
+      </div>
+    </div>
+
+    <div style="height: 70px;">
+
+    </div>
+
+    <div class="main-div-m" style="mask-type: 100px;">
+      <h3 style="color: black; font-weight: normal; font-family:Arial, Helvetica, sans-serif;">Explore indias best <br> tools and components</h3>
+
+      <div class="search-div-m">
+        <div class="search-left">
+          <i class="fa-solid fa-search" style="color: gray; margin-right: 5px;"></i>
+          <h5 style="font-weight: normal; color: gray;">Mcu, Multimeter, Dso...</h5>
+        </div>
+
+        <div class="search-right">
+          <i class="fa-solid fa-magnifying-glass-arrow-right fa-xl" style="color: black; margin-right: 5px;"></i>
+         
+        </div>
+      </div>
+
+      <div class="category-div-m">
+
+        <h4 class="home-category-selected">All</h4>
+        
+        <h4 class="home-category">Tools</h4>
+        <h4 class="home-category">Components</h4>
+        <h4 class="home-category">MCU- Programmed</h4>
+        
+      </div>
+
+      <img style="width: 100%; border-radius: 10px; margin-top: 10px;" src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/special-offer-video-thumbnail-design-template-8f9935d30288afc548f9cb0da7c4deed_screen.jpg?ts=1634989937" alt="">
+
+  <div style="display: flex; align-items: center; width: 100%; margin: 0px;">
+
+    <div style="width: 100%;">
+      <h4 style="font-family: Sans-serif; font-weight: 500; margin-top: 50px; margin-bottom: 10px;">Featured Components</h4>
+              <p style="font-family: Sans-serif; font-weight: 200; font-size: 10px; margin: 0px;">Purchase product on bulk to get best price
+              </p>
+            
+    </div>
+
+    <button class="buy-now" style="font-family: Sans-serif; font-size: 13px; width: 120px; height: 35px; margin-top: 40px; margin-right: 0px;">View All</button>
+
+
+  </div>
+  
+  <div id="products-div-tools-m" class="home-products-div">
+
+    
+  
+  </div>
+
+
+
+    </div>
+
+
+  </div>
+ 
 
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>

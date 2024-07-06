@@ -1026,3 +1026,99 @@ input[type="number"]::-webkit-outer-spin-button {
   text-align: center;
   margin-top: 100px;
 }
+
+#div-mobile{
+  display: none;
+}
+
+
+
+/* Medira queries */
+@media (max-width: 908px) {
+  #div-pc{
+  
+    display: none;
+  }
+
+  #div-mobile{
+    height: 100vh;
+    width: 100%;
+    display: block;
+  }
+
+  .toolbar-m{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    padding: 10px;
+    top: 0px;
+  }
+
+  .main-div-m{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    height: 80vh;
+  }
+
+  .search-div-m{
+    display: flex;
+  }
+
+  .search-left{
+    width: 80%;
+    height: 50px;
+    background-color: rgb(247, 247, 247); 
+    border-radius: 5px; 
+    display: flex;
+    padding-left: 10px;
+    align-items: center;
+  }
+
+  .search-right{
+    width: 60px;
+    height: 50px;
+    margin-left: 10px;
+    background-color: rgb(247, 247, 247); 
+    border-radius: 5px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .category-div-m{
+    display: flex;
+    align-items: center;
+
+  }
+
+  .home-category{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    color: gray;
+    font-size: 14px !important;
+    margin-right: 10px;
+    border-radius: 100px;
+    border: 0.3px solid rgb(199, 195, 195);
+    font-weight: normal;
+    padding-bottom: 5px;
+    background-color: white;
+  }
+
+  .home-category-selected{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    margin-right: 10px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 10px var(--shadow-color);
+    color: rgb(255, 252, 252);
+    font-weight: normal;
+    padding-bottom: 5px;
+    background-color: orangered;
+  }
+}
