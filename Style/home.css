@@ -1047,20 +1047,21 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .toolbar-m{
-    width: 90%;
+    width: 93%;
     height: 60px;
     display: flex;
     align-items: center;
     position: fixed;
     padding: 10px;
-    padding-left: 20px;
+    padding-left: 3.5%;
     top: 0px;
-    
+    background-color: white;
+    z-index: 5;
   }
 
   .main-div-m{
-    width: 90%;
-    margin-left: 5%;
+    width: 93%;
+    margin-left: 3.5%;
     margin-right: 2.5%;
     height: 80vh;
   }
@@ -1122,5 +1123,32 @@ input[type="number"]::-webkit-outer-spin-button {
     font-weight: normal;
     padding-bottom: 5px;
     background-color: orangered;
+  }
+
+  .details-div-one-m{
+    height: 500px;
+    background-color: var(--secondary-color);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .product-image-m{
+    width: 150px;
+  }
+
+  .whyus-div-one{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+  }
+  .whyus-div-two{
+    width: 80%;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
