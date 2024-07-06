@@ -1047,18 +1047,20 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .toolbar-m{
-    width: 100%;
+    width: 90%;
     height: 60px;
     display: flex;
     align-items: center;
     position: fixed;
     padding: 10px;
+    padding-left: 20px;
     top: 0px;
+    
   }
 
   .main-div-m{
-    width: 95%;
-    margin-left: 2.5%;
+    width: 90%;
+    margin-left: 5%;
     margin-right: 2.5%;
     height: 80vh;
   }
