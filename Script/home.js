@@ -149,7 +149,8 @@ query.update({
 
   </div>
          `;
-         
+
+
       });
     });
   }
@@ -279,6 +280,10 @@ query.update({
   `
   $("#all-data-div").css("display", "block");
          $("#loader").css("display", "none");
+         $(".main-div-m").css("display", "block");
+         $("#loader-m").css("display", "none");
+       
+         
        
       })
     
