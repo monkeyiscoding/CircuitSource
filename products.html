@@ -23,35 +23,196 @@
     </style>
 </head>
 <body style="overflow: hidden;">
-   <div class="toolbar" style="box-shadow: 0px 0px 0px white; border: 1px solid rgb(161, 161, 161);">
-    <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px;">
-      <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
-    </div>
-    <h3 style="padding-left: 10px; font-family: Sans-serif; color: orangered;">CircuitSource.in</h3>
 
 
-
-    <div style="width: 100%; height: 5px; ">
-
-    </div>
-    
-
-    <h4 style=" font-family: Sans-serif; font-weight: 200;  color: orangered; margin-right: 20px;"> <a class="a-menu" href="index.html">Home</a></h4>
-    <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
-    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: bold; margin-right: 20px;"><a class="a-menu-active" href="products.html">Products</a></h4>
-    <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
-    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200;  max-lines: 1; margin-right: 20px;"><a class="a-menu" href="address.html">Address</a></h4>
-    <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
-    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="">About</a></h4>
+  <div id="div-pc">
+    <div class="toolbar" style="box-shadow: 0px 0px 0px white; border: 1px solid rgb(161, 161, 161);">
+      <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px;">
+        <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
+      </div>
+      <h3 style="padding-left: 10px; font-family: Sans-serif; color: orangered;">CircuitSource.in</h3>
   
-    <div style="width: 100%; height: 5px; margin-left: 0px;">
+  
+  
+      <div style="width: 100%; height: 5px; ">
+  
+      </div>
+      
+  
+      <h4 style=" font-family: Sans-serif; font-weight: 200;  color: orangered; margin-right: 20px;"> <a class="a-menu" href="index.html">Home</a></h4>
+      <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
+      <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: bold; margin-right: 20px;"><a class="a-menu-active" href="products.html">Products</a></h4>
+      <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
+      <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200;  max-lines: 1; margin-right: 20px;"><a class="a-menu" href="address.html">Address</a></h4>
+      <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
+      <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="">About</a></h4>
     
+      <div style="width: 100%; height: 5px; margin-left: 0px;">
+      
+      </div>
+  
+  
+      <a href="cart.html">
+  
+        <div>
+         
+         <div class="cart-container" >
+           <i class="fa-solid fa-cart-arrow-down"></i>
+           <span class="cart-indicator">0</span>
+     </div>
+  
+     </a>
+     
+  
+  
+  
+      
+    </div>
+    <a id="login-pending" href="login.html" class="a-menu" style="width: 150px; margin-left: 20px; margin-right: 20px; display: flex;">
+      <div class="login-box">
+      <h4 style="margin-left: 10px; font-weight: 200;">Sign In</h4>
+      <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
+    </div></a>
+  
+    <a id="login-done" class="a-menu" style="width: 108px; margin-left: 20px; margin-right: 20px; display: none;">
+      <div class="login-box">
+      <h4 style="margin-left: 10px; font-weight: 200;">Me</h4>
+      <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
+    </div>
+  
+    <div id="profile" class="" style=" border-radius: 10px; box-shadow: 0px 0px 10px rgb(197, 196, 196); width: 200px; height: auto; position: absolute; background-color: rgb(255, 255, 255); margin-top: 50px; right: 45px; padding: 10px; display: none;">
+  
+      <div style="display: flex; justify-content: center; align-items: center;">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGFjsxZCvbMuKnsJHFywAKXzJh6SsPWVsifY_z36wVT9p38WQ3IQPDPDjhFPDyxv6YQY&usqp=CAU" alt="" style="width: 40px; height: 40px;">
+  
+      <div style="display: block;">
+         <h5 id="name" style="margin-left: 10px; margin-top: 5px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">Ayush Soni</h5>
+      <h6 id="number" style="margin-left: 10px; margin-top: 0px; font-family: sans-serif; font-weight: normal;  margin-bottom: 0px;">+91 9521532447</h6>
+   
+      </div>
+  
+      <i class="fa-solid fa-right-from-bracket" style="margin-left: auto;"></i>
+  
+      </div>
+  
+      
+      </div>
+  
+  </a>
+  
+    
+      
+    </div>
+  
+    <div id="all-data-div-product" style=" margin-top: 80px; display: none; background-color: rgb(255, 255, 255); height: 100vh;">
+  
+      <div style="background-color: white; height: 100vh; width: 17%; padding-left: 30px; padding-top: 30px; box-shadow: 5px 10px 7px rgb(199, 198, 198); color: black; position: fixed; z-index: 5;">
+  
+  
+          <h3>MOST SEARCHED</h3>
+  
+          <div id="most-searched-div" style="display: block;">
+  
+  
+              
+         
+          
+          </div>
+  
+  
+          <h4 style="margin-top: 40px;">BY CATEGORY</h4>
+  
+          <div id="category-div">
+  
+          </div>
+          
+          
+      </div>
+  
+  
+      <div style="width: 80%; margin-left: 17%;">
+  
+          <div style="width: 100%; border: 0px solid gray; height: 70px; box-shadow: 0px 0px 10px rgb(199, 198, 198); display: flex; align-items: center; padding-left: 50px; background-color: white; position: fixed; z-index: 4;">
+  
+              <i class="fa-solid fa-search"></i>
+              <input id="searchInput" type="text" placeholder="Search..." class="search-input" style="float: right;">
+  
+              <Button id="search" style="background-color: orangered; color: white; margin-left: 0px; margin-right: 30px; border-radius: 100px; position: fixed; right: 0px;">Search</Button>
+          
+            </div >
+  
+  
+  
+  
+  
+  
+            <div style="padding-top: 75px; ">
+  
+  
+  
+              <div id="top-suggestion-div" style="display: flex; margin-left: 70px; align-items: center; ">
+  
+                
+               
+                  
+  
+              </div>
+  
+  
+          <div id="loader-product" style="width: 100%; height: 80vh; display: flex; align-items: center; text-align: center; justify-content: center;" >
+  
+            <span class="loader" style="margin-bottom: 100px;"></span>
+  
+            
+            
+        
+          </div>
+  
+          <div id="not-found" style="width: 100%; height: 80vh; align-items: center; text-align: center; justify-content: center; display: none; " >
+  
+  
+            <img src="gif/search.gif" style="width: 100px; height: 100px; margin-top: 100px;"  alt="">
+  
+            <h3 style="font-weight: 300; color: gray;">Serach Not Found</h3>
+  
+            
+            
+        
+          </div>
+  
+              <div id="items-div" style="display: grid; padding-left:20px ; background-color: rgb(255, 255, 255);margin-bottom: 30px; overflow-y: auto; height: 70vh; padding-bottom: 20px;">
+  
+  
+            
+              </div>
+  
+            </div>
+          
+          
+  
+      </div>
+      
+    </div>
+    
+  
+    <div id="loader-product-main" style="width: 100%; height: 100vh; align-items: center; text-align: center; justify-content: center;" >
+  
+      <span class="loader"></span>
+  
     </div>
 
+  </div>
 
-    <a href="cart.html">
+  <div id="div-mobile"> 
 
-      <div>
+    <div class="toolbar-m" style="box-shadow: 0px 0px 0px white; border: 1px solid rgb(221, 218, 218);">
+      <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px;">
+        <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
+      </div>
+      
+    <a href="cart.html" style="margin-left: auto;">
+
+ 
        
        <div class="cart-container" >
          <i class="fa-solid fa-cart-arrow-down"></i>
@@ -59,144 +220,163 @@
    </div>
 
    </a>
-   
 
 
+      <div style="height: 40px; width: 40px; background-color: rgb(244, 244, 244); margin-left: 15px; margin-right: 25px; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px; display: flex; align-items: center; justify-content: center;">
+        <div id="menuToggle">
+          <input type="checkbox" />
+            <span></span>
+            <span></span>
+            <span></span>
+        <ul id="menu" style="background-color: white;">
+          <div style="align-items: center; margin-bottom: 20px; display: flex;">
+            <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px; width: 42px;">
+              <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
+            </div>
 
-    
-  </div>
-  <a id="login-pending" href="login.html" class="a-menu" style="width: 150px; margin-left: 20px; margin-right: 20px; display: flex;">
-    <div class="login-box">
-    <h4 style="margin-left: 10px; font-weight: 200;">Sign In</h4>
-    <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
-  </div></a>
+            <h3 style="margin-left: 10px; color: orangered;">CircuitSource.in</h3>
+          </div>
+        
+          <div style="display: flex; align-items: center; margin-left: 10px; height: 40px; ">
+             <i class="fa-solid fa-home"></i>
+             <h4 style="margin-left: 10px; font-weight: normal;">Home</h4>
+          </div>
+          <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+            <i style="margin-left: 2px;" class="fa-solid fa-shopping-bag"></i>
+            <h4 style="margin-left: 10px; font-weight: normal;">Products</h4>
+         </div>
+         <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+          <i style="margin-left: 0px;" class="fa-solid fa-address-book"></i>
+          <h4 style="margin-left: 10px; font-weight: normal;">My Address</h4>
+       </div>
+       <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+        <i style="margin-left: 0px;" class="fa-solid fa-shopping-cart"></i>
+        <h4 style="margin-left: 10px; font-weight: normal;">My Cart</h4>
+     </div>
+     <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+      <i style="margin-left: 2px;" class="fa-solid fa-bag-shopping"></i>
+      <h4 style="margin-left: 10px; font-weight: normal;">My Orders</h4>
+   </div>
 
-  <a id="login-done" class="a-menu" style="width: 108px; margin-left: 20px; margin-right: 20px; display: none;">
-    <div class="login-box">
-    <h4 style="margin-left: 10px; font-weight: 200;">Me</h4>
-    <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
-  </div>
-
-  <div id="profile" class="" style=" border-radius: 10px; box-shadow: 0px 0px 10px rgb(197, 196, 196); width: 200px; height: auto; position: absolute; background-color: rgb(255, 255, 255); margin-top: 50px; right: 45px; padding: 10px; display: none;">
+   <a href="login.html"> <button id="login-button-m" style="border-radius: 10px; margin-top: 30px;" class="button">Login</button>
+  </a>
+   <div id="profile-m" class="" style="display: none; border-radius: 10px; box-shadow: 0px 0px 5px rgb(197, 196, 196); width: 200px; height: auto; background-color: rgb(255, 255, 255); margin-top: 50px; right: 45px; padding: 10px;">
 
     <div style="display: flex; justify-content: center; align-items: center;">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGFjsxZCvbMuKnsJHFywAKXzJh6SsPWVsifY_z36wVT9p38WQ3IQPDPDjhFPDyxv6YQY&usqp=CAU" alt="" style="width: 40px; height: 40px;">
 
     <div style="display: block;">
        <h5 id="name" style="margin-left: 10px; margin-top: 5px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">Ayush Soni</h5>
-    <h6 id="number" style="margin-left: 10px; margin-top: 0px; font-family: sans-serif; font-weight: normal;  margin-bottom: 0px;">+91 9521532447</h6>
+    <h6 id="number" style="margin-left: 10px; margin-top: 0px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">+91 9521532447</h6>
  
     </div>
 
-    <i class="fa-solid fa-right-from-bracket" style="margin-left: auto;"></i>
+    <i style="margin-left: 30px;" class="fa-solid fa-right-from-bracket"></i>
+
 
     </div>
-
+    
     
     </div>
+ 
+        </ul>
+       </div>
+      </div>
+    </div>
 
-</a>
+    <div style="height: 80px;">
 
+    </div>
+
+    <div class="main-div-m" style="mask-type: 100px; display: none; margin: 0px; width: 100%;">
+
+
+      <div id="all-data-div-product-m" style=" width: 100%; margin: 0px; margin-top: 0px; display: none; background-color: rgb(255, 255, 255); height: 100vh;">
   
+
     
-  </div>
-
-  <div id="all-data-div-product" style=" margin-top: 80px; display: none; background-color: rgb(255, 255, 255); height: 100vh;">
-
-    <div style="background-color: white; height: 100vh; width: 17%; padding-left: 30px; padding-top: 30px; box-shadow: 5px 10px 7px rgb(199, 198, 198); color: black; position: fixed; z-index: 5;">
-
-
-        <h3>MOST SEARCHED</h3>
-
-        <div id="most-searched-div" style="display: block;">
-
-
+        <div style="width: 100%; ">
+    
+            <div style="width: 100%; border: 0px solid gray; height: 70px; box-shadow: 0px 0px 10px rgb(199, 198, 198); display: flex; align-items: center; padding-left: 10px; background-color: white; position: fixed; z-index: 4;">
+    
+                <i class="fa-solid fa-search"></i>
+                <input id="searchInput-m" type="text" placeholder="Search..." class="search-input" style="float: right;">
+    
+                <Button id="search-m" style="background-color: orangered; color: white; margin-left: 0px; margin-right: 10px; border-radius: 100px; position: fixed; right: 0px;">Search</Button>
             
-       
-        
-        </div>
-
-
-        <h4 style="margin-top: 40px;">BY CATEGORY</h4>
-
-        <div id="category-div">
-
-        </div>
-        
-        
-    </div>
-
-
-    <div style="width: 80%; margin-left: 17%;">
-
-        <div style="width: 100%; border: 0px solid gray; height: 70px; box-shadow: 0px 0px 10px rgb(199, 198, 198); display: flex; align-items: center; padding-left: 50px; background-color: white; position: fixed; z-index: 4;">
-
-            <i class="fa-solid fa-search"></i>
-            <input id="searchInput" type="text" placeholder="Search..." class="search-input" style="float: right;">
-
-            <Button id="search" style="background-color: orangered; color: white; margin-left: 0px; margin-right: 30px; border-radius: 100px; position: fixed; right: 0px;">Search</Button>
-        
-          </div >
-
-
-
-
-
-
-          <div style="padding-top: 75px; ">
-
-
-
-            <div id="top-suggestion-div" style="display: flex; margin-left: 70px; align-items: center; ">
-
-              
-             
-                
-
-            </div>
-
-
-        <div id="loader-product" style="width: 100%; height: 80vh; display: flex; align-items: center; text-align: center; justify-content: center;" >
-
-          <span class="loader" style="margin-bottom: 100px;"></span>
-
-          
-          
-      
-        </div>
-
-        <div id="not-found" style="width: 100%; height: 80vh; align-items: center; text-align: center; justify-content: center; display: none; " >
-
-
-          <img src="gif/search.gif" style="width: 100px; height: 100px; margin-top: 100px;"  alt="">
-
-          <h3 style="font-weight: 300; color: gray;">Serach Not Found</h3>
-
-          
-          
-      
-        </div>
-
-            <div id="items-div" style="display: grid; padding-left:20px ; background-color: rgb(255, 255, 255);margin-bottom: 30px; overflow-y: auto; height: 70vh; padding-bottom: 20px;">
-
-
-          
-            </div>
-
-          </div>
-        
-        
-
-    </div>
+              </div >
     
-  </div>
+    
+    
+    
+    
+    
+              <div style="padding-top: 75px; ">
+    
+    
+    
+                <div id="top-suggestion-div-m" style="display: flex; margin-left: 10px; align-items: center; ">
+    
+                  
+                 
+                    
+    
+                </div>
+    
+    
+            <div id="loader-product-m" style="width: 100%; height: 80vh; display: flex; align-items: center; text-align: center; justify-content: center;" >
+    
+              <span class="loader" style="margin-bottom: 100px;"></span>
+    
+              
+              
+          
+            </div>
+    
+            <div id="not-found-m" style="width: 100%; height: 80vh; align-items: center; text-align: center; justify-content: center; display: none; padding: 0px; " >
+    
+    
+              <img src="gif/search.gif" style="width: 100px; height: 100px; margin-top: 100px;"  alt="">
+    
+              <h3 style="font-weight: 300; color: gray;">Serach Not Found</h3>
+    
+              
+              
+          
+            </div>
+    
+                <div id="items-div-m" style=" width: 98%; margin-right: 0px; margin-top: 0px; display: grid; padding-left:0px; margin-left: 2%; background-color: rgb(255, 255, 255);margin-bottom: 30px; overflow-y: auto; height: 70vh; padding-bottom: 20px;">
+    
+    
+              
+                </div>
+    
+              </div>
+            
+            
+    
+        </div>
+        
+      </div>
+      
+    
   
 
-  <div id="loader-product-main" style="width: 100%; height: 100vh; align-items: center; text-align: center; justify-content: center;" >
 
-    <span class="loader"></span>
+
+    </div>
+
+
+
+    <div id="loader-m" style="width: 100%; height: 80vh; display: flex; align-items: center; text-align: center; justify-content: center;" >
+
+      <span class="loader"></span>
+  
+    </div>
+  
 
   </div>
+  
 
   <!-- The actual snackbar -->
 <div id="snackbar">Some text some message..</div>

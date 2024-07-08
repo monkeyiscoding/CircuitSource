@@ -51,6 +51,8 @@ function checkLogin(){
   if(lc == "true"){
     $("#login-pending").css("display","none");
     $("#login-done").css("display","flex");
+    $("#profile-m").css("display","flex");
+    $("#login-button-m").css("display","none");
     $("#name").html(name);
     $("#number").html(number);
 
@@ -60,6 +62,8 @@ function checkLogin(){
   else{
     $("#login-pending").css("display","flex");
     $("#login-done").css("display","none");
+    $("#profile-m").css("display","none");
+    $("#login-button-m").css("display","flex");
   }
 
 }
@@ -316,3 +320,25 @@ dropdownContent.addEventListener('mouseout', hideDropdown);
   
 
  
+
+// Assuming you have an input with id="searchInput"
+const searchInput = document.getElementById('searchInput');
+
+
+/// Event listener for input field on pressing Enter
+searchInput.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        handleSearch();
+    }
+});
+
+// Function to handle search submission
+function handleSearch() {
+  var text = $("#searchInput").val();
+
+  if(text.trim() != ""){
+    localStorage.setItem("recent-search",text);
+    window.location.href = "products.html";
+  } }
+
+
