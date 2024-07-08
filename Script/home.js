@@ -248,6 +248,7 @@ query.update({
       var key = snapshot.val();
       var query2 = firebase.database().ref("Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products/"+key);
  
+
       query2.once("value", function(snapshot2){
 
           var mydiv = document.getElementById("banner-div");
@@ -282,11 +283,11 @@ query.update({
               <img style="border-radius: 20px; margin-top: 20px;" src="${thumbnail}" alt="Product Image">
           </div>
   `
+ 
+  $("#loader").css("display", "none");
   $("#all-data-div").css("display", "block");
-         $("#loader").css("display", "none");
-         $(".main-div-m").css("display", "block");
-         $("#loader-m").css("display", "none");
-       
+  $(".main-div-m").css("display", "block");
+  $("#loader-m").css("display", "none");
          
        
       })
@@ -322,7 +323,7 @@ dropdownContent.addEventListener('mouseout', hideDropdown);
  
 
 // Assuming you have an input with id="searchInput"
-const searchInput = document.getElementById('searchInput');
+const searchInput = document.getElementById('searchInput-m');
 
 
 /// Event listener for input field on pressing Enter
@@ -334,11 +335,12 @@ searchInput.addEventListener('keyup', function(event) {
 
 // Function to handle search submission
 function handleSearch() {
-  var text = $("#searchInput").val();
+  var text = $("#searchInput-m").val();
 
   if(text.trim() != ""){
     localStorage.setItem("recent-search",text);
-    window.location.href = "products.html";
-  } }
+    window.open("products.html");
+  }
+ }
 
 

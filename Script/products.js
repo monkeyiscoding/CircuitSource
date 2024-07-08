@@ -16,11 +16,23 @@ const firebaseConfig = {
 
 
   checkSearch();
-  checkLogin();
-  loardCartCount();
+  
 
 
 
+  if(isMobileScreen){
+    loadProductMobile();
+    loadSuggestionsMobile();
+  }
+
+  if(!isMobileScreen){
+    checkLogin();
+    loardCartCount();
+  
+    loadMostSearchd();
+    loadCategory();
+    loadSuggestions();
+  }
 
 function loardCartCount(){
     number = localStorage.getItem("number");
@@ -73,8 +85,7 @@ function checkLogin(){
 
 
   $("#loader-product-main").css("display","flex")
-  loadMostSearchd();
-  loadCategory();
+
  
 
   var a = 0;
@@ -222,6 +233,7 @@ function loadProduct() {
                 }
           });
       });
+
   }).catch(function(error) {
       console.error('Error fetching products: ', error);
       $("#loader-product").css("display", "none");
@@ -232,7 +244,7 @@ function loadProduct() {
 }
 
 
-loadProductMobile();
+
 function loadProductMobile() {
     var mydiv = document.getElementById("items-div-m");
     mydiv.innerHTML = "";
@@ -697,7 +709,6 @@ function loadCategory() {
 }
 
 
-loadSuggestions();
 
 function loadSuggestions() {
     var query = firebase.database().ref("CircuitSource/top_suggestions");
@@ -728,7 +739,7 @@ function loadSuggestions() {
   }
 
 
-  loadSuggestionsMobile();
+
   function loadSuggestionsMobile() {
     var query = firebase.database().ref("CircuitSource/top_suggestions");
     query.once("value", function (snapshot) {
@@ -876,3 +887,8 @@ function checkSearch(){
     loadProduct();
   }
 }
+
+  // Check if the screen width is less than a certain threshold (e.g., 768px for tablets)
+  function isMobileScreen() {
+    return window.innerWidth < 908;
+  }
