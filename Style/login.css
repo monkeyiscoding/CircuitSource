@@ -106,3 +106,19 @@ body{
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
+
+
+  @media (max-width: 908px) {
+    .div-left{
+        display: none;
+
+    }
+
+    .div-right{
+        width: 100%;
+        margin-left: 0px;
+        padding: 0px;
+        margin-top: 100px;
+    }
+
+  }
