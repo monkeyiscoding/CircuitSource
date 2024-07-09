@@ -11,14 +11,14 @@ const firebaseConfig = {
   
   firebase.initializeApp(firebaseConfig);
 
-  if(isMobileScreen){
+  if(isMobileScreen()){
       loadImagesMobile();
       loadDataMobile();
       loadPointsMobile();
      getKeyWordsAndShowRelatedMobile();
   }
 
-  if(!isMobileScreen){
+  if(!isMobileScreen()){
     loadImages();
     loadPoints();
     loadData();

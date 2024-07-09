@@ -15,25 +15,21 @@ const firebaseConfig = {
 
 
 
-  checkSearch();
   
 
-
-
-  if(isMobileScreen){
-    loadProductMobile();
+  if(isMobileScreen()){
     loadSuggestionsMobile();
+    myFunction("fgfg");
   }
 
-  if(!isMobileScreen){
-   
-    
-  
+  if(!isMobileScreen()){
+    myFunction("fefe");
     loadMostSearchd();
     loadCategory();
     loadSuggestions();
+    
   }
-
+  checkSearch();
   checkLogin();
   loardCartCount();
 
@@ -894,11 +890,18 @@ function checkSearch(){
   }
 
   else{
-    loadProduct();
+    if(isMobileScreen()){
+        loadProductMobile();
+    }
+
+    if(!isMobileScreen()){
+        loadProduct();
+    }
+    
   }
 }
 
-  // Check if the screen width is less than a certain threshold (e.g., 768px for tablets)
-  function isMobileScreen() {
+// Check if the screen width is less than a certain threshold (e.g., 768px for tablets)
+function isMobileScreen() {
     return window.innerWidth < 908;
   }
