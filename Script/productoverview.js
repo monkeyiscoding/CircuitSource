@@ -333,8 +333,20 @@ $("#search").click(function() {
  
 })
 
+$("#search-m").click(function() {
+  var text = $("#searchInput-m").val();
+
+  if(text.trim() != ""){
+    localStorage.setItem("recent-search",text);
+    window.location.href = "products.html";
+  }
+ 
+})
+
   // Assuming you have an input with id="searchInput"
   const searchInput = document.getElementById('searchInput');
+   // Assuming you have an input with id="searchInput"
+   const searchInputm = document.getElementById('searchInput-m');
 
 
   /// Event listener for input field on pressing Enter
@@ -343,6 +355,13 @@ $("#search").click(function() {
           handleSearch();
       }
   });
+
+   /// Event listener for input field on pressing Enter
+   searchInputm.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        handleSearchMobile();
+    }
+});
   
   // Function to handle search submission
   function handleSearch() {
@@ -350,7 +369,17 @@ $("#search").click(function() {
 
     if(text.trim() != ""){
       localStorage.setItem("recent-search",text);
-      window.open("products.html");
+      window.location.href = "products.html";
+    } }
+  
+  
+  // Function to handle search submission
+  function handleSearchMobile() {
+    var text = $("#searchInput-m").val();
+
+    if(text.trim() != ""){
+      localStorage.setItem("recent-search",text);
+      window.location.href = "products.html";
     } }
   
   
@@ -658,7 +687,7 @@ query.update({
     var lc = localStorage.getItem("userislogin");
 
     if(lc == "true"){
- var quantity = $("#quantity").val();
+ var quantity = $("#quantity-m").val();
     var number = localStorage.getItem("number");
     var query = firebase.database().ref("CircuitSource/Users/"+number+"/my_cart/"+productKey);
 
