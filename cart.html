@@ -13,11 +13,12 @@
 
     <link rel="stylesheet" href="[path/to/css/feathericon.min.css" />
     <script src="https://unpkg.com/feather-icons"></script>
-    <link rel="stylesheet" href="Style/home.css"/>
     <link rel="stylesheet" href="Style/cart.css"/>
+    <link rel="stylesheet" href="Style/home.css"/>
+
     <link rel="icon" href="Images/logo.png" type="image/png">
 </head>
-<body>
+<body style="background-color: rgb(243, 243, 243);">
 
   <div id="div-pc" style="width: 100%;">
        <div class="toolbar">
@@ -284,27 +285,44 @@
 
             <h3 style="margin-left: 10px; color: orangered;">CircuitSource.in</h3>
           </div>
-        
-          <div style="display: flex; align-items: center; margin-left: 10px; height: 40px; ">
-             <i class="fa-solid fa-home"></i>
-             <h4 style="margin-left: 10px; font-weight: normal;">Home</h4>
-          </div>
-          <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+          <a href="index.html" style="text-decoration: none; color: black;">
+
+            <div style="display: flex; align-items: center; margin-left: 10px; height: 40px; ">
+              <i class="fa-solid fa-home"></i>
+              <h4 style="margin-left: 10px; font-weight: normal;">Home</h4>
+           </div>
+          </a>
+
+
+          <a href="products.html" style="text-decoration: none; color: black;">
+<div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
             <i style="margin-left: 2px;" class="fa-solid fa-shopping-bag"></i>
             <h4 style="margin-left: 10px; font-weight: normal;">Products</h4>
          </div>
-         <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+
+          </a>
+
+
+          <a href="address.html" style="text-decoration: none; color: black;">
+  <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
           <i style="margin-left: 0px;" class="fa-solid fa-address-book"></i>
           <h4 style="margin-left: 10px; font-weight: normal;">My Address</h4>
        </div>
-       <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+          </a>
+          <a href="cart.html" style="text-decoration: none; color: black;">
+ <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
         <i style="margin-left: 0px;" class="fa-solid fa-shopping-cart"></i>
         <h4 style="margin-left: 10px; font-weight: normal;">My Cart</h4>
      </div>
-     <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+          </a>
+          <a href="orders.html" style="text-decoration: none; color: black;">
+  <div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
       <i style="margin-left: 2px;" class="fa-solid fa-bag-shopping"></i>
       <h4 style="margin-left: 10px; font-weight: normal;">My Orders</h4>
    </div>
+
+          </a>         
+          
 
    <a href="login.html"> <button id="login-button-m" style="border-radius: 10px; margin-top: 30px;" class="button">Login</button>
   </a>
@@ -434,67 +452,66 @@
     </div>
   
 
-  </div>
-
-
-
-  <div class="overlay" id="overlay">
-    <div class="dialog">
-      <h2>Enter Address Details</h2>
-      <form id="addressForm-m">
-        <div class="form-group">
-          <label for="fullName">Full Name:</label>
-          <input type="text" id="fullName" name="fullName" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="addressLine" >Address Line:</label>
-          <textarea id="addressLine-m" name="addressLine" rows="7" required style="border: 0.5px solid gray; width: 95%; border-radius: 5px; padding: 10px; margin-right: 15px;"></textarea>
-</div>
-  
-        <div class="form-group">
-          <label for="landmark">Landmark:</label>
-          <input type="text" id="landmark" name="landmark" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="state">State:</label>
-          <input type="text" id="state" name="state" required>
-        </div>
-  
-        
-  
-        <div style="display: flex; justify-content: space-between;">
-<div class="form-group">
-          <label for="city">City:</label>
-          <input type="text" id="city" name="city" required>
-        </div> 
-        <div class="form-group">
-          <label for="pincode">Pin Code:</label>
-          <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" required>
-        </div>
-        </div>
-       
-  
-        <div class="form-group">
-          <label for="mobileNumber">Mobile Number:</label>
-          <input type="text" id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}" required>
-        </div>
-
-        <div class="checkbox-container" style="display: flex; justify-content: left; align-items: left;">
-            <input type="checkbox" id="agreeCheckbox" name="agreeCheckbox" checked style="background-color: orangered;">
-            <label for="agreeCheckbox" style="margin-top: 5px; margin-left: 5px;">Set this default</label>
+    <div class="overlay" id="overlay">
+      <div class="dialog">
+        <h2>Enter Address Details</h2>
+        <form id="addressForm-m">
+          <div class="form-group">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
           </div>
+    
+          <div class="form-group">
+            <label for="addressLine" >Address Line:</label>
+            <textarea id="addressLine-m" name="addressLine" rows="7" required style="border: 0.5px solid gray; width: 95%; border-radius: 5px; padding: 10px; margin-right: 15px;"></textarea>
+  </div>
+    
+          <div class="form-group">
+            <label for="landmark">Landmark:</label>
+            <input type="text" id="landmark" name="landmark" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
+          </div>
+    
           
+    
+          <div style="display: flex; justify-content: space-between;">
+  <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+          </div> 
+          <div class="form-group">
+            <label for="pincode">Pin Code:</label>
+            <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" required>
+          </div>
+          </div>
+         
+    
+          <div class="form-group">
+            <label for="mobileNumber">Mobile Number:</label>
+            <input type="text" id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}" required>
+          </div>
   
-        <div class="button-container">
-          <button type="button" style="background-color: orangered;" onclick="closeDialog()">Cancel</button>
-          <button type="submit" style="background-color: orangered; margin-left: 10px;">Save Address</button>
-        </div>
-      </form>
+          <div class="checkbox-container" style="display: flex; justify-content: left; align-items: left;">
+              <input type="checkbox" id="agreeCheckbox" name="agreeCheckbox" checked style="background-color: orangered;">
+              <label for="agreeCheckbox" style="margin-top: 5px; margin-left: 5px;">Set this default</label>
+            </div>
+            
+    
+          <div class="button-container">
+            <button type="button" style="background-color: orangered;" onclick="closeDialog()">Cancel</button>
+            <button type="submit" style="background-color: orangered; margin-left: 10px;">Save Address</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-  
+
+
+
 <!-- The actual snackbar -->
 <div id="snackbar">Some text some message..</div>
 

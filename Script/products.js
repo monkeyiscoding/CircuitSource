@@ -26,13 +26,16 @@ const firebaseConfig = {
   }
 
   if(!isMobileScreen){
-    checkLogin();
-    loardCartCount();
+   
+    
   
     loadMostSearchd();
     loadCategory();
     loadSuggestions();
   }
+
+  checkLogin();
+  loardCartCount();
 
 function loardCartCount(){
     number = localStorage.getItem("number");
@@ -62,26 +65,33 @@ var previousSearch = "";
  
 
 function checkLogin(){
-  var lc = localStorage.getItem("userislogin");
-  var name = localStorage.getItem("username");
-  var email = localStorage.getItem("email");
-  var number = localStorage.getItem("number");
-
+    var lc = localStorage.getItem("userislogin");
+    var name = localStorage.getItem("username");
+    var email = localStorage.getItem("email");
+    var number = localStorage.getItem("number");
   
-
-  if(lc == "true"){
-    $("#login-pending").css("display","none");
-    $("#login-done").css("display","flex");
-    $("#name").html(name);
-    $("#number").html(number);
+  
+  
+    if(lc == "true"){
+      $("#login-pending").css("display","none");
+      $("#login-done").css("display","flex");
+      $("#profile-m").css("display","flex");
+      $("#login-button-m").css("display","none");
+      $("#name").html(name);
+      $("#number").html(number);
+  
+    }
+  
+  
+    else{
+      $("#login-pending").css("display","flex");
+      $("#login-done").css("display","none");
+      $("#profile-m").css("display","none");
+      $("#login-button-m").css("display","flex");
+    }
+  
   }
-
-  else{
-    $("#login-pending").css("display","flex");
-    $("#login-done").css("display","none");
-  }
-
-}
+  
 
 
   $("#loader-product-main").css("display","flex")

@@ -38,27 +38,34 @@ const hideDropdown = () => {
    
 
 
-function checkLogin(){
+ function checkLogin(){
   var lc = localStorage.getItem("userislogin");
   var name = localStorage.getItem("username");
   var email = localStorage.getItem("email");
   var number = localStorage.getItem("number");
 
-  
+
 
   if(lc == "true"){
     $("#login-pending").css("display","none");
     $("#login-done").css("display","flex");
+    $("#profile-m").css("display","flex");
+    $("#login-button-m").css("display","none");
     $("#name").html(name);
     $("#number").html(number);
+
   }
+
 
   else{
     $("#login-pending").css("display","flex");
     $("#login-done").css("display","none");
+    $("#profile-m").css("display","none");
+    $("#login-button-m").css("display","flex");
   }
 
 }
+
 
 var addressCheck = false;
 var count = 0;

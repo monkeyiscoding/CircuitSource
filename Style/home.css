@@ -1032,6 +1032,10 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
+.list-address{
+  padding-left: 50px;
+}
+
 
 /* Medira queries */
 @media (max-width: 908px) {
@@ -1318,4 +1322,29 @@ input[type="number"]::-webkit-outer-spin-button {
     transform: translateY(0%);
   }
 }
+
+.toolbar{
+  display: none;
+}
+
+.list-address{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.dialog{
+  width: 70%;
+}
+
+.product-image-option-deactive{
+  width: 40px;
+  padding: 10px;
+  margin-right: 10px;
+  display: block;
+  margin-top: 10px;
+  background-color: rgb(245, 245, 245);
+  border-radius: 5px;
+  
+}
+
 }
