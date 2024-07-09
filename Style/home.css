@@ -765,7 +765,6 @@ http://stackoverflow.com/a/34696029/383904
 
 
 .product-div-one-search{
-
   width: 200px;
   margin-right: 20px;
   height: 340px;
@@ -1258,8 +1257,6 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .product-div-one-search{
-
-    width: 190px;
     margin-right: 20px;
     height: 340px;
     border-radius: 5px;
@@ -1278,7 +1275,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
     gap: 10px;
     grid-auto-flow: dense;
     width: 100%;

@@ -13,22 +13,21 @@ const firebaseConfig = {
   var dataRef = firebase.database().ref("All");
 
 
-
-
   
 
   if(isMobileScreen()){
     loadSuggestionsMobile();
-    myFunction("fgfg");
+
   }
 
   if(!isMobileScreen()){
-    myFunction("fefe");
     loadMostSearchd();
     loadCategory();
     loadSuggestions();
     
   }
+
+
   checkSearch();
   checkLogin();
   loardCartCount();
@@ -541,13 +540,17 @@ function loadSearchProductMobile(value) {
   
             var discPrice = price - discount;
   
-            $("#loader-product-main-m").css("display", "none");
+            $("#loader-m").css("display", "none");
+            $(".main-div-m").css("display", "block");
             $("#loader-product-m").css("display", "none");
+            $("#all-data-div-product-m").css("display", "flex");
             $("#all-data-div-product-m").css("display", "flex");
   
             if (previousSearch != "") {
                 searchInput.value = previousSearch;
             }
+
+        
   
             mydiv.classList.add('grid-container');
   
@@ -746,7 +749,7 @@ function loadSuggestions() {
 
 
 
-  function loadSuggestionsMobile() {
+function loadSuggestionsMobile() {
     var query = firebase.database().ref("CircuitSource/top_suggestions");
     query.once("value", function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
@@ -829,8 +832,8 @@ function loadSuggestions() {
     
   
   }
-  
 
+  
  // Get the dropdown elements
  const dropdownButton = document.getElementById('login-done');
  const dropdownContent = document.getElementById('profile');
@@ -882,9 +885,17 @@ function myFunction(text) {
 
 function checkSearch(){
   var st = localStorage.getItem("recent-search");
+ 
   if(st.toString().trim() != ""){
     previousSearch = st;
-    loadSearchProduct(st);
+    if(isMobileScreen()){
+        loadSearchProductMobile(st);
+    }
+
+    if(!isMobileScreen()){
+        loadSearchProduct(st);
+    }
+   
     localStorage.setItem("recent-search","");
     
   }
@@ -900,6 +911,7 @@ function checkSearch(){
     
   }
 }
+
 
 // Check if the screen width is less than a certain threshold (e.g., 768px for tablets)
 function isMobileScreen() {

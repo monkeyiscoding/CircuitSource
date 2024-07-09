@@ -337,10 +337,24 @@ searchInput.addEventListener('keyup', function(event) {
 function handleSearch() {
   var text = $("#searchInput-m").val();
 
+  myFunction(text);
   if(text.trim() != ""){
     localStorage.setItem("recent-search",text);
-    window.open("products.html");
+    window.location.href="products.html";
   }
  }
+
+
+ function myFunction(text) {
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
+  x.innerHTML = text;
+  // Add the "show" class to DIV
+  x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
 
 
