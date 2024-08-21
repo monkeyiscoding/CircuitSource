@@ -35,6 +35,8 @@ function render() {
 
 
 
+
+
 $("#login").click(function() {
   var number = $("#phone").val();
 
@@ -167,12 +169,27 @@ function codeverify() {
 
     var ref = firebase.database().ref().push();
     var key = ref.key;
-
+    const platform = navigator.platform;
     
     firebase.database().ref("CircuitSource/Users/"+number).update({
         number: number,
+        first_login_on: platform,
     }, function (value){
 
+      // Get current date and time
+const currentDate = new Date();
+
+// Extract the date and time components
+const date = currentDate.toLocaleDateString(); // e.g., "8/21/2024"
+const time = currentDate.toLocaleTimeString(); // e.g., "10:30:15 AM"
+
+      var sKey = firebase.database().ref("CircuitSource/Users/"+number).push().key;
+    firebase.database().ref("CircuitSource/Users/"+number+"/login_sessions/"+sKey).update({
+      platform: platform,
+      time: time,
+      date: date,
+  });
+      
         fullNumber = number;
       
         var query = firebase.database().ref("CircuitSource/Users/"+number)

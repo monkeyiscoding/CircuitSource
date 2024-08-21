@@ -29,10 +29,12 @@ function loardCartCount(){
         var childrenCount = snapshot.numChildren();
         if(snapshot.exists){
             $(".cart-indicator").html(childrenCount);
+            $(".cart-indicator-2").html(childrenCount);
         }
 
         else{
             $(".cart-indicator").html("0");
+            $(".cart-indicator-2").html("0");
         }
         
     });
@@ -55,6 +57,12 @@ function checkLogin(){
     $("#login-button-m").css("display","none");
     $("#name").html(name);
     $("#number").html(number);
+
+    $("#login-pending-m").css("display","none");
+    $("#login-done-m").css("display","flex");
+    $("#profile-m").css("display","flex");
+    $("#login-button-m").css("display","none");
+    
 
   }
 
