@@ -615,10 +615,10 @@ function loadCartProduct() {
             var pin = snapshot.val().pincode;
             var city = snapshot.val().city;
             var state = snapshot.val().state;
-            var phone = snapshot.val().phone;
+            var phone = snapshot.val().mobileNumber;
 
             $("#default-address").html(address+"\n\n"+city+", "+state+", "+pin);
-            $("#default-address-m").html(address+"<br>"+city+", "+state+", "+pin+"<br><br>"+number);
+            $("#default-address-m").html(address+"<br>"+city+", "+state+", "+pin+"<br><br>PH: "+phone);
         })
 
     })

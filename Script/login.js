@@ -17,7 +17,11 @@ const firebaseConfig = {
 
   var query = firebase.database().ref("CircuitSource/Users");
 
-  
+  var lc = localStorage.getItem("userislogin");
+  if(lc == "true"){
+    window.location.href = "index.html";
+  }
+
   
 var capta = false;
 var fullNumber = "";
@@ -54,7 +58,7 @@ $("#login").click(function() {
   // }
   else {
     $("#loader").css("visibility","visible");
-    
+
     checkUser(number);
   }
 })
