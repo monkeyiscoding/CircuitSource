@@ -1438,4 +1438,62 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
+@media (max-width: 400px){
+  .product-div-one-search{
+    margin-right: 20px;
+    height: 340px;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    text-align: center;
+    margin: 0px;
+    padding-top: 10px; 
+    transition: 0.5s;
+    width: 180px;
+    margin-bottom: 10px;
+    border: 0.5px solid rgb(147, 147, 147);
+    background-color: white;
+  }
 
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    grid-auto-flow: dense;
+    width: 100%;
+    margin: auto;
+  }
+}
+
+
+
+@media (max-width: 350px){
+  .product-div-one-search{
+    margin-right: 20px;
+    height: 340px;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    text-align: center;
+    margin: 0px;
+    padding-top: 10px; 
+    transition: 0.5s;
+    width: 160px;
+    margin-bottom: 10px;
+    border: 0.5px solid rgb(147, 147, 147);
+    background-color: white;
+  }
+
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    grid-auto-flow: dense;
+    width: 100%;
+    margin: auto;
+  }
+}
