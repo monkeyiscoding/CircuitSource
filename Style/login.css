@@ -155,8 +155,8 @@ body{
   .country-code {
     background-color: #ffffff; /* Adjust as needed */
     padding: 0 10px;
-    border: 1px solid #8d8d8d;
-    margin-left: 20px;
+   
+    margin-left: 10px;
 
     height: 45px;
     text-align: center;
