@@ -211,22 +211,13 @@
       <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px;">
         <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
       </div>
-      <h3 style="margin-left: 7px; color: orangered;">Products</h3>
+      <h3 style="margin-left: 7px; color: orangered; margin-right: auto;">Products</h3>
       
-    <a href="cart.html" style="margin-left: auto;">
-
- 
-       
-       <div class="cart-container" >
-         <i class="fa-solid fa-cart-arrow-down"></i>
-         <span class="cart-indicator">0</span>
-   </div>
-
-   </a>
-
+    
 
       <div style="height: 40px; width: 40px; background-color: rgb(244, 244, 244); margin-left: 15px; margin-right: 25px; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px; display: flex; align-items: center; justify-content: center;">
         <div id="menuToggle">
+          
           <input type="checkbox" />
             <span></span>
             <span></span>
@@ -323,7 +314,7 @@
                 <i class="fa-solid fa-search"></i>
                 <input id="searchInput-m" type="text" placeholder="Search..." class="search-input" style="float: right;">
     
-                <Button id="search-m" style="background-color: orangered; color: white; margin-left: 0px; margin-right: 10px; border-radius: 100px; position: fixed; right: 0px;">Search</Button>
+                <Button id="search-m" style="background-color: orangered; color: white; margin-left: 0px; margin-right: 10px; border-radius: 100px; position: fixed; right: 0px;"><i data-feather="search"></i></Button>
             
               </div >
     
@@ -397,7 +388,45 @@
   
 
   </div>
-  
+
+  <div class="wrapper-2" style="z-index: 0; height: 0px;">
+    <div id="bottom-bar" style="height: 70px;">
+
+      <a href="index.html" style="margin-left: auto;">
+           <div class="bottom-bar-element" style="color: white;">
+            <i class="icon-bottom-bar-deselected" data-feather="home"></i>
+           
+        </div>
+      </a>
+     
+
+        <a href="products.html" style="margin-left: auto;">
+<div class="bottom-bar-element">
+            <i class="icon-bottom-bar" data-feather="shopping-bag" style="color: white;"></i>
+        </div>
+          </a>
+        
+        <div class="bottom-bar-element">
+            <i class="icon-bottom-bar-deselected" data-feather="bell"></i>
+        </div>
+         
+    <a href="cart.html" style="margin-left: auto;">
+
+ 
+        <div class="bottom-bar-element cart-icon-container">
+            <i class="icon-bottom-bar-deselected" data-feather="shopping-cart"></i>
+            <span class="cart-indicator-2">0</span>
+        </div>
+
+    </a>
+ 
+       
+        <div class="bottom-bar-element">
+            <i class="icon-bottom-bar-deselected" data-feather="user"></i>
+        </div>
+    </div>
+</div>
+
 
   <!-- The actual snackbar -->
 <div id="snackbar">Some text some message..</div>
@@ -409,6 +438,9 @@
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    feather.replace();
+  </script>
   <script src="Script/products.js" charset="utf-8"></script>
 
 </body>

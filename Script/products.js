@@ -32,23 +32,24 @@ const firebaseConfig = {
   checkLogin();
   loardCartCount();
 
-function loardCartCount(){
+  function loardCartCount(){
     number = localStorage.getItem("number");
     query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
     query.on("value", function(snapshot) { 
         var childrenCount = snapshot.numChildren();
         if(snapshot.exists){
             $(".cart-indicator").html(childrenCount);
+            $(".cart-indicator-2").html(childrenCount);
         }
 
         else{
             $(".cart-indicator").html("0");
+            $(".cart-indicator-2").html("0");
         }
         
     });
 
 }
-
   
 
     // Assuming you have an input with id="searchInput"
@@ -287,20 +288,20 @@ function loadProductMobile() {
   
             var productHTML = `
                 <div style="cursor: pointer;" onClick="openProduct('${key}')" class="product-div-one-search fade-in" style="background-color: white; border-radius: 5px; border: 0.2px solid grey;">
-                    <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
-                        <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
-                    </div>
-                    <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="130px" alt="">
-                    <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
-                    <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
-                        <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold; text-align: center;">₹${discPrice}</h5>
-                        <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: center;">₹${price}</h5>
-                    </div>
-                    <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
-                        <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
-                        <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
-                    </button>
-                </div>
+                  <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
+                      <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
+                  </div>
+                  <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="120px" alt="">
+                  <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
+                  <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
+                      <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold; text-align: center;">₹${discPrice}</h5>
+                      <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: center;">₹${price}</h5>
+                  </div>
+                  <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
+                      <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
+                      <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
+                  </button>
+              </div>
             `;
   
             mydiv.innerHTML += productHTML;

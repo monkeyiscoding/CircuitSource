@@ -615,9 +615,10 @@ function loadCartProduct() {
             var pin = snapshot.val().pincode;
             var city = snapshot.val().city;
             var state = snapshot.val().state;
+            var phone = snapshot.val().phone;
 
             $("#default-address").html(address+"\n\n"+city+", "+state+", "+pin);
-            $("#default-address-m").html(address+"\n\n"+city+", "+state+", "+pin);
+            $("#default-address-m").html(address+"<br>"+city+", "+state+", "+pin+"<br><br>"+number);
         })
 
     })
@@ -628,6 +629,8 @@ function loadCartProduct() {
 
 // scripts.js
 document.getElementById('openBottomSheet').addEventListener('click', function() {
+  var bottomSheetBack = document.getElementById('bottomSheetBack');
+  bottomSheetBack.style.display = 'block';
   var bottomSheet = document.getElementById('bottomSheet');
   bottomSheet.style.display = 'block';
 });
@@ -635,6 +638,8 @@ document.getElementById('openBottomSheet').addEventListener('click', function() 
 document.getElementById('closeBottomSheetNow').addEventListener('click', function() {
   var bottomSheet = document.getElementById('bottomSheet');
   bottomSheet.style.display = 'none';
+  var bottomSheetBack = document.getElementById('bottomSheetBack');
+  bottomSheetBack.style.display = 'none';
 });
 
  // Check if the screen width is less than a certain threshold (e.g., 768px for tablets)

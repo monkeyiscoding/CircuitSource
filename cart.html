@@ -261,21 +261,12 @@
         <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
       </div>
 
-      <h3 style="margin-left: 7px; color: orangered;">My Cart</h3>
+      <h3 style="margin-left: 7px; color: orangered; margin-right: auto;">My Cart</h3>
       
-    <a href="cart.html" style="margin-left: auto;">
-
  
-       
-       <div class="cart-container" >
-         <i class="fa-solid fa-cart-arrow-down"></i>
-         <span class="cart-indicator">0</span>
-   </div>
-
-   </a>
 
 
-      <div style="height: 40px; width: 40px; background-color: rgb(244, 244, 244); margin-left: 15px; margin-right: 25px; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px; display: flex; align-items: center; justify-content: center;">
+      <div style=" margin-left: auto; height: 40px; width: 40px; background-color: rgb(244, 244, 244); margin-left: 15px; margin-right: 25px; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px; display: flex; align-items: center; justify-content: center;">
         <div id="menuToggle">
           <input type="checkbox" />
             <span></span>
@@ -358,10 +349,10 @@
 
     </div>
 
-    <div class="main-div-m" style="mask-type: 100px; display: none; margin: 0px; width: 100%;">
+    <div class="main-div-m" style="mask-type: 100px; display: none; margin: 0px; width: 100%; margin: 0px;">
 
-      <div class="div-left-cart" style="  overflow-x: hidden; width: 90%; padding: 10px; margin:  0px; margin-left: 10px; margin-top: 10px; border-radius: 5px; height: 80vh;">
-        <div style="margin: 0px;">
+      <div class="div-left-cart" style="overflow-x: hidden; width: 90%; padding: 20px; margin:  0px; margin-left: 0px; margin-top: 0px; border-radius: 5px; height: 100vh;">
+        <div style="margin: 0px; margin-bottom: 60px;">
              <h3 id="item-count-m"></h3>
 
            
@@ -389,8 +380,12 @@
 
     </div>
 
-    <button id="openBottomSheet" style="width: 90%; background-color: orangered; color: white; left: 5%; position: fixed; bottom: 20px;">Checkout</button>
+    <div style="width: 100%; height: 70px; background-color: rgb(255, 255, 255); left: 0%; position: fixed; bottom: 0px; box-shadow: 0px 0px 10px grey;">
+ <button id="openBottomSheet" style="width: 90%; background-color: orangered; color: white; left: 5%;  position: fixed; bottom: 20px;">Checkout</button>
 
+    </div>
+
+   
     </div>
 
 
@@ -401,7 +396,9 @@
   
     </div>
   
-    <div class="bottomSheet" id="bottomSheet" style="width: 90%; background-color: white;">
+
+    <div id="bottomSheetBack" style="height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.3); position: absolute; top: 0px; display: none;">
+ <div class="bottomSheet" id="bottomSheet" style="width: 90%; background-color: white;">
 
       <h4 style="color: gray; font-weight: 500;">Address Details</h4>
   
@@ -454,6 +451,8 @@
         
           
     </div>
+    </div>
+   
   
 
     <div class="overlay" id="overlay">
