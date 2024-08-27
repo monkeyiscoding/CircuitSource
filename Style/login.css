@@ -1,4 +1,14 @@
 
+:root {
+    --primary-color: orangered;
+    --secondary-color: #f4f4f4;
+    --shadow-color: #e6e3e3;
+    --font-default: Sans-serif;
+    --bg: white;
+    --color: black;
+    --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+  }
+
 body{
     margin: 0px;
     font-family: sans-serif;
@@ -118,7 +128,54 @@ body{
         width: 100%;
         margin-left: 0px;
         padding: 0px;
-        margin-top: 100px;
+        margin-top: 10px;
     }
 
+  }
+
+  .card-phone{
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px var(--shadow-color);
+    margin-right: 30px;
+    margin-left: 30px;
+    padding-top: 20px;
+  }
+
+  #animationContainer {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+ }
+
+ .phone-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .country-code {
+    background-color: #ffffff; /* Adjust as needed */
+    padding: 0 10px;
+    border: 1px solid #8d8d8d;
+    margin-left: 20px;
+
+    height: 45px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-right: 0px;
+    line-height: 2; /* Adjust as needed */
+  }
+  
+  .input-with-border {
+    flex: 1;
+    border: 1px solid #ccc;
+
+    border-radius: 5px; /* Rounded corners on the right side */
+    padding: 0 10px;
+  }
+  
+  
+  .input-with-border::placeholder {
+    color: #999;
   }

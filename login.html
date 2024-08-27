@@ -10,11 +10,13 @@
       src="https://kit.fontawesome.com/3b2cf0bb84.js"
       crossorigin="anonymous"
     ></script>
+    
 
     <link rel="stylesheet" href="[path/to/css/feathericon.min.css" />
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="Style/login.css" />
     <link rel="icon" href="Images/logo.png" type="image/png">
+    
     <style>
 
 
@@ -40,13 +42,17 @@
 
         <div id="div-phone" class="div-right" style="display: block;">
 
-            <img src="Images/welcome.png" style="width: 180px;" alt="">
+            <div id="animationContainer"></div>
 
-            <h2 style="font-weight: normal; margin-bottom: 0px;">Account Verification</h2>
+            <div class="card-phone">
+                 <h3 style="font-weight: normal; margin-bottom: 0px; font-weight: bold;">Account Verification</h3>
             <h5 style="font-weight: normal; color: gray; margin-top: 0px;">Enter your phone number for account verification</h5>
 
             
-            <input id="phone" type="text" class="input-with-border" placeholder="Phone Number">
+            <div class="phone-wrapper">
+                <span class="country-code" style="font-size: 20px;">+91</span>
+                <input style="margin-right: 20px; margin-left: 10px;" id="phone" type="text" class="input-with-border" placeholder="Phone Number" />
+              </div>
             <h4 id="error" class="error" style="visibility: hidden; color: red; font-weight: normal;">Invalid Number</h4>
       
             
@@ -55,12 +61,17 @@
       
             <div id="loader" class="loader" style="margin-left: auto; margin-right: auto; margin-top: 10px; visibility: hidden;"></div>
 
+
+            </div>
+           
         </div>
 
         <div id="div-otp" class="div-right" style="display: none;">
 
-            <img src="Images/otp.png" style="width: 180px;" alt="">
-            <h2 style="font-weight: normal; margin-bottom: 0px;">OTP Verification</h2>
+            <div id="animationContainer-otp" style="width: 200px; margin-left: auto; margin-right: auto; margin-top: 60px;"></div>
+
+            <div class="card-phone">
+  <h2 style="font-weight: normal; margin-bottom: 0px;">OTP Verification</h2>
             <h5 style="font-weight: normal; color: gray; margin-top: 0px; margin-left: 50px; margin-right: 50px;">Enter 6 Digit OTP that we have send to you enterd phone number</h5>
 
             
@@ -72,25 +83,34 @@
 
             <div id="loader-otp" class="loader" style="margin-left: auto; margin-right: auto; margin-top: 10px; visibility: hidden;"></div>
 
+            </div>
+          
         </div>
 
         <div id="div-details" class="div-right" style="display: none;">
+            <div id="animationContainer-details" style="width: 300px; margin-left: auto; margin-right: auto; margin-top: 60px;"></div>
 
-            <h2 style="font-weight: normal; margin-bottom: 0px;">Enter Details</h2>
+            <div class="card-phone">
+
+              <h2 style="font-weight: normal; margin-bottom: 0px;">Enter Details</h2>
             <h5 style="font-weight: normal; color: gray; margin-top: 0px;">Enter your name or email address to continue</h5>
 
             
             <input id="username" type="text" class="input-with-border" placeholder="Full Name">
-            <input id="email" type="text" class="input-with-border" placeholder="Email" style="margin-top: 20px;">
+            <input id="email" type="text" class="input-with-border" placeholder="Email Address" style="margin-top: 20px;">
             <h4 id="error3" class="error" style="visibility: hidden; color: red; font-weight: normal;">Invalid Name</h4>
       
            
             <button id="save" class="otp-button" style="margin-top: 0px; margin-left: auto; margin-right: auto;">Save</button>
 
             <div id="loader-details" class="loader" style="margin-left: auto; margin-right: auto; margin-top: 10px; visibility: hidden;"></div>
-
+    
+            </div>
+          
         </div>
 
+
+        <h5 style="position: absolute; bottom: 10px;width: 100%; text-align: center;">www.cercuitsource.in</h5>
         
 
     </div>
@@ -98,14 +118,42 @@
     <!-- The actual snackbar -->
     <div id="snackbar">Some text some message..</div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        var animation = lottie.loadAnimation({
+    container: document.getElementById('animationContainer'), // the DOM element to render the animation
+    renderer: 'svg', // the rendering method
+    loop: true, // whether to loop the animation
+    autoplay: true, // whether to start the animation automatically
+    path: 'https://lottie.host/4bff0c4f-497f-486c-a4de-f68aa4534cd8/jIBXy1zMeh.json' 
+ });
+ var animation = lottie.loadAnimation({
+    container: document.getElementById('animationContainer-otp'), // the DOM element to render the animation
+    renderer: 'svg', // the rendering method
+    loop: true, // whether to loop the animation
+    autoplay: true, // whether to start the animation automatically
+    path: 'https://lottie.host/0fe34a47-68bd-4d7a-8ff2-018e5b7d676b/UMlQvpCl04.json' 
+ });
+
+ var animation = lottie.loadAnimation({
+    container: document.getElementById('animationContainer-details'), // the DOM element to render the animation
+    renderer: 'svg', // the rendering method
+    loop: true, // whether to loop the animation
+    autoplay: true, // whether to start the animation automatically
+    path: ' https://lottie.host/4710491e-99eb-4f74-b5d1-2a6abb546bc7/9PtGSEI8YC.json' 
+ });
+    </script>
+   
     <script src="Script/login.js" charset="utf-8"></script>
   
-    
+   
 </body>
 </html>
