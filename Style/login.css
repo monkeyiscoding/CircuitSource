@@ -118,6 +118,10 @@ body{
   }
 
 
+  #link{
+    display: none;
+    position: fixed;
+}
   @media (max-width: 908px) {
     .div-left{
         display: none;
@@ -131,7 +135,13 @@ body{
         margin-top: 10px;
     }
 
+    #link{
+        display: block;
+        position: fixed;
+    }
+
   }
+
 
   .card-phone{
     border-radius: 20px;
@@ -139,6 +149,7 @@ body{
     margin-right: 30px;
     margin-left: 30px;
     padding-top: 20px;
+    padding-bottom: 10px;
   }
 
   #animationContainer {
