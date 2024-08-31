@@ -1,0 +1,44 @@
+.verified-div{
+    width: 90%;
+    margin-left: 5%;
+    height: 100px;
+    background-color: rgb(245, 245, 245);
+    margin-top: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.verified-div-items{
+    display: inline-block;
+    align-items: center;
+
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+}
+
+#animationContainer {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+ }
+
+ #animationContainer-1 {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+ }
+
+ #animationContainer-2 {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+ }
+
+ h5{
+    font-weight: 500;
+    margin: 0px;
+ }
