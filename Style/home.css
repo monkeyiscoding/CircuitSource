@@ -1473,7 +1473,7 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0px;
     padding-top: 10px; 
     transition: 0.5s;
-    width: 10px;
+    width: 170px;
     margin-bottom: 10px;
     border: 0.5px solid rgb(147, 147, 147);
     background-color: white;
