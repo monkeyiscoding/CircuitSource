@@ -14,6 +14,35 @@ var dataRef = firebase.database().ref("All");
 localStorage.setItem("recent-search","");
 
 loadProductOne();
+loadSuggestions();
+// loading data
+
+var query = firebase.database().ref("CircuitSource/Web/home_screen");
+query.once("value", function (snapshot) {
+
+  var data = snapshot.val(); // Get all data at once
+  var tag_line = data.tag_line;
+  var poster_url = data.poster.url;
+  var poster_type = data.poster.type;
+  var poster_key = data.poster.product_key;
+
+  $("#tag-line").html(tag_line);
+  $("#home-poster-m").attr("src", poster_url); // Assuming you want to set the poster URL in an image element
+
+  $("#home-poster-m").click(function() {
+
+    if(poster_type == "product"){
+       openProduct(poster_key);
+    }
+   
+  });
+});
+
+function openProduct(key){
+  localStorage.setItem("search-key", key);
+  window.location.href = "productoverview.html";
+}
+
 loadTools();
 loadComponents();
 
@@ -21,6 +50,8 @@ checkLogin();
 loardCartCount();
 loadToolsMobile();
 loadComponentsMobile();
+
+
 
 
 function loardCartCount(){
@@ -366,4 +397,61 @@ function handleSearch() {
 }
 
 
+document.addEventListener('scroll', function () {
+    const tagLine = document.getElementById('tag-line');
+    const searchDiv = document.getElementById('search-div-m');
+  
 
+    const tagLineRect = tagLine.getBoundingClientRect();
+
+    if (tagLineRect.bottom <= 0) { // If tag-line is not visible
+        searchDiv.classList.add('fixed');
+        $(".search-left").css("width","76%");
+        $(".search-right").css("width","10%");
+      
+    } else {
+        searchDiv.classList.remove('fixed');
+        $(".search-left").css("width","80%");
+        $(".search-right").css("width","15%");
+    }
+});
+
+
+function loadSuggestions() {
+  var query = firebase.database().ref("CircuitSource/Web/home_screen/top_categories");
+  query.once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      var mydiv = document.getElementById("category-div-m");
+      var title = childSnapshot.val().title;
+      
+
+    
+      
+       mydiv.innerHTML += 
+       `
+            <a  onClick="searchCategory(\`` +
+      title +
+      `\`,)" style="text-decoration: none; color: black; margin-right: 10px;" ><h5  style="" class="home-category">${title}</h5>
+
+            </a>
+
+              
+
+       `;
+
+      
+
+    });
+  });
+}
+
+
+// Function to handle search submission
+function searchCategory(text) {
+
+  myFunction(text);
+  if(text.trim() != ""){
+    localStorage.setItem("recent-search",text);
+    window.location.href="products.html";
+  }
+ }

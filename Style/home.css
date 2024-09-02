@@ -1163,14 +1163,17 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: rgb(247, 247, 247); 
     border-radius: 5px; 
     display: flex;
+    margin-right: 10px;
     padding-left: 10px;
     align-items: center;
   }
 
   .search-right{
-    width: 60px;
+    width: 15%;
     height: 50px;
-    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 0px;
     background-color: rgb(247, 247, 247); 
     border-radius: 5px; 
     display: flex;
@@ -1193,15 +1196,18 @@ input[type="number"]::-webkit-outer-spin-button {
   .home-category{
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 5px;
+    padding-top: 10px;
     color: gray;
-    font-size: 14px !important;
-    margin-right: 10px;
+    font-size: 12px !important;
+    margin-right: 5px;
     border-radius: 100px;
     border: 0.3px solid rgb(199, 195, 195);
     font-weight: normal;
-    height: 20px;
+    height: 17px;
     max-lines: 1;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
     white-space: nowrap;
     padding-bottom: 5px;
     background-color: white;
@@ -1212,10 +1218,12 @@ input[type="number"]::-webkit-outer-spin-button {
     padding-right: 10px;
     padding-top: 5px;
     margin-right: 10px;
+    font-size: 14px !important;
     border-radius: 100px;
     box-shadow: 0px 0px 10px var(--shadow-color);
     color: rgb(255, 252, 252);
     font-weight: normal;
+    height: 18px;
     padding-bottom: 5px;
     background-color: orangered;
   }
@@ -1519,4 +1527,18 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 100%;
     margin: auto;
   }
+}
+
+.fixed{
+
+  position: fixed;
+  padding-bottom: 15px;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  padding-left: 15px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.056);
+  z-index: 1000; /* Ensure it's on top of other content */
+  background-color: white; /* Same as the container’s background */
+  
 }
