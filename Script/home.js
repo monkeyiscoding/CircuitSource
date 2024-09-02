@@ -13,9 +13,10 @@ firebase.initializeApp(firebaseConfig);
 var dataRef = firebase.database().ref("All");
 localStorage.setItem("recent-search","");
 
+loadProductOne();
 loadTools();
 loadComponents();
-loadProductOne();
+
 checkLogin();
 loardCartCount();
 loadToolsMobile();
