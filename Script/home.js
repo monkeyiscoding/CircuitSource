@@ -25,8 +25,29 @@ query.once("value", function (snapshot) {
   var poster_url = data.poster.url;
   var poster_type = data.poster.type;
   var poster_key = data.poster.product_key;
+  var details_div_title = data.details_div.title;
+  var details_div_url = data.details_div.url;
+  var details_div_des = data.details_div.description;
+  var details_div_button_text = data.details_div.button_text;
+  var details_div_type = data.details_div.type;
+  var details_div_key = data.details_div.key;
+
 
   $("#tag-line").html(tag_line);
+
+  // mobile div one
+  $("#details-title").html(details_div_title);
+  $("#details-des").html(details_div_des);
+  $("#details-button").html(details_div_button_text);
+  $("#details-thumbnial").attr("src", details_div_url); // Assuming you want to set the poster URL in an image element
+
+  // pc div one
+  $("#details-title-pc").html(details_div_title);
+  $("#details-des-pc").html(details_div_des);
+  $("#details-button-pc").html(details_div_button_text);
+  $("#details-thumbnial-pc").attr("src", details_div_url); // Assuming you want to set the poster URL in an image element
+
+  // poster mobile
   $("#home-poster-m").attr("src", poster_url); // Assuming you want to set the poster URL in an image element
 
   $("#home-poster-m").click(function() {
@@ -34,14 +55,93 @@ query.once("value", function (snapshot) {
     if(poster_type == "product"){
        openProduct(poster_key);
     }
+
+    else if(poster_type == "serach"){
+      searchCategory(poster_key);
+    }
+
+    else if(poster_type == "page"){
+
+    }
+   
+  });
+
+  $("#details-button-pc-bt").click(function() {
+
+    if(details_div_type == "product"){
+       openProduct(details_div_key);
+    }
+
+    else if(details_div_type == "serach"){
+      searchCategory(details_div_key);
+    }
+
+    else if(details_div_type == "page"){
+
+    }
+   
+  });
+
+  $("#details-button-m-bt").click(function() {
+
+    if(details_div_type == "product"){
+       openProduct(details_div_key);
+    }
+
+    else if(details_div_type == "serach"){
+      searchCategory(details_div_key);
+    }
+
+    else if(details_div_type == "page"){
+
+    }
    
   });
 });
 
-function openProduct(key){
-  localStorage.setItem("search-key", key);
-  window.location.href = "productoverview.html";
-}
+
+
+$("#search-button-m").click(function() {
+
+  handleSearch();
+ 
+});
+
+$("#view-components").click(function() {
+
+  
+    localStorage.setItem("recent-search","Compoents");
+    window.location.href="products.html";
+  
+ 
+});
+
+$("#view-tools").click(function() {
+
+  
+  localStorage.setItem("recent-search","Tools");
+  window.location.href="products.html";
+
+
+});
+
+$("#view-components-pc").click(function() {
+
+  
+  localStorage.setItem("recent-search","Compoents");
+  window.location.href="products.html";
+
+
+});
+
+$("#view-tools-pc").click(function() {
+
+
+localStorage.setItem("recent-search","Tools");
+window.location.href="products.html";
+
+
+});
 
 loadTools();
 loadComponents();
@@ -129,11 +229,14 @@ query.update({
         var price = childSnapshot.val().price;
         var discount = childSnapshot.val().discount;
         var thumbnail = childSnapshot.val().thumbnail_url;
+        var key = childSnapshot.val().key;
 
         var discPrice = price - discount;
         a++;
          mydiv.innerHTML += 
-         `<div class="product-div-one">
+         `<div  onClick="openProduct(\`` +
+      key +
+      `\`,)"  class="product-div-one">
 
       
       <img style="border-radius: 10px;"  src="${thumbnail}" height="100px" width="100px" alt="">
@@ -169,11 +272,13 @@ query.update({
         var price = childSnapshot.val().price;
         var discount = childSnapshot.val().discount;
         var thumbnail = childSnapshot.val().thumbnail_url;
-
+        var key = childSnapshot.val().key;
         var discPrice = price - discount;
         a++;
          mydiv.innerHTML += 
-         `<div class="product-div-one">
+         `<div  onClick="openProduct(\`` +
+      key +
+      `\`,)"  class="product-div-one">
 
       
       <img style="border-radius: 10px;"  src="${thumbnail}" height="100px" width="100px" alt="">
@@ -210,11 +315,14 @@ query.update({
         var price = childSnapshot.val().price;
         var discount = childSnapshot.val().discount;
         var thumbnail = childSnapshot.val().thumbnail_url;
+        var key = childSnapshot.val().key;
 
         var discPrice = price - discount;
         a++;
          mydiv.innerHTML += 
-         `<div class="product-div-one">
+         `<div onClick="openProduct(\`` +
+      key +
+      `\`,)" class="product-div-one">
 
       
       <img style="border-radius: 10px;" src="${thumbnail}" height="100px" width="100px" alt="">
@@ -250,11 +358,14 @@ query.update({
         var price = childSnapshot.val().price;
         var discount = childSnapshot.val().discount;
         var thumbnail = childSnapshot.val().thumbnail_url;
+        var key = childSnapshot.val().key;
 
         var discPrice = price - discount;
         a++;
          mydiv.innerHTML += 
-         `<div class="product-div-one">
+         `<div onClick="openProduct(\`` +
+      key +
+      `\`,)"  class="product-div-one">
 
       
       <img style="border-radius: 10px;" src="${thumbnail}" height="100px" width="100px" alt="">
@@ -377,9 +488,12 @@ searchInput.addEventListener('keyup', function(event) {
 function handleSearch() {
   var text = $("#searchInput-m").val();
 
-  myFunction(text);
+
   if(text.trim() != ""){
     localStorage.setItem("recent-search",text);
+    window.location.href="products.html";
+  }
+  else{ 
     window.location.href="products.html";
   }
  }
@@ -444,12 +558,14 @@ function loadSuggestions() {
     });
   });
 }
-
+function openProduct(key){
+  localStorage.setItem("search-key", key);
+  window.location.href = "productoverview.html";
+}
 
 // Function to handle search submission
 function searchCategory(text) {
 
-  myFunction(text);
   if(text.trim() != ""){
     localStorage.setItem("recent-search",text);
     window.location.href="products.html";

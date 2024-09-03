@@ -13,6 +13,7 @@
   <script src="https://unpkg.com/feather-icons"></script>
   <link rel="stylesheet" href="Style/home.css"/>
   <link rel="stylesheet" href="Style/account.css"/>
+  <link rel="stylesheet" href="Style/cart.css"/>
   <link rel="icon" href="Images/logo.png" type="image/png">
 </head>
 <body style="background-color: rgb(243, 243, 243);">
@@ -22,16 +23,18 @@
   
   
       <img class="top-details-div" src="Images/2.png" alt="">
-      <img class="profile-image" src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" alt="">
+      <img id="p-image" style="padding: 8px ; background-color: rgba(255, 255, 255, 0.293);" class="profile-image" src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" alt="">
   
       <div style="margin: 0px; margin-left: 5% ; background-color: rgba(255, 255, 255, 0.301); height: 130px;" class="data-card">
 
-        <h2 style="margin-bottom: 0px;">Arman Malik</h2>
-        <h4 style="margin-top: 0px; font-weight: normal ; color: gray;" >As8822977@gmail.com</h4>
+        <h2 id="username" style="margin-bottom: 0px;">Arman Malik</h2>
+        <h4 id="email" style="margin-top: 0px; font-weight: normal ; color: gray;" >As8822977@gmail.com</h4>
       </div>
 
 
-      <div style="margin-top: 155px;" class="options-div">
+
+      <a onclick="openDialogCheck()" >
+<div style="margin-top: 155px;" class="options-div">
         <i class="icon-bottom-bar-deselected" data-feather="edit"></i>
 
         <div>
@@ -41,7 +44,12 @@
         <i style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" class="icon-bottom-bar-deselected" data-feather="chevron-right"></i>
       </div>
 
-      <div class="options-div">
+      </a>
+      
+
+      <a href="orders.html">
+
+              <div class="options-div">
         <i class="icon-bottom-bar-deselected" data-feather="shopping-bag"></i>
 
         <div>
@@ -52,8 +60,12 @@
         <i style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" class="icon-bottom-bar-deselected" data-feather="chevron-right"></i>
 
       </div>
+      </a>
 
-      <div class="options-div">
+
+
+      <a href="address.html">
+        <div class="options-div">
         <i class="icon-bottom-bar-deselected" data-feather="map"></i>
 
         <div>
@@ -64,6 +76,8 @@
         <i style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" class="icon-bottom-bar-deselected" data-feather="chevron-right"></i>
 
       </div>
+      </a>
+      
 
 
 
@@ -71,7 +85,7 @@
   
     
 
-    <button style="position: absolute; bottom: 100px; width: 36%; margin-left: 32%; background-color: white; border: 1px solid red; color: red; font-weight: bold;">
+    <button style="position: absolute; bottom: 100px; width: 36%; background-color: white; border: 1px solid red; color: red; font-weight: bold;">
         Log Out
     </button>
   
@@ -112,18 +126,72 @@
           </div>
       </div>
   </div>
+
+
+  <div class="overlay" id="overlay">
+    <div class="dialog" style="width: 70%; align-items: center; text-align: center; justify-content: center; border-radius: 50px 50px 8px 8px">
+      <img style="padding: 8px;" id="profile-image" class="profile-image-2" 
+           src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" 
+           alt="Profile Image" onclick="triggerFileInput()">
   
+      <input type="file" id="image-input" style="display:none" accept="image/*" onchange="loadImage(event)">
+  
+      <div class="col-3" style="margin-top: 40px; display: flex; align-items: center;">
+        <i style="color: rgb(0, 0, 0); margin-right: 10px;" data-feather="user"></i>
+        <input id="username-input" class="effect-8" type="text" placeholder="Username">
+        <span class="focus-border"></span>
+      </div>
+  
+      <div class="col-3" style="margin-top: 20px; display: flex; align-items: center;">
+        <i style="color: rgb(0, 0, 0); margin-right: 10px;" data-feather="mail"></i>
+        <input id="email-input" class="effect-8" type="text" placeholder="Email Address">
+        <span class="focus-border"></span>
+      </div>
+  
+      <div class="col-3" style="margin-top: 20px; display: flex; align-items: center;">
+        <i style="color: rgb(0, 0, 0); margin-right: 10px;" data-feather="phone"></i>
+        <input disabled id="number-input" class="effect-8" type="text" placeholder="Number">
+        <span class="focus-border"></span>
+      </div>
+  
+      <div class="button-container">
+        <button type="button" style="background-color: rgb(212, 212, 212); color: black;" onclick="closeDialog()">Cancel</button>
+        <button onclick="saveUserData()" type="submit" style="background-color: orangered; margin-left: 10px;">Save</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="overlay" id="overlay-saving">
+    <div class="dialog" style="width: 70%; align-items: center; text-align: center; justify-content: center; border-radius: 100px 100px;">
+
+      <div id="animationContainer" style="height: 100px;"></div>
+
+      <h4>Saving....</h4>
+    </div>
+  </div>
   
   <!-- The actual snackbar -->
   <div id="snackbar">Some text some message..</div>
   
    
-    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        var animation = lottie.loadAnimation({
+    container: document.getElementById('animationContainer'), // the DOM element to render the animation
+    renderer: 'svg', // the rendering method
+    loop: true, // whether to loop the animation
+    autoplay: true, // whether to start the animation automatically
+    path: 'https://lottie.host/e3285535-8de8-46a1-970e-834a63ac9cc5/IR0H7CTQ0a.json' 
+ });
+    </script>
+
+    <script src="Script/account.js"></script>
     <script>
       feather.replace();
     </script>
