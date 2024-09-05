@@ -22,6 +22,9 @@ const firebaseConfig = {
     window.location.href = "index.html";
   }
 
+  var number = localStorage.getItem("number");
+  var sKey = firebase.database().ref("CircuitSource/Users/" + number).push().key;
+
   
   var city = "Unknown";
 var region = "unknown";
@@ -157,7 +160,7 @@ $("#save").click(function() {
         }, function (value){
           
          
-            saveData(email, name, fullNumber);
+            saveData(email, name, fullNumber,sKey);
             
           
         });
@@ -202,7 +205,6 @@ function codeverify() {
       const date = currentDate.toLocaleDateString(); // e.g., "8/21/2024"
       const time = currentDate.toLocaleTimeString(); // e.g., "10:30:15 AM"
 
-      var sKey = firebase.database().ref("CircuitSource/Users/" + number).push().key;
 
       // Update login sessions
       firebase.database().ref("CircuitSource/Users/" + number + "/login_sessions/" + sKey).update({
@@ -264,6 +266,7 @@ function getEmail(){
 
 
 function saveData(email, username, number,sKey){
+  myFunction(sKey);
     $("#loader2").fadeOut();
       localStorage.setItem("userislogin", "true");
       localStorage.setItem("number", number);
