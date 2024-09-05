@@ -219,7 +219,7 @@ function codeverify() {
       });
 
       // Save sKey in login_devices as DeviceId
-      firebase.database().ref("CircuitSource/Users/" + number + "/login_devices/DeviceId").set(sKey);
+      firebase.database().ref("CircuitSource/Users/" + number + "/login_devices/"+sKey+"/deviceId").set(sKey);
 
       fullNumber = number;
 

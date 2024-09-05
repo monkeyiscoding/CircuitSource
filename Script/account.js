@@ -22,7 +22,7 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
 .then(data => {
   city = data.city;
   region = data.region; // State
-  console.log(`City: ${city}, State: ${region}`);
+ 
 })
 .catch(error => console.error('Error fetching location:', error));
   
@@ -31,6 +31,7 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
 //   var nameq = localStorage.setItem("username","lscfhd");
 //   var emailq = localStorage.setItem("email","djfhd");
 //   var numbeqr = localStorage.setItem("number","+919664112386");
+
 
 
   var name = localStorage.getItem("username");
@@ -54,6 +55,7 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
         $("#p-image").css("display","none");
         $("#login-text").css("display","block");
         $("#login-button").css("display","block");
+        $("#logout-button").css("display","none");
         
     }
 
@@ -238,6 +240,7 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
         city: city,
         state: region,
         devicename: currentDevice,
+        deviceId: deviceId,
         currenttime: new Date().toLocaleTimeString(),
         currentdate: new Date().toLocaleDateString(),
         platform: navigator.platform,  // Detect platform (e.g., Windows, Mac)
@@ -249,6 +252,7 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
         .then(() => {
           console.log("Added logout session to Firebase");
           document.getElementById('overlay-loading').style.display = 'none';
+          window.location.href = "index.html"
         });
 
     }
@@ -281,6 +285,7 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
       const logoutSessionData = {
         os: os,
         city: city,
+        deviceId: deviceId,
         state: region,
         devicename: currentDevice,
         currenttime: new Date().toLocaleTimeString(),
@@ -294,6 +299,7 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
         .then(() => {
           console.log("Added logout session to Firebase");
           document.getElementById('overlay-loading').style.display = 'none';
+          window.location.href = "index.html"
         });
 
     }
