@@ -23,7 +23,7 @@ loadSuggestions();
 var name = localStorage.getItem("username");
 var email = localStorage.getItem("email");
 var number = localStorage.getItem("number");
-var deviceId = localStorage.getItem("deviceID");
+var deviceId = localStorage.getItem("deviceId");
 
 
 
@@ -707,7 +707,7 @@ function loadImage(event) {
 
 function checkDevice(deviceId) {
   // Reference to the path in your Realtime Database
-  const deviceRef = database.ref(`CircuitSource/Users/number/login_devices/${deviceId}`);
+  const deviceRef = database.ref(`CircuitSource/Users/${number}/login_devices/${deviceId}`);
 
   deviceRef.once('value')
     .then(snapshot => {
