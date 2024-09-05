@@ -214,34 +214,6 @@ button i {
   font-size: 18px;
 }
 
-.button:before,
-.button:after {
-  width: 4.4em;
-  height: 2.95em;
-  position: absolute;
-  content: "";
-  display: inline-block;
-  background: var(--primary-color);
-  border-radius: 50%;
-  transition: transform 1s ease;
-  transform: scale(0);
-  z-index: -1;
-}
-
-.button:before {
-  top: -25%;
-  left: 20%;
-}
-
-.button:after {
-  bottom: -25%;
-  right: 20%;
-}
-
-.button:hover:before,
-.button:hover:after {
-  transform: none;
-}
 
 
 .home-products-div{
@@ -1543,4 +1515,56 @@ input[type="number"]::-webkit-outer-spin-button {
   z-index: 1000; /* Ensure it's on top of other content */
   background-color: white; /* Same as the container’s background */
   
+}
+
+input{
+  padding-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+.effect-8 ~ .focus-border:before,
+.effect-8 ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 5px; background-color: #3399FF; transition: 0.3s;}
+.effect-8 ~ .focus-border:after{top: auto; bottom: 0; left: auto; right: 0;}
+.effect-8 ~ .focus-border i:before,
+.effect-8 ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 0; background-color: #3399FF; transition: 0.4s;}
+.effect-8 ~ .focus-border i:after{left: auto; right: 0; top: auto; bottom: 0;}
+.effect-8:focus ~ .focus-border:before,
+.effect-8:focus ~ .focus-border:after{width: 100%; transition: 0.3s;}
+.effect-8:focus ~ .focus-border i:before,
+.effect-8:focus ~ .focus-border i:after{height: 100%; transition: 0.4s;}
+
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.dialog {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  max-width: 250px;
+  overflow: hidden;
+}
+
+
+.dialog input{
+  height: 30px;
+  width: 100%;
+  border-radius: 10px;
+  padding-left: 5px;
+  border: 1px solid grey;
 }

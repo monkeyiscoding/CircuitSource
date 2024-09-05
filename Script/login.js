@@ -23,6 +23,18 @@ const firebaseConfig = {
   }
 
   
+  var city = "Unknown";
+var region = "unknown";
+        // Fetch user's location information using IP
+fetch('https://ipinfo.io/json?token=b9158001bffcc8')
+.then(response => response.json())
+.then(data => {
+  city = data.city;
+  region = data.region; // State
+  console.log(`City: ${city}, State: ${region}`);
+})
+.catch(error => console.error('Error fetching location:', error));
+  
 var capta = false;
 var fullNumber = "";
 render();
@@ -156,78 +168,83 @@ $("#save").click(function() {
 
 function codeverify() {
   var number = "";
-
   var numberPreview = $("#phone").val();
 
-
+  // Remove leading "0" if exists
   if (numberPreview.startsWith("0")) {
     numberPreview = numberPreview.slice(1);
   }
 
-
+  // Add +91 if it's not present
   if (numberPreview.indexOf("+91") < 1) {
-    number = "+91" + numberPreview
+    number = "+91" + numberPreview;
   }
 
   var code = document.getElementById('otp').value;
   coderesult.confirm(code).then(function() {
-
     var ref = firebase.database().ref().push();
     var key = ref.key;
     const platform = navigator.platform;
     
-    firebase.database().ref("CircuitSource/Users/"+number).update({
-        number: number,
-        first_login_on: platform,
-    }, function (value){
+    // Save user login info
+    firebase.database().ref("CircuitSource/Users/" + number).update({
+      number: number,
+      first_login_on: platform,
+      currentDevice: platform
+    }, function (value) {
 
       // Get current date and time
-const currentDate = new Date();
+      const currentDate = new Date();
+      var device = detectDeviceType();
+      var os = getDeviceModel();
 
-// Extract the date and time components
-const date = currentDate.toLocaleDateString(); // e.g., "8/21/2024"
-const time = currentDate.toLocaleTimeString(); // e.g., "10:30:15 AM"
+      // Extract the date and time components
+      const date = currentDate.toLocaleDateString(); // e.g., "8/21/2024"
+      const time = currentDate.toLocaleTimeString(); // e.g., "10:30:15 AM"
 
-      var sKey = firebase.database().ref("CircuitSource/Users/"+number).push().key;
-    firebase.database().ref("CircuitSource/Users/"+number+"/login_sessions/"+sKey).update({
-      platform: platform,
-      time: time,
-      date: date,
-  });
-      
-        fullNumber = number;
-      
-        var query = firebase.database().ref("CircuitSource/Users/"+number)
+      var sKey = firebase.database().ref("CircuitSource/Users/" + number).push().key;
 
-        query.once('value', function(snapshot) {
-            if (snapshot.hasChild("email")) {
-                var email = snapshot.val().email;
-                var username = snapshot.val().username;
+      // Update login sessions
+      firebase.database().ref("CircuitSource/Users/" + number + "/login_sessions/" + sKey).update({
+        platform: platform,
+        time: time,
+        date: date,
+        key: sKey,
+        city: city,
+        state: state,
+        deviceId: sKey,
+        os: os,
+        devicename: device,
+        platform: navigator.platform, 
+      });
 
-                saveData(email, username, number)
-            } else {
-                $("#div-otp").css("display","none");
-                $("#div-details").css("display","block");
-                $("#div-details").fadeIn();
-            }
-          })
-        
-        
-      
+      // Save sKey in login_devices as DeviceId
+      firebase.database().ref("CircuitSource/Users/" + number + "/login_devices/DeviceId").set(sKey);
+
+      fullNumber = number;
+
+      // Check if user has email or username saved
+      var query = firebase.database().ref("CircuitSource/Users/" + number);
+      query.once('value', function(snapshot) {
+        if (snapshot.hasChild("email")) {
+          var email = snapshot.val().email;
+          var username = snapshot.val().username;
+
+          saveData(email, username, number, sKey);
+        } else {
+          $("#div-otp").css("display", "none");
+          $("#div-details").css("display", "block");
+          $("#div-details").fadeIn();
+        }
+      });
     });
-     
-    
-
-
-
-
   }).catch(function() {
     $("#verify").css("display", "flex");
     $("#error2").html("Invalid OTP");
     $("#error2").css("visibility", "visible");
     $("#loader-otp").css("visibility", "hidden");
-      $("#loader-otp").fadeOut();
-  })
+    $("#loader-otp").fadeOut();
+  });
 }
 
 function myFunction(text) {
@@ -245,12 +262,44 @@ function getEmail(){
      
 }
 
-function saveData(email, username, number){
+
+function saveData(email, username, number,sKey){
     $("#loader2").fadeOut();
       localStorage.setItem("userislogin", "true");
       localStorage.setItem("number", number);
       localStorage.setItem("email", email);
+      localStorage.setItem("deviceId", sKey);
       localStorage.setItem("username", username);
       myFunction("Login successfully")
       window.location.replace("index.html");
 }
+
+
+ // Function to detect device type
+ function detectDeviceType() {
+  const userAgent = navigator.userAgent.toLowerCase();
+
+  if (/mobile|android|touch|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(userAgent)) {
+    return "mobile";
+  } else {
+    return "pc";
+  }
+}
+
+function getDeviceModel() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  // For Android devices
+  if (/android/i.test(userAgent)) {
+    return "Android Device";
+  }
+
+  // For iOS devices
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    return "iOS Device";
+  }
+
+  // For other devices
+  return "Unknown Device";
+}
+

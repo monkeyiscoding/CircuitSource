@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="[path/to/css/feathericon.min.css" />
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="Style/home.css"/>
+    <link rel="stylesheet" href="Style/account.css"/>
+    
     <link rel="icon" href="Images/logo.png" type="image/png">
     
 </head>
@@ -84,22 +86,40 @@
       <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
     </div>
 
-    <div id="profile" class="" style=" border-radius: 10px; box-shadow: 0px 0px 10px rgb(197, 196, 196); width: 200px; height: auto; position: absolute; background-color: rgb(255, 255, 255); margin-top: 50px; right: 45px; padding: 10px; display: none;">
+    <div id="profile" class="" style=" border-radius: 10px; box-shadow: 0px 0px 10px rgb(197, 196, 196); width: 260px; height: auto; position: absolute; background-color: rgb(255, 255, 255); margin-top: 50px; right: 45px; padding: 10px; display: none;">
 
-      <div style="display: flex; justify-content: center; align-items: center;">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGFjsxZCvbMuKnsJHFywAKXzJh6SsPWVsifY_z36wVT9p38WQ3IQPDPDjhFPDyxv6YQY&usqp=CAU" alt="" style="width: 40px; height: 40px;">
+      <div class="dialog" style=" margin-right: 10px; width: 200px; align-items: center; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px;">
+        <div>
+            <img id="p-image-pc" class="profile-image-2" style="object-fit: cover; padding: 8px; width: 100px; border-radius: 1000px; height: 100px;" 
+                 src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" 
+                 alt="Profile Image">
+            <i class="icon" style="color: rgb(255, 255, 255); position: absolute;" data-feather="edit"></i>
+        </div>
+        <input type="file" id="image-input" style="display: none;" accept="image/*" onchange="loadImage(event)">
 
-      <div style="display: block;">
-         <h5 id="name" style="margin-left: 10px; margin-top: 5px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">Ayush Soni</h5>
-      <h6 id="number" style="margin-left: 10px; margin-top: 0px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">+91 9521532447</h6>
-   
-      </div>
+        <div class="col-3" style="margin-top: 10px; display: flex; align-items: center;">
+            <i style="color: rgb(0, 0, 0); margin-right: 10px; width: 14px;" data-feather="user"></i>
+            <input style="padding: 5px;" id="username-input-pc" class="effect-8" type="text" placeholder="Username" disabled>
+            <span class="focus-border"></span>
+        </div>
 
-      <i style="margin-left: auto;" class="fa-solid fa-right-from-bracket"></i>
+        <div class="col-3" style="margin-top: 5px; display: flex; align-items: center;">
+            <i style="color: rgb(0, 0, 0); margin-right: 10px; width: 14px;" data-feather="mail"></i>
+            <input style="padding: 5px;" id="email-input-pc" class="effect-8" type="text" placeholder="Email Address" disabled>
+            <span class="focus-border"></span>
+        </div>
 
+        <div class="col-3" style="margin-top: 5px; display: flex; align-items: center;">
+            <i style="color: rgb(0, 0, 0); margin-right: 10px; width: 14px;" data-feather="phone"></i>
+            <input style="padding: 5px;" id="number-input-pc" class="effect-8" type="text" placeholder="Number" disabled>
+            <span class="focus-border"></span>
+        </div>
 
-      </div>
-      
+        <div class="button-container" style="display: flex;  font-size: 10px; margin-top: 0px; width: 100%;padding-right: 0px;">
+            <button type="button" style=" margin-left: auto; background-color: rgba(212, 212, 212, 0.211); color: rgb(224, 0, 0);" onclick="logOut()">LOG OUT</button>
+            <button type="submit" style="background-color: orangered; margin-left: 10px; margin-right: 0px; margin-right: 3px; color: white;" onclick="openDialogCheck()">EDIT</button>
+        </div>
+    </div>
       
       </div>
    
@@ -197,7 +217,7 @@
 
   <div id="top-div-one" class="details-div-one">
 
-    <div class="product-details" style="display: inline; padding-left: 50px;">
+    <div class="product-details" style="display: inline; padding-left: 50px; border-radius: 50px;">
       <h1 id="details-title-pc" style="font-family: Sans-serif;">Programmed Microcontroller for all PCB'S</h1>
       <p id="details-des-pc" style="font-family: Sans-serif; font-weight: 200; font-size: 14px;">Get verified programmed microcontroller for your pcb ready to sold, Request any microcontroller and get notified in 7 days</p>
     
@@ -946,7 +966,51 @@
   <!-- The actual snackbar -->
   <div id="snackbar">Some text some message..</div>
   
+      <!-- Edit Account Dialog -->
+      <div class="overlay" id="overlay">
+        <div class="dialog" style="width: 70%; align-items: center; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px;">
+            <div>
+                <img id="profile-image-pc" class="profile-image-2" style="object-fit: cover; padding: 8px;" 
+                     src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" 
+                     alt="Profile Image" onclick="triggerFileInput()">
+                <i class="icon" style="color: rgb(255, 255, 255); position: absolute;" data-feather="edit"></i>
+            </div>
+            <input type="file" id="image-input" style="display: none;" accept="image/*" onchange="loadImage(event)">
+
+            <div class="col-3" style="margin-top: 40px; display: flex; align-items: center;">
+                <i style="color: rgb(0, 0, 0); margin-right: 7px;" data-feather="user"></i>
+                <input id="username-input" class="effect-8" type="text" placeholder="Username">
+                <span class="focus-border"></span>
+            </div>
+
+            <div class="col-3" style="margin-top: 10px; display: flex; align-items: center;">
+                <i style="color: rgb(0, 0, 0); margin-right: 7px;" data-feather="mail"></i>
+                <input id="email-input" class="effect-8" type="text" placeholder="Email Address">
+                <span class="focus-border"></span>
+            </div>
+
+            <div class="col-3" style="margin-top: 10px; display: flex; align-items: center;">
+                <i style="color: rgb(0, 0, 0); margin-right: 7px;" data-feather="phone"></i>
+                <input id="number-input" class="effect-8" type="text" placeholder="Number" disabled>
+                <span class="focus-border"></span>
+            </div>
+
+            <div class="button-container" style="width: 100%; display: flex; font-size: 12px;">
+                <button type="button" style="background-color: rgba(212, 212, 212, 0.191); color: black; margin-left: auto;" onclick="closeDialog()">Cancel</button>
+                <button type="submit" style="background-color: orangered; margin-left: 10px; color: white;" onclick="saveUserData()">Save</button>
+            </div>
+        </div>
+    </div>
+    <!-- Saving Animation Dialog -->
+    <div class="overlay" id="overlay-saving">
+        <div class="dialog" style="width: 70%; align-items: center; text-align: center; justify-content: center; border-radius: 100px 100px;">
+            <div id="animationContainer" style="height: 100px;"></div>
+            <h4>Saving....</h4>
+        </div>
+    </div>
    
+        <!-- Lottie Animation Script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
     
 
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
@@ -957,7 +1021,20 @@
   <script>
     feather.replace();
   </script>
+  
+  <script>
+    var animation = lottie.loadAnimation({
+container: document.getElementById('animationContainer'), // the DOM element to render the animation
+renderer: 'svg', // the rendering method
+loop: true, // whether to loop the animation
+autoplay: true, // whether to start the animation automatically
+path: 'https://lottie.host/e3285535-8de8-46a1-970e-834a63ac9cc5/IR0H7CTQ0a.json' 
+});
+</script>
+
   <script src="Script/home.js" charset="utf-8"></script>
+
+
 
 </body>
 </html>

@@ -12,11 +12,27 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var dataRef = firebase.database().ref("All");
 localStorage.setItem("recent-search","");
+const storage = firebase.storage();
+const database = firebase.database();
+
 
 loadProductOne();
 loadSuggestions();
 // loading data
 
+var name = localStorage.getItem("username");
+var email = localStorage.getItem("email");
+var number = localStorage.getItem("number");
+
+var url = localStorage.getItem("profile_url");
+
+const image = document.getElementById('profile-image-pc');
+const image2 = document.getElementById('p-image-pc');
+image.src = url;
+image2.src = url;
+$("#email-input-pc").val(email);
+$("#username-input-pc").val(name);
+$("#number-input-pc").val(number);
 var query = firebase.database().ref("CircuitSource/Web/home_screen");
 query.once("value", function (snapshot) {
 
@@ -571,3 +587,116 @@ function searchCategory(text) {
     window.location.href="products.html";
   }
  }
+
+
+
+ // edit account
+ function openDialogCheck(){
+    
+  var lc = localStorage.getItem("userislogin");
+  if(lc == "true"){
+      openDialog();
+      
+  }
+  else{
+      window.location.href = "login.html";
+  }
+}
+
+function openDialog() {
+  document.getElementById('overlay').style.display = 'flex';
+  $("#email-input").val(email);
+  $("#username-input").val(name);
+  $("#number-input").val(number);
+}
+
+function closeDialog() {
+  document.getElementById('overlay').style.display = 'none';
+}
+
+function login(){
+  location.href = "login.html";
+}
+
+function saveUserData() {
+  const imageInput = document.getElementById('image-input');
+  const profileImage = document.getElementById('profile-image-pc').src;
+  const username = document.getElementById('username-input').value;
+  const email = document.getElementById('email-input').value;
+  const phoneNumber = number; // Replace this with the actual user phone number
+  
+
+  if(username.trim().length < 4){
+      myFunction("Enter full name");
+  }
+
+  else if(!email.includes("@")){
+      myFunction("Invalid emial address");
+  }
+
+  else{
+if (imageInput.files.length > 0) {
+    const file = imageInput.files[0];
+    const storageRef = storage.ref(`circuitsource/users/${phoneNumber}/profile_url`);
+    const uploadTask = storageRef.put(file);
+    closeDialog();
+    document.getElementById('overlay-saving').style.display = 'flex';
+    uploadTask.on('state_changed', 
+      (snapshot) => {
+        // Progress function if needed
+      }, 
+      (error) => {
+        console.log('Error uploading file:', error);
+      }, 
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          // Save to Realtime Database
+          database.ref(`CircuitSource/Users/${phoneNumber}`).set({
+            profile_url: downloadURL,
+            username: username,
+            email: email
+          });
+          const image2 = document.getElementById('p-image-pc');
+          image2.src = url;
+          // Save to localStorage
+          localStorage.setItem('profile_url', downloadURL);
+          localStorage.setItem('username', username);
+          localStorage.setItem('email', email);
+          document.getElementById('overlay-saving').style.display = 'none';
+          // Reloads the current page
+          myFunction("Data Saved")
+          location.reload();
+          
+          console.log('Data saved successfully!');
+        });
+      }
+    );
+  } else {
+      closeDialog();
+    // If no new image was selected, just save the username and email
+    database.ref(`CircuitSource/Users/${phoneNumber}`).set({
+      profile_url: profileImage,
+      username: username,
+      email: email
+    });
+
+
+    // Save to localStorage
+    localStorage.setItem('profile_url', profileImage);
+    localStorage.setItem('username', username);
+    localStorage.setItem('email', email);
+    location.reload();
+   myFunction("Data Saved");
+  }
+  }
+ 
+}
+
+function triggerFileInput() {
+  document.getElementById('image-input').click();
+}
+
+function loadImage(event) {
+  const image = document.getElementById('profile-image-pc');
+  image.src = URL.createObjectURL(event.target.files[0]);
+}

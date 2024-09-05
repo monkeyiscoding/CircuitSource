@@ -3,179 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  
     <title>Document</title>
-
-    <script
-    src="https://kit.fontawesome.com/3b2cf0bb84.js"
-    crossorigin="anonymous"
-  ></script>
-
-  <script src="https://unpkg.com/feather-icons"></script>
-  <link rel="stylesheet" href="Style/home.css"/>
-  <link rel="stylesheet" href="Style/account.css"/>
-  <link rel="stylesheet" href="Style/cart.css"/>
-  <link rel="icon" href="Images/logo.png" type="image/png">
+    <script src="https://kit.fontawesome.com/3b2cf0bb84.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="Style/home.css"/>
+    <link rel="stylesheet" href="Style/account.css"/>
+    <link rel="stylesheet" href="Style/cart.css"/>
+    <link rel="icon" href="Images/logo.png" type="image/png">
 </head>
-<body style="background-color: rgb(243, 243, 243);">
+<body style="background-color: rgb(255, 255, 255);">
 
+ <div style="width: 100%; z-index: 1; margin-bottom: 170px;">
+     <div id="div-mobile" style="background-color: white;"> 
+        <img class="top-details-div" src="Images/2.png" alt="Top Details">
+        <img id="p-image" style="object-fit: cover; padding: 8px; background-color: rgba(255, 255, 255, 0.293);" 
+             class="profile-image" 
+             src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" 
+             alt="Profile Image">
 
-    <div id="div-mobile" style="background-color: white;"> 
-  
-  
-      <img class="top-details-div" src="Images/2.png" alt="">
-      <img id="p-image" style=" object-fit: cover; padding: 8px ; background-color: rgba(255, 255, 255, 0.293);" class="profile-image" src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" alt="">
-  
-      <div style="margin: 0px; margin-left: 5% ; background-color: rgba(255, 255, 255, 0.301); height: 130px;" class="data-card">
+        <div class="data-card" style="margin: 0px; margin-left: 5%; background-color: rgba(255, 255, 255, 0.301); height: 130px;">
+            <h2 id="username" style="margin-bottom: 0px;">Arman Malik</h2>
+            <h4 id="email" style="margin-top: 0px; font-weight: normal; color: gray;">As8822977@gmail.com</h4>
 
-        <h2 id="username" style="margin-bottom: 0px;">Arman Malik</h2>
-        <h4 id="email" style="margin-top: 0px; font-weight: normal ; color: gray;" >As8822977@gmail.com</h4>
-      </div>
-
-
-
-      <a onclick="openDialogCheck()" >
-<div style="margin-top: 155px;" class="options-div">
-        <i class="icon-bottom-bar-deselected" data-feather="edit"></i>
-
-        <div>
-            <h4>Edit Account</h4>
-            <h6 style="color: gray; font-weight: 300;">Here you can edit your personal details</h6>
-        </div>
-        <i style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" class="icon-bottom-bar-deselected" data-feather="chevron-right"></i>
-      </div>
-
-      </a>
-      
-
-      <a href="orders.html">
-
-              <div class="options-div">
-        <i class="icon-bottom-bar-deselected" data-feather="shopping-bag"></i>
-
-        <div>
-            <h4>My Orders</h4>
-            <h6 style="color: gray; font-weight: 300;">Click here to view your previous orders</h6>
+            <h2 id="login-text" style="margin-bottom: 0px; display: none;">Login to continue</h2>
+            <button id="login-button" class="button" style="border-radius: 10px; display: none; margin-left: auto; margin-right: auto;" 
+                    onclick="login()">Login</button>
         </div>
 
-        <i style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" class="icon-bottom-bar-deselected" data-feather="chevron-right"></i>
+        <a onclick="openDialogCheck()">
+            <div class="options-div" style="margin-top: 155px;">
+                <i class="icon-bottom-bar-deselected" data-feather="edit"></i>
+                <div>
+                    <h4>Edit Account</h4>
+                    <h6 style="color: gray; font-weight: 300;">Here you can edit your personal details</h6>
+                </div>
+                <i class="icon-bottom-bar-deselected" style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" 
+                   data-feather="chevron-right"></i>
+            </div>
+        </a>
 
-      </div>
-      </a>
+        <a href="orders.html">
+            <div class="options-div">
+                <i class="icon-bottom-bar-deselected" data-feather="shopping-bag"></i>
+                <div>
+                    <h4>My Orders</h4>
+                    <h6 style="color: gray; font-weight: 300;">Click here to view your previous orders</h6>
+                </div>
+                <i class="icon-bottom-bar-deselected" style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" 
+                   data-feather="chevron-right"></i>
+            </div>
+        </a>
 
-
-
-      <a href="address.html">
-        <div class="options-div">
-        <i class="icon-bottom-bar-deselected" data-feather="map"></i>
-
-        <div>
-            <h4>Address Book</h4>
-            <h6 style="color: gray; font-weight: 300;">View all saved address or change primary address</h6>
-        </div>
-
-        <i style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" class="icon-bottom-bar-deselected" data-feather="chevron-right"></i>
-
-      </div>
-      </a>
-      
-
-
-
+        <a href="address.html">
+            <div class="options-div">
+                <i class="icon-bottom-bar-deselected" data-feather="map"></i>
+                <div>
+                    <h4>Address Book</h4>
+                    <h6 style="color: gray; font-weight: 300;">View all saved addresses or change primary address</h6>
+                </div>
+                <i class="icon-bottom-bar-deselected" style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" 
+                   data-feather="chevron-right"></i>
+            </div>
+        </a>
     </div>
-  
-    
 
-    <button style="position: absolute; bottom: 100px; width: 36%; background-color: white; border: 1px solid red; color: red; font-weight: bold;">
+    <button onclick="openLogoutDialog()" style="position: absolute; bottom: 100px; width: 36%; background-color: white; border: 1px solid red; color: red; font-weight: bold; margin-left: 32%; margin-right: auto;">
         Log Out
     </button>
-  
-    <div class="wrapper-2" style="z-index: 0; height: 0px;">
-      <div id="bottom-bar" style="height: 70px;">
-  
-        <a href="index.html" style="margin-left: auto;">
-             <div class="bottom-bar-element" style="color: white;">
-              <i class="icon-bottom-bar-deselected" data-feather="home"></i>
-             
+
+    <!-- Edit Account Dialog -->
+    <div class="overlay" id="overlay">
+        <div class="dialog" style="width: 70%; align-items: center; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px;">
+            <div>
+                <img id="profile-image" class="profile-image-2" style="object-fit: cover; padding: 8px;" 
+                     src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" 
+                     alt="Profile Image" onclick="triggerFileInput()">
+                <i class="icon" style="color: rgb(255, 255, 255); position: absolute;" data-feather="edit"></i>
+            </div>
+            <input type="file" id="image-input" style="display: none;" accept="image/*" onchange="loadImage(event)">
+
+            <div class="col-3" style="margin-top: 40px; display: flex; align-items: center;">
+                <i style="color: rgb(0, 0, 0); margin-right: 10px;" data-feather="user"></i>
+                <input id="username-input" class="effect-8" type="text" placeholder="Username">
+                <span class="focus-border"></span>
+            </div>
+
+            <div class="col-3" style="margin-top: 10px; display: flex; align-items: center;">
+                <i style="color: rgb(0, 0, 0); margin-right: 10px;" data-feather="mail"></i>
+                <input id="email-input" class="effect-8" type="text" placeholder="Email Address">
+                <span class="focus-border"></span>
+            </div>
+
+            <div class="col-3" style="margin-top: 10px; display: flex; align-items: center;">
+                <i style="color: rgb(0, 0, 0); margin-right: 10px;" data-feather="phone"></i>
+                <input id="number-input" class="effect-8" type="text" placeholder="Number" disabled>
+                <span class="focus-border"></span>
+            </div>
+
+            <div class="button-container">
+                <button type="button" style="background-color: rgba(212, 212, 212, 0.4); color: black;" onclick="closeDialog()">Cancel</button>
+                <button type="submit" style="background-color: orangered; margin-left: 10px;" onclick="saveUserData()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saving Animation Dialog -->
+    <div class="overlay" id="overlay-saving">
+        <div class="dialog" style="width: 70%; align-items: center; text-align: center; justify-content: center; border-radius: 20px 20px;">
+            <div id="animationContainer" style="height: 100px;"></div>
+            <h4>Saving....</h4>
+        </div>
+    </div>
+
+     <!-- loading Animation Dialog -->
+     <div class="overlay" id="overlay-loading" style="display: none;">
+      <div class="dialog" style="width: 60px; height: 60px; align-items: center; text-align: center; justify-content: center; border-radius: 20px 20px;">
+        <span class="loader" style="position: relative; margin: 0px; margin-left: auto; margin-right: 50px; right: 0px; left: 0px; width: 50px; height: 50px;"></span>
+      </div>
+  </div>
+
+ </div> 
+
+     <!-- Logout option Dialog -->
+     <div class="overlay" id="overlay-logout" style="display: none;">
+      <div class="dialog" style="width: 70%; align-items: center; text-align: center; justify-content: center; border-radius: 20px 20px; align-items: start; justify-content: start; text-align: start;">
+        
+        <h4>Options</h4>
+    
+        <div style="display: flex; align-items: center; justify-content: start; text-align: start; margin-top: 20px;">
+          <input type="radio" id="this" name="logout_option" value="this" style="width: 20px;" checked>
+          <div style="display: block; margin-left: 10px;">
+            <h4>Logout from this device</h4>
+            <h6 style="color: rgba(128, 128, 128, 0.875);">Select this option to logout only from this device</h6>
           </div>
-        </a>
-       
-  
-          <a href="products.html" style="margin-left: auto;">
-  <div class="bottom-bar-element">
-              <i class="icon-bottom-bar-deselected" data-feather="shopping-bag"></i>
+        </div>
+    
+        <div style="display: flex; align-items: center; justify-content: start; text-align: start; margin-top: 20px;">
+          <input type="radio" id="all" name="logout_option" value="all" style="width: 20px;">
+          <div style="display: block; margin-left: 10px;">
+            <h4>Logout from all devices</h4>
+            <h6 style="color: rgba(128, 128, 128, 0.875);">Select this option to logout from all your devices</h6>
           </div>
+        </div>
+    
+        <button onclick="logOut()" style="width: 100%; background-color: white; border: 1px solid red; color: red; font-weight: bold; margin-top: 20px;">
+          Log Out
+        </button>
+
+
+        <button onclick="closeLogoutDialog()" style="background-color: transparent; color: black; margin-left: auto; margin-right: auto;">
+          Cancel
+        </button>
+      </div>
+    </div>
+    
+ 
+    <!-- Snackbar -->
+    <div id="snackbar">Some text some message..</div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="wrapper-2" style="z-index: 0; width: 100%; position: absolute; height: 0px;">
+        <div id="bottom-bar" style="height: 70px;">
+            <a href="index.html" style="margin-left: auto;">
+                <div class="bottom-bar-element" style="color: white;">
+                    <i class="icon-bottom-bar-deselected" data-feather="home"></i>
+                </div>
             </a>
-          
-          <div class="bottom-bar-element">
-              <i class="icon-bottom-bar-deselected" data-feather="bell"></i>
-          </div>
-           
-      <a href="cart.html" style="margin-left: auto;">
-  
-   
-          <div class="bottom-bar-element cart-icon-container">
-              <i class="icon-bottom-bar-deselected" data-feather="shopping-cart"></i>
-              <span class="cart-indicator-2">0</span>
-          </div>
-  
-      </a>
-   
-         
-          <div class="bottom-bar-element">
-              <i class="icon-bottom-bar" style="color: white;" data-feather="user"></i>
-          </div>
-      </div>
-  </div>
 
+            <a href="products.html" style="margin-left: auto;">
+                <div class="bottom-bar-element">
+                    <i class="icon-bottom-bar-deselected" data-feather="shopping-bag"></i>
+                </div>
+            </a>
 
-  <div class="overlay" id="overlay">
-    <div class="dialog" style="width: 70%; align-items: center; text-align: center; justify-content: center; border-radius: 50px 50px 8px 8px">
-      <img style=" object-fit: cover; padding: 8px;" id="profile-image" class="profile-image-2" 
-           src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" 
-           alt="Profile Image" onclick="triggerFileInput()">
-  
-      <input type="file" id="image-input" style="display:none" accept="image/*" onchange="loadImage(event)">
-  
-      <div class="col-3" style="margin-top: 40px; display: flex; align-items: center;">
-        <i style="color: rgb(0, 0, 0); margin-right: 10px;" data-feather="user"></i>
-        <input id="username-input" class="effect-8" type="text" placeholder="Username">
-        <span class="focus-border"></span>
-      </div>
-  
-      <div class="col-3" style="margin-top: 20px; display: flex; align-items: center;">
-        <i style="color: rgb(0, 0, 0); margin-right: 10px;" data-feather="mail"></i>
-        <input id="email-input" class="effect-8" type="text" placeholder="Email Address">
-        <span class="focus-border"></span>
-      </div>
-  
-      <div class="col-3" style="margin-top: 20px; display: flex; align-items: center;">
-        <i style="color: rgb(0, 0, 0); margin-right: 10px;" data-feather="phone"></i>
-        <input disabled id="number-input" class="effect-8" type="text" placeholder="Number">
-        <span class="focus-border"></span>
-      </div>
-  
-      <div class="button-container">
-        <button type="button" style="background-color: rgb(212, 212, 212); color: black;" onclick="closeDialog()">Cancel</button>
-        <button onclick="saveUserData()" type="submit" style="background-color: orangered; margin-left: 10px;">Save</button>
-      </div>
+            <div class="bottom-bar-element">
+                <i class="icon-bottom-bar-deselected" data-feather="bell"></i>
+            </div>
+
+            <a href="cart.html" style="margin-left: auto;">
+                <div class="bottom-bar-element cart-icon-container">
+                    <i class="icon-bottom-bar-deselected" data-feather="shopping-cart"></i>
+                    <span class="cart-indicator-2">0</span>
+                </div>
+            </a>
+
+            <div class="bottom-bar-element">
+                <i class="icon-bottom-bar" style="color: white;" data-feather="user"></i>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <div class="overlay" id="overlay-saving">
-    <div class="dialog" style="width: 70%; align-items: center; text-align: center; justify-content: center; border-radius: 100px 100px;">
 
-      <div id="animationContainer" style="height: 100px;"></div>
-
-      <h4>Saving....</h4>
-    </div>
-  </div>
-  
-  <!-- The actual snackbar -->
-  <div id="snackbar">Some text some message..</div>
-  
-   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+    <!-- Lottie Animation Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+    
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
