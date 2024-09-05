@@ -23,6 +23,10 @@ loadSuggestions();
 var name = localStorage.getItem("username");
 var email = localStorage.getItem("email");
 var number = localStorage.getItem("number");
+var deviceId = localStorage.getItem("deviceID");
+
+
+
 
 var url = localStorage.getItem("profile_url");
 
@@ -211,7 +215,7 @@ function checkLogin(){
     $("#profile-m").css("display","flex");
     $("#login-button-m").css("display","none");
     
-
+    checkDevice(deviceId);
   }
 
 
@@ -699,4 +703,31 @@ function triggerFileInput() {
 function loadImage(event) {
   const image = document.getElementById('profile-image-pc');
   image.src = URL.createObjectURL(event.target.files[0]);
+}
+
+function checkDevice(deviceId) {
+  // Reference to the path in your Realtime Database
+  const deviceRef = database.ref(`CircuitSource/Users/number/login_devices/${deviceId}`);
+
+  deviceRef.once('value')
+    .then(snapshot => {
+      if (!snapshot.exists()) {
+        // Device ID does not exist in the database
+        // Update localStorage
+        localStorage.setItem("userislogin", "false");
+        localStorage.removeItem("number");
+        localStorage.removeItem("email");
+        localStorage.removeItem("username");
+        localStorage.removeItem("deviceId");
+
+        console.log("Device Verification failed");
+        window.location.reload();
+      }
+      else{
+        console.log("Device Verified");
+      }
+    })
+    .catch(error => {
+      console.error("Error checking device:", error);
+    });
 }
