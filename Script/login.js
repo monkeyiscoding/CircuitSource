@@ -211,7 +211,7 @@ function codeverify() {
         date: date,
         key: sKey,
         city: city,
-        state: state,
+        state: region,
         deviceId: sKey,
         os: os,
         devicename: device,
