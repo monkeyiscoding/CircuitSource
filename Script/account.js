@@ -119,7 +119,7 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             // Save to Realtime Database
-            database.ref(`CircuitSource/Users/${phoneNumber}`).set({
+            database.ref(`CircuitSource/Users/${phoneNumber}`).update({
               profile_url: downloadURL,
               username: username,
               email: email
@@ -142,7 +142,7 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
     } else {
         closeDialog();
       // If no new image was selected, just save the username and email
-      database.ref(`CircuitSource/Users/${phoneNumber}`).set({
+      database.ref(`CircuitSource/Users/${phoneNumber}`).update({
         profile_url: profileImage,
         username: username,
         email: email

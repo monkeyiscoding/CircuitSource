@@ -239,7 +239,7 @@ query.update({
 
  var a = 0;
  function loadTools() {
-    var query = firebase.database().ref("Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products");
+    var query = firebase.database().ref("CircuitSource/Top_components_web");
     query.once("value", function (snapshot) {
       
       snapshot.forEach(function (childSnapshot) {
@@ -282,7 +282,7 @@ query.update({
   }
 
   function loadToolsMobile() {
-    var query = firebase.database().ref("Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products");
+    var query = firebase.database().ref("CircuitSource/Top_components_web");
     query.once("value", function (snapshot) {
       
       snapshot.forEach(function (childSnapshot) {
@@ -326,7 +326,7 @@ query.update({
 
 
  function loadComponents() {
-    var query = firebase.database().ref("Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products");
+    var query = firebase.database().ref("CircuitSource/Top_components_web");
     query.once("value", function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
         var mydiv = document.getElementById("products-div-tools");
@@ -369,7 +369,7 @@ query.update({
 
 
   function loadComponentsMobile() {
-    var query = firebase.database().ref("Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products");
+    var query = firebase.database().ref("CircuitSource/Top_components_web");
     query.once("value", function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
         var mydiv = document.getElementById("products-div-tools-m");
