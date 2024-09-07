@@ -1029,8 +1029,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
 .wrapper-2 {
-	min-height: 100%;
-  height: 100vh;
+	
+  height: 100px;
 	position: relative;
   padding-top: 24px;
   text-align: center;
