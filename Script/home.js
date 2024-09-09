@@ -706,7 +706,6 @@ function loadImage(event) {
 }
 
 function checkDevice(deviceId) {
-  myFunction(deviceId);
   // Reference to the path in your Realtime Database
   const deviceRef = database.ref(`CircuitSource/Users/${number}/login_devices/${deviceId}`);
 

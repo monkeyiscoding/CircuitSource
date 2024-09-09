@@ -73,7 +73,7 @@ $("#login").click(function() {
   // }
   else {
     $("#loader").css("visibility","visible");
-
+    $("#login").css("display", "none");
     checkUser(number);
   }
 })
@@ -92,15 +92,12 @@ function checkUser(number) {
   if (numberPreview.indexOf("+91") < 1) {
     number = "+91" + numberPreview
   }
-
-
- 
+  
   
       $("#loader").fadeOut();
       phoneAuth(number);
       $("#error").css("visibility", "hidden");
-  
-
+      
 
 }
 
@@ -160,7 +157,7 @@ $("#save").click(function() {
         }, function (value){
           
          
-            saveData(email, name, fullNumber,sKey);
+            saveData(email, name, fullNumber,"",sKey);
             
           
         });
@@ -231,8 +228,10 @@ function codeverify() {
         if (snapshot.hasChild("email")) {
           var email = snapshot.val().email;
           var username = snapshot.val().username;
+          var url = snapshot.val().profile_url;
 
-          saveData(email, username, number, sKey);
+
+          saveData(email, username, number, url, sKey);
         } else {
           $("#div-otp").css("display", "none");
           $("#div-details").css("display", "block");
@@ -265,11 +264,12 @@ function getEmail(){
 }
 
 
-function saveData(email, username, number,sKey){
+function saveData(email, username, number , url, sKey){
   myFunction(sKey);
     $("#loader2").fadeOut();
       localStorage.setItem("userislogin", "true");
       localStorage.setItem("number", number);
+      localStorage.setItem('profile_url', url);
       localStorage.setItem("email", email);
       localStorage.setItem("deviceId", sKey);
       localStorage.setItem("username", username);
