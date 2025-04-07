@@ -24,7 +24,7 @@ loardCartCount();
 
 function loardCartCount(){
     number = localStorage.getItem("number");
-    query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
+    query = firebase.database().ref("Users/" + number + "/my_cart");
     query.on("value", function(snapshot) { 
         var childrenCount = snapshot.numChildren();
         if(snapshot.exists){
@@ -41,60 +41,35 @@ function loardCartCount(){
 
 
 
-  // Get the dropdown elements
-  const dropdownButton = document.getElementById('login-done');
-  const dropdownContent = document.getElementById('profile');
-  
-  
- // Function to show dropdown
- const showDropdown = () => {
-    dropdownContent.style.display = 'block';
-};
-
-// Function to hide dropdown
-const hideDropdown = () => {
-    dropdownContent.style.display = 'none';
-};
-
-   // Event listeners for hover
- dropdownButton.addEventListener('mouseover', showDropdown);
- 
- dropdownContent.addEventListener('mouseover', showDropdown);
- dropdownContent.addEventListener('mouseout', hideDropdown);
-   
 
  function checkLogin(){
     var lc = localStorage.getItem("userislogin");
-    var name = localStorage.getItem("username");
-    var email = localStorage.getItem("email");
-    var number = localStorage.getItem("number");
-  
-    
+  // var lc = "true";
+   
   
     if(lc == "true"){
+        $("#cart-icon").css("margin-right"," 50px");
       $("#login-pending").css("display","none");
-      $("#login-done").css("display","flex");
-      $("#name").html(name);
-      $("#number").html(number);
+     
+      
+      checkDevice(deviceId);
     }
   
-    else{
-      $("#login-pending").css("display","flex");
-      $("#login-done").css("display","none");
-    }
+  
+  
   
   }
-
+  
 
 
   function loadDefaultAddress(){
     var number = localStorage.getItem("number");
-  var query = firebase.database().ref("CircuitSource/Users/"+number)
+  var query = firebase.database().ref("Users/"+number)
   
   query.on("value", function(snapshot) {
   
     
-      var m = snapshot.val().primary_address;
+      var m = snapshot.val().default_location;
      // myFunction(m);
       loadAllAddress(m.toString());
 
@@ -105,7 +80,7 @@ var count = 0;
 function loadAllAddress(key) {
     var count = 0;
     var number = localStorage.getItem("number");
-    var query = firebase.database().ref("CircuitSource/Users/" + number + "/address_list");
+    var query = firebase.database().ref("Users/" + number + "/location");
 
     query.once("value", function(snapshot) {
         var mydiv = document.getElementById("address-div");
@@ -175,7 +150,7 @@ function loadAllAddress(key) {
         useButtons.forEach(function(button) {
             button.addEventListener('click', function() {
                 var adKey = this.getAttribute('data-key');
-                firebase.database().ref("CircuitSource/Users/" + number + "/primary_address").set(adKey)
+                firebase.database().ref("Users/" + number + "/default_location").set(adKey)
                 .then(function() {
                     myFunction('Primary address updated successfully');
                     loadAllAddress(adKey); // Refresh the address list to update the UI
@@ -211,11 +186,11 @@ function openDialog() {
 
     var number = localStorage.getItem("number");
 
-    var query = firebase.database().ref("CircuitSource/Users/"+number+"/address_list")
+    var query = firebase.database().ref("Users/"+number+"/address_list")
 
     var key = query.push().key;
-    var query2 = firebase.database().ref("CircuitSource/Users/"+number+"/address_list/"+key)
-    var query3 = firebase.database().ref("CircuitSource/Users/"+number+"/primary_address")
+    var query2 = firebase.database().ref("Users/"+number+"/location/"+key)
+    var query3 = firebase.database().ref("Users/"+number+"/default_location/key")
 
   
     query2.update({

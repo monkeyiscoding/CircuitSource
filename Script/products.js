@@ -63,8 +63,11 @@ var previousSearch = "";
 
 function checkLogin(){
     var lc = localStorage.getItem("userislogin");
+   //var lc = "true";
+   
   
     if(lc == "true"){
+        $("#cart-icon").css("margin-right"," 50px");
       $("#login-pending").css("display","none");
      
       
