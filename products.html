@@ -82,24 +82,43 @@
       <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
     </div>
   
-    <div id="profile" class="" style=" border-radius: 10px; box-shadow: 0px 0px 10px rgb(197, 196, 196); width: 200px; height: auto; position: absolute; background-color: rgb(255, 255, 255); margin-top: 50px; right: 45px; padding: 10px; display: none;">
-  
-      <div style="display: flex; justify-content: center; align-items: center;">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGFjsxZCvbMuKnsJHFywAKXzJh6SsPWVsifY_z36wVT9p38WQ3IQPDPDjhFPDyxv6YQY&usqp=CAU" alt="" style="width: 40px; height: 40px;">
-  
-      <div style="display: block;">
-         <h5 id="name" style="margin-left: 10px; margin-top: 5px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">Ayush Soni</h5>
-      <h6 id="number" style="margin-left: 10px; margin-top: 0px; font-family: sans-serif; font-weight: normal;  margin-bottom: 0px;">+91 9521532447</h6>
-   
-      </div>
-  
-      <i class="fa-solid fa-right-from-bracket" style="margin-left: auto;"></i>
-  
-      </div>
-  
+    <div id="profile" class="" style=" border-radius: 10px; box-shadow: 0px 0px 10px rgb(197, 196, 196); width: 260px; height: auto; position: absolute; background-color: rgb(255, 255, 255); margin-top: 50px; right: 45px; padding: 10px; display: none;">
+
+      <div class="dialog" style=" margin-right: 10px; width: 200px; align-items: center; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px;">
+        <div>
+            <img id="p-image-pc" class="profile-image-2" style="object-fit: cover; padding: 8px; width: 100px; border-radius: 1000px; height: 100px;" 
+                 src="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" 
+                 alt="Profile Image">
+            <i class="icon" style="color: rgb(255, 255, 255); position: absolute;" data-feather="edit"></i>
+        </div>
+        <input type="file" id="image-input" style="display: none;" accept="image/*" onchange="loadImage(event)">
+
+        <div class="col-3" style="margin-top: 10px; display: flex; align-items: center;">
+            <i style="color: rgb(0, 0, 0); margin-right: 10px; width: 14px;" data-feather="user"></i>
+            <input style="padding: 5px;" id="username-input-pc" class="effect-8" type="text" placeholder="Username" disabled>
+            <span class="focus-border"></span>
+        </div>
+
+        <div class="col-3" style="margin-top: 5px; display: flex; align-items: center;">
+            <i style="color: rgb(0, 0, 0); margin-right: 10px; width: 14px;" data-feather="mail"></i>
+            <input style="padding: 5px;" id="email-input-pc" class="effect-8" type="text" placeholder="Email Address" disabled>
+            <span class="focus-border"></span>
+        </div>
+
+        <div class="col-3" style="margin-top: 5px; display: flex; align-items: center;">
+            <i style="color: rgb(0, 0, 0); margin-right: 10px; width: 14px;" data-feather="phone"></i>
+            <input style="padding: 5px;" id="number-input-pc" class="effect-8" type="text" placeholder="Number" disabled>
+            <span class="focus-border"></span>
+        </div>
+
+        <div class="button-container" style="display: flex;  font-size: 10px; margin-top: 0px; width: 100%;padding-right: 0px;">
+            <button type="button" style=" margin-left: auto; background-color: rgba(212, 212, 212, 0.211); color: rgb(224, 0, 0);" onclick="logOut()">LOG OUT</button>
+            <button type="submit" style="background-color: orangered; margin-left: 10px; margin-right: 0px; margin-right: 3px; color: white;" onclick="openDialogCheck()">EDIT</button>
+        </div>
+    </div>
       
       </div>
-  
+   
   </a>
   
     
@@ -113,7 +132,7 @@
   
           <h3>MOST SEARCHED</h3>
   
-          <div id="most-searched-div" style="display: block;">
+          <div id="most-searched-div" style="display: block; align-items: start;">
   
   
               
@@ -356,13 +375,14 @@
               
           
             </div>
+            
     
                 <div id="items-div-m" style=" width: 98%; margin-right: 0px; margin-top: 0px; display: grid; padding-left:0px; margin-left: 2%; background-color: rgb(255, 255, 255);margin-bottom: 30px; overflow-y: auto; height: 70vh; padding-bottom: 20px;">
     
     
               
                 </div>
-    
+            
               </div>
             
             
