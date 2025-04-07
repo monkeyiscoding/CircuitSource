@@ -186,7 +186,7 @@ function openDialog() {
 
     var number = localStorage.getItem("number");
 
-    var query = firebase.database().ref("Users/"+number+"/address_list")
+    var query = firebase.database().ref("Users/"+number+"/location")
 
     var key = query.push().key;
     var query2 = firebase.database().ref("Users/"+number+"/location/"+key)
