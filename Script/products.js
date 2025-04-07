@@ -63,35 +63,16 @@ var previousSearch = "";
 
 function checkLogin(){
     var lc = localStorage.getItem("userislogin");
-    var name = localStorage.getItem("username");
-    var email = localStorage.getItem("email");
-    var number = localStorage.getItem("number");
-  
-  
   
     if(lc == "true"){
       $("#login-pending").css("display","none");
-      $("#login-done").css("display","flex");
-      $("#profile-m").css("display","flex");
-      $("#login-button-m").css("display","none");
-      $("#name").html(name);
-      $("#number").html(number);
-  
-      $("#login-pending-m").css("display","none");
-      $("#login-done-m").css("display","flex");
-      $("#profile-m").css("display","flex");
-      $("#login-button-m").css("display","none");
+     
       
       checkDevice(deviceId);
     }
   
   
-    else{
-      $("#login-pending").css("display","flex");
-      $("#login-done").css("display","none");
-      $("#profile-m").css("display","none");
-      $("#login-button-m").css("display","flex");
-    }
+  
   
   }
   
@@ -857,30 +838,6 @@ function loadSuggestionsMobile() {
     
   
   }
-
-   // Get the dropdown elements
-const dropdownButton = document.getElementById('login-done');
-const dropdownContent = document.getElementById('profile');
-
-
-
-
-// Function to show dropdown
-const showDropdown = () => {
-    dropdownContent.style.display = 'block';
-};
-
-// Function to hide dropdown
-const hideDropdown = () => {
-    dropdownContent.style.display = 'none';
-};
-
-// Event listeners for hover
-dropdownButton.addEventListener('mouseover', showDropdown);
-
-dropdownContent.addEventListener('mouseover', showDropdown);
-dropdownContent.addEventListener('mouseout', hideDropdown);
-  
 
 
  $("#search").click(function() {
