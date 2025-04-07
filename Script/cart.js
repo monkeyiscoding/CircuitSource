@@ -93,7 +93,7 @@ loadDefaultAddress();
 
 function loardCartCount(){
     number = localStorage.getItem("number");
-    query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
+    query = firebase.database().ref("Users/" + number + "/my_cart");
     query.on("value", function(snapshot) { 
         var childrenCount = snapshot.numChildren();
         if(snapshot.exists){
@@ -116,7 +116,7 @@ function loadCartProduct() {
     $("#loader-items").css("display", "flex");
     mydiv.classList.remove('grid-container');
     var number = localStorage.getItem("number");
-    var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
+    var query = firebase.database().ref("Users/" + number + "/my_cart");
   
     query.on("value", function(snapshot) {
         mydiv.innerHTML = "";
@@ -221,7 +221,7 @@ function loadCartProduct() {
           // Update the quantity in Firebase or perform save action
           // For demonstration, let's assume you update Firebase here
           var newQuantity = quantityInput.value;
-          firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + key).update({
+          firebase.database().ref("Users/" + number + "/my_cart/" + key).update({
             quantity: newQuantity
           }).then(function() {
             alert('Quantity updated successfully');
@@ -238,7 +238,7 @@ function loadCartProduct() {
         // Event handling for delete button click
         deleteButton.addEventListener('click', function() {
           // Delete the item from Firebase or perform delete action
-          firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + key).remove().then(function() {
+          firebase.database().ref("Users/" + number + "/my_cart/" + key).remove().then(function() {
             myFunction('Item deleted successfully');
             // Remove the cart item from the DOM
             cartItem.remove();
@@ -264,7 +264,7 @@ function loadCartProduct() {
     $("#loader-items-m").css("display", "flex");
     mydiv.classList.remove('grid-container');
     var number = localStorage.getItem("number");
-    var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
+    var query = firebase.database().ref("Users/" + number + "/my_cart");
   
     query.on("value", function(snapshot) {
         mydiv.innerHTML = "";
@@ -372,7 +372,7 @@ function loadCartProduct() {
           // Update the quantity in Firebase or perform save action
           // For demonstration, let's assume you update Firebase here
           var newQuantity = quantityInput.value;
-          firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + key).update({
+          firebase.database().ref("Users/" + number + "/my_cart/" + key).update({
             quantity: newQuantity
           }).then(function() {
             alert('Quantity updated successfully');
@@ -389,7 +389,7 @@ function loadCartProduct() {
         // Event handling for delete button click
         deleteButton.addEventListener('click', function() {
           // Delete the item from Firebase or perform delete action
-          firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + key).remove().then(function() {
+          firebase.database().ref("Users/" + number + "/my_cart/" + key).remove().then(function() {
             myFunction('Item deleted successfully');
             // Remove the cart item from the DOM
             cartItem.remove();
@@ -420,7 +420,7 @@ function loadCartProduct() {
     cartTotalDiscount = 0;
     totaltax = 0;
     number = localStorage.getItem("number");
-    query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
+    query = firebase.database().ref("Users/" + number + "/my_cart");
 
 
     query.once("value", function(snapshot) {
@@ -467,7 +467,7 @@ function loadCartProduct() {
     cartTotalDiscount = 0;
     totaltax = 0;
     number = localStorage.getItem("number");
-    query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
+    query = firebase.database().ref("Users/" + number + "/my_cart");
 
 
     query.once("value", function(snapshot) {
@@ -545,26 +545,25 @@ function loadCartProduct() {
 
     var number = localStorage.getItem("number");
 
-    var query = firebase.database().ref("CircuitSource/Users/"+number+"/address_list")
+    var query = firebase.database().ref("Users/"+number+"/location")
 
     var key = query.push().key;
-    var query2 = firebase.database().ref("CircuitSource/Users/"+number+"/address_list/"+key)
-    var query3 = firebase.database().ref("CircuitSource/Users/"+number+"/primary_address")
+    var query2 = firebase.database().ref("Users/"+number+"/location/"+key)
+    var query3 = firebase.database().ref("Users/"+number+"/default_location/key")
 
   
     query2.update({
-        full_name: fullName,
-        address: addressLine,
-        landmark: landmark,
-        state: state,
-        city: city,
-        pincode: pincode,
-        key: key,
-        mobileNumber: mobileNumber,
-    }, function (error){
+      location: addressLine+", "+landmark+", "+state+", "+city+", "+pincode,
+      landmark: landmark,
+      state: state,
+      city: city,
+      pin_code: pincode,
+      key: key,
+      mobileNumber: mobileNumber,
+  }, function (error){
 
-        var checkbox = document.getElementById('agreeCheckbox');
-  var isChecked = checkbox.checked;
+      var checkbox = document.getElementById('agreeCheckbox');
+var isChecked = checkbox.checked;
 
   if(isChecked){
     query3.set(key);
@@ -598,13 +597,13 @@ function loadCartProduct() {
 
   var number = localStorage.getItem("number");
   function loadDefaultAddress(){
-    var query = firebase.database().ref("CircuitSource/Users/"+number)
+    var query = firebase.database().ref("Users/"+number)
     
     query.on("value", function(snapshot) {
     
         var key = snapshot.val().primary_address;
        
-        var query2 = firebase.database().ref("CircuitSource/Users/"+number+"/address_list/"+key)
+        var query2 = firebase.database().ref("Users/"+number+"/location/"+key)
 
         query2.once("value", function(snapshot) {
 

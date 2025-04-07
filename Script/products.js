@@ -35,7 +35,7 @@ let allMobileProducts = [];
 
   function loardCartCount(){
     number = localStorage.getItem("number");
-    query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
+    query = firebase.database().ref("Users/" + number + "/my_cart");
     query.on("value", function(snapshot) { 
         var childrenCount = snapshot.numChildren();
         if(snapshot.exists){
@@ -205,7 +205,7 @@ allProducts
             const number = localStorage.getItem("number");
             const quantity = 1;
   
-            const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+            const cartRef = firebase.database().ref("Users/" + number + "/my_cart/" + productKey);
   
             cartRef.once("value", snapshot => {
               if (snapshot.exists()) {
@@ -355,7 +355,7 @@ function renderMobileProducts() {
       const number = localStorage.getItem("number");
       const quantity = 1;
 
-      const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+      const cartRef = firebase.database().ref("Users/" + number + "/my_cart/" + productKey);
 
       cartRef.once("value", snapshot => {
         if (snapshot.exists()) {
@@ -485,7 +485,7 @@ function renderMobileProducts() {
             const number = localStorage.getItem("number");
             const quantity = 1;
   
-            const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+            const cartRef = firebase.database().ref("Users/" + number + "/my_cart/" + productKey);
   
             cartRef.once("value", snapshot => {
               if (snapshot.exists()) {
@@ -621,7 +621,7 @@ function renderMobileProducts() {
             const number = localStorage.getItem("number");
             const quantity = 1;
   
-            const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+            const cartRef = firebase.database().ref("Users/" + number + "/my_cart/" + productKey);
   
             cartRef.once("value", snapshot => {
               if (snapshot.exists()) {
