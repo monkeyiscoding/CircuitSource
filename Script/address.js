@@ -106,13 +106,13 @@ function loadAllAddress(key) {
         addresses.forEach(function(addressData) {
             count++;
             var adKey = addressData.key;
-            var address = addressData.address;
-            var state = addressData.state;
-            var city = addressData.city;
-            var pin = addressData.pincode;
-            var name = addressData.full_name;
-            var landmark = addressData.landmark;
-            var mobileNumber = addressData.mobileNumber;
+            var address = addressData.location;
+            //var state = addressData.state;
+            //var city = addressData.city;
+            var pin = addressData.pin_code;
+            var name = localStorage.getItem("username");
+            //var landmark = addressData.landmark;
+            var mobileNumber = number;
 
             var addressClass = adKey === key ? 'address' : 'address-not-use';
 
@@ -137,7 +137,7 @@ function loadAllAddress(key) {
 
             addressHTML += `
                     </div>
-                    <h5 style="margin-left: 10px; font-weight: normal;">${name}, ${address}, ${landmark}, ${city}, ${state}, ${pin}</h5>
+                    <h5 style="margin-left: 10px; font-weight: normal;">${name}, ${address}, ${pin}</h5>
                     <h5 style="margin-left: 10px; font-weight: normal;">Mobile - ${mobileNumber}</h5>
                 </div>
             `;
