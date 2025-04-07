@@ -45,6 +45,7 @@ query.once("value", function (snapshot) {
   var poster_url = data.poster.url;
   var poster_type = data.poster.type;
   var poster_key = data.poster.product_key;
+  var poster_category= data.poster.category;
   var details_div_title = data.details_div.title;
   var details_div_url = data.details_div.url;
   var details_div_des = data.details_div.description;
@@ -73,11 +74,11 @@ query.once("value", function (snapshot) {
   $("#home-poster-m").click(function() {
 
     if(poster_type == "product"){
-       openProduct(poster_key);
+       openProduct(poster_key,poster_category);
     }
 
     else if(poster_type == "serach"){
-      searchCategory(poster_key);
+      searchCategory(poster_key,poster_category);
     }
 
     else if(poster_type == "page"){
@@ -89,7 +90,7 @@ query.once("value", function (snapshot) {
   $("#details-button-pc-bt").click(function() {
 
     if(details_div_type == "product"){
-       openProduct(details_div_key);
+       openProduct(details_div_key,poster_category);
     }
 
     else if(details_div_type == "serach"){
@@ -105,7 +106,7 @@ query.once("value", function (snapshot) {
   $("#details-button-m-bt").click(function() {
 
     if(details_div_type == "product"){
-       openProduct(details_div_key);
+       openProduct(details_div_key,poster_category);
     }
 
     else if(details_div_type == "serach"){
@@ -239,50 +240,51 @@ query.update({
 
  var a = 0;
  function loadTools() {
-    var query = firebase.database().ref("CircuitSource/Top_components_web");
-    query.once("value", function (snapshot) {
-      
-      snapshot.forEach(function (childSnapshot) {
-        var mydiv = document.getElementById("products-div-components");
-        
-        var title = childSnapshot.val().title;
-        var price = childSnapshot.val().price;
-        var discount = childSnapshot.val().discount;
-        var thumbnail = childSnapshot.val().thumbnail_url;
-        var key = childSnapshot.val().key;
+  var query = firebase.database()
+    .ref("Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products")
+    .limitToFirst(30); // Load only first 30 products
 
-        var discPrice = price - discount;
-        a++;
-         mydiv.innerHTML += 
-         `<div  onClick="openProduct(\`` +
-      key +
-      `\`,)"  class="product-div-one">
+  query.once("value", function (snapshot) {
+    var mydiv = document.getElementById("products-div-components");
+    var fragment = document.createDocumentFragment(); // Reduces reflows
+    let a = 0;
 
-      
-      <img style="border-radius: 10px;"  src="${thumbnail}" height="100px" width="100px" alt="">
+    snapshot.forEach(function (childSnapshot) {
+      var title = childSnapshot.val().title;
+      var price = childSnapshot.val().price;
+      var discount = childSnapshot.val().discount;
+      var thumbnail = childSnapshot.val().thumbnail_url;
+      var key = childSnapshot.val().key;
+      var category = childSnapshot.val().category;
 
-      <h6 style=" height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal;text-align: left; margin-bottom: 0px;overflow: hidden; text-overflow: ellipsis; max-lines: 3; width: 100px; white-space: normal;">${title}</h6>
+      var discPrice = price - discount;
+      a++;
 
-      <div style="display: flex; align-items: center;">
-<h5  style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold;text-align: left;">₹${discPrice}</h5>
-<h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal;text-align: left;">₹${price}</h5>
+      var container = document.createElement("div");
+      container.className = "product-div-one";
+      container.setAttribute("onclick", `openProduct('${key}','${category}')`);
+      container.style.cursor = "pointer";
 
-      </div>
-      
-      <!-- <div style="color: white; background-color: orangered; margin: 0px;">
-        <h6>20% OFF</h6>
-      </div> -->
-    </div>
+      container.innerHTML = `
+        <img style="border-radius: 10px;" src="${thumbnail}" height="100px" width="100px" alt="">
+        <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: left; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; width: 100px; white-space: normal;">${title}</h6>
+        <div style="display: flex; align-items: center;">
+          <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold; text-align: left;">₹${discPrice}</h5>
+          <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: left;">₹${price}</h5>
+        </div>
+      `;
 
-  </div>
-         `;
-         
-      });
+      fragment.appendChild(container);
     });
-  }
+
+    mydiv.appendChild(fragment); // Append all at once
+  });
+}
 
   function loadToolsMobile() {
-    var query = firebase.database().ref("CircuitSource/Top_components_web");
+    var query = firebase.database()
+    .ref("Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products")
+    .limitToFirst(30); // Load only first 30 products
     query.once("value", function (snapshot) {
       
       snapshot.forEach(function (childSnapshot) {
@@ -293,11 +295,14 @@ query.update({
         var discount = childSnapshot.val().discount;
         var thumbnail = childSnapshot.val().thumbnail_url;
         var key = childSnapshot.val().key;
+        var category = childSnapshot.val().category;
         var discPrice = price - discount;
         a++;
          mydiv.innerHTML += 
          `<div  onClick="openProduct(\`` +
       key +
+      `\`,\`` +
+      category +
       `\`,)"  class="product-div-one">
 
       
@@ -326,50 +331,50 @@ query.update({
 
 
  function loadComponents() {
-    var query = firebase.database().ref("CircuitSource/Top_components_web");
-    query.once("value", function (snapshot) {
-      snapshot.forEach(function (childSnapshot) {
-        var mydiv = document.getElementById("products-div-tools");
+  var query = firebase.database()
+    .ref("Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products")
+    .limitToFirst(30); // Load only first 30 components
 
-        var title = childSnapshot.val().title;
-        var price = childSnapshot.val().price;
-        var discount = childSnapshot.val().discount;
-        var thumbnail = childSnapshot.val().thumbnail_url;
-        var key = childSnapshot.val().key;
+  query.once("value", function (snapshot) {
+    var mydiv = document.getElementById("products-div-tools");
+    var fragment = document.createDocumentFragment();
+    let a = 0;
 
-        var discPrice = price - discount;
-        a++;
-         mydiv.innerHTML += 
-         `<div onClick="openProduct(\`` +
-      key +
-      `\`,)" class="product-div-one">
+    snapshot.forEach(function (childSnapshot) {
+      var title = childSnapshot.val().title;
+      var price = childSnapshot.val().price;
+      var discount = childSnapshot.val().discount;
+      var thumbnail = childSnapshot.val().thumbnail_url;
+      var key = childSnapshot.val().key;
+      var category = childSnapshot.val().category;
 
-      
-      <img style="border-radius: 10px;" src="${thumbnail}" height="100px" width="100px" alt="">
+      var discPrice = price - discount;
+      a++;
 
-      <h6 style=" height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal;text-align: left; margin-bottom: 0px;overflow: hidden; text-overflow: ellipsis; max-lines: 3; width: 100px; white-space: normal;">${title}</h6>
+      var container = document.createElement("div");
+      container.className = "product-div-one";
+      container.setAttribute("onclick", `openProduct('${key}','${category}')`);
+      container.style.cursor = "pointer";
 
-      <div style="display: flex; align-items: center;">
-<h5  style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold;text-align: left;">₹${discPrice}</h5>
-<h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal;text-align: left;">₹${price}</h5>
+      container.innerHTML = `
+        <img style="border-radius: 10px;" src="${thumbnail}" height="100px" width="100px" alt="">
+        <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: left; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; width: 100px; white-space: normal;">${title}</h6>
+        <div style="display: flex; align-items: center;">
+          <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; font-weight: bold; text-align: left;">₹${discPrice}</h5>
+          <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: left;">₹${price}</h5>
+        </div>
+      `;
 
-      </div>
-      
-      <!-- <div style="color: white; background-color: orangered; margin: 0px;">
-        <h6>20% OFF</h6>
-      </div> -->
-    </div>
-
-  </div>
-         `;
-  
-      });
+      fragment.appendChild(container);
     });
-  }
 
-
+    mydiv.appendChild(fragment); // Append everything at once
+  });
+}
   function loadComponentsMobile() {
-    var query = firebase.database().ref("CircuitSource/Top_components_web");
+    var query = firebase.database()
+    .ref("Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products")
+    .limitToFirst(30); // Load only first 30 components
     query.once("value", function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
         var mydiv = document.getElementById("products-div-tools-m");
@@ -379,13 +384,16 @@ query.update({
         var discount = childSnapshot.val().discount;
         var thumbnail = childSnapshot.val().thumbnail_url;
         var key = childSnapshot.val().key;
+        var category = childSnapshot.val().category;
 
         var discPrice = price - discount;
         a++;
          mydiv.innerHTML += 
          `<div onClick="openProduct(\`` +
       key +
-      `\`,)"  class="product-div-one">
+      `\`,\`` +
+      category +
+      `\`)"  class="product-div-one">
 
       
       <img style="border-radius: 10px;" src="${thumbnail}" height="100px" width="100px" alt="">
@@ -578,10 +586,12 @@ function loadSuggestions() {
     });
   });
 }
-function openProduct(key){
+function openProduct(key,category){
   localStorage.setItem("search-key", key);
+  localStorage.setItem("search-category", category);
   window.location.href = "productoverview.html";
 }
+
 
 // Function to handle search submission
 function searchCategory(text) {

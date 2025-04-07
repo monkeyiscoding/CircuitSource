@@ -13,7 +13,8 @@ const firebaseConfig = {
   var dataRef = firebase.database().ref("All");
 
 
-  
+  let productOffset = 0;
+let allMobileProducts = [];
 
   if(isMobileScreen()){
     loadSuggestionsMobile();
@@ -76,6 +77,12 @@ function checkLogin(){
       $("#name").html(name);
       $("#number").html(number);
   
+      $("#login-pending-m").css("display","none");
+      $("#login-done-m").css("display","flex");
+      $("#profile-m").css("display","flex");
+      $("#login-button-m").css("display","none");
+      
+      checkDevice(deviceId);
     }
   
   
@@ -88,7 +95,7 @@ function checkLogin(){
   
   }
   
-
+  
 
   $("#loader-product-main").css("display","flex")
 
@@ -124,540 +131,560 @@ function handleSearch() {
 }
 
 
-
 function loadProduct() {
-  var mydiv = document.getElementById("items-div");
-  mydiv.innerHTML = "";
-  $("#loader-product").css("display", "flex");
-  mydiv.classList.remove('grid-container');
-  var query = firebase.database().ref("CircuitSource/all_products");
+    const mydiv = document.getElementById("items-div");
+    mydiv.innerHTML = "";
+    $("#loader-product").css("display", "flex");
+    mydiv.classList.remove("grid-container");
   
-  query.once("value", function(snapshot) {
-      if (!snapshot.exists()) {
+    const allProducts = [];
+  
+    const paths = [
+      "Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products", // Components
+      "Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products"  // Tools
+    ];
+  
+    const promises = paths.map(path => firebase.database().ref(path).once("value"));
+  
+    Promise.all(promises)
+      .then(snapshots => {
+        snapshots.forEach(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            allProducts.push(childSnapshot.val());
+          });
+        });
+  
+        if (allProducts.length === 0) {
           $("#loader-product").css("display", "none");
           $("#all-data-div-product").css("display", "none");
           $("#loader-product-main").css("display", "none");
           mydiv.innerHTML = "<p>No products found</p>";
           return;
-      }
-
-      snapshot.forEach(function(childSnapshot) {
-          var product = childSnapshot.val();
-          var title = product.title;
-          var price = product.price;
-          var discount = product.discount;
-          var thumbnail = product.thumbnail_url;
-          var key = product.key;
-
-          var discPrice = price - discount;
-
-          $("#loader-product-main").css("display", "none");
-          $("#loader-product").css("display", "none");
-          $("#loader-m").css("display", "none");
-          $(".main-div-m").css("display", "block");
-          $("#all-data-div-product").css("display", "flex");
-          $("#all-data-div-product-m").css("display", "block");
-
-          mydiv.classList.add('grid-container');
-
-          var productHTML = `
-              <div style="cursor: pointer;" onClick="openProduct('${key}')" class="product-div-one-search fade-in" style="background-color: white; border-radius: 5px; border: 0.2px solid grey;">
-                  <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
-                      <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
-                  </div>
-                  <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="130px" alt="">
-                  <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
-                  <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
-                      <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold; text-align: center;">₹${discPrice}</h5>
-                      <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: center;">₹${price}</h5>
-                  </div>
-                  <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
-                      <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
-                      <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
-                  </button>
-              </div>
-          `;
-
-          mydiv.innerHTML += productHTML;
-      });
-
-      // Attach event listeners to "Add to Cart" buttons
-      document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-          button.addEventListener('click', function(event) {
-              event.stopPropagation(); // Prevent the click from triggering the product open
-
-                // Check if user is logged in
-                var lc = localStorage.getItem("userislogin");
-                if (lc !== "true") {
-                    window.location.href = "login.html"; // Redirect to login page
-                    return;
-                }
+        }
   
-                else{
-                  
-                var productKey = this.getAttribute('data-key');
-                var cTitle = this.getAttribute('data-title');
-                var price = this.getAttribute('data-price');
-                var discount = this.getAttribute('data-discount');
-                var thumbnail_url = this.getAttribute('data-thumbnail');
-                var quantity = 1; // Assuming default quantity is 1
-                var number = localStorage.getItem("number");
+        $("#loader-product-main").css("display", "none");
+        $("#loader-product").css("display", "none");
+        $("#loader-m").css("display", "none");
+        $(".main-div-m").css("display", "block");
+        $("#all-data-div-product").css("display", "flex");
+        $("#all-data-div-product-m").css("display", "block");
+        mydiv.classList.add("grid-container");
   
-                var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
-  
-                // Check if product is already in cart
-                query.once("value", snapshot => {
-                    if (snapshot.exists()) {
-                        myFunction("Already in cart");
-                    } else {
-                        $("#cart-text", this).css("display", "none");
-                        $("#cart-i", this).css("display", "none");
-                        $("#cart-loader", this).css("display", "flex");
-  
-                        query.update({
-                            title: cTitle,
-                            description: '',
-                            key: productKey,
-                            quantity: quantity,
-                            price: price,
-                            discount: discount,
-                            thumbnail_url: thumbnail_url,
-                        }, function(error) {
-                            $("#cart-text", this).css("display", "flex");
-                            $("#cart-i", this).css("display", "flex");
-                            $("#cart-loader", this).css("display", "none");
-  
-                            if (error) {
-                                console.error('Error adding to cart: ', error);
-                                myFunction("Error adding to cart");
-                            } else {
-                                myFunction("Added to cart");
-                            }
-                        }.bind(this));
-                    }
-                });
-                }
-          });
-      });
+// After merging all products
+allProducts
+  .slice(0, 100) // 👈 LIMIT to first 100 products
+  .forEach(product => {
+    const title = product.title;
+    const price = product.price;
+    const discount = product.discount;
+    const thumbnail = product.thumbnail_url;
+    const key = product.key;
+    const category = product.category;
+    const discPrice = price - discount;
 
-  }).catch(function(error) {
-      console.error('Error fetching products: ', error);
-      $("#loader-product").css("display", "none");
-      $("#all-data-div-product").css("display", "none");
-      $("#loader-product-main").css("display", "none");
-      mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
+    const productHTML = `
+      <div style="cursor: pointer;" onClick="openProduct('${key}','${category}')" class="product-div-one-search fade-in">
+          <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
+              <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
+          </div>
+          <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="130px" alt="">
+          <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
+          <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
+              <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold;">₹${discPrice}</h5>
+              <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal;">₹${price}</h5>
+          </div>
+          <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
+              <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
+              <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
+          </button>
+      </div>
+    `;
+
+    mydiv.innerHTML += productHTML;
   });
+        // Add to cart logic
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+          button.addEventListener('click', function (event) {
+            event.stopPropagation();
+  
+            const lc = localStorage.getItem("userislogin");
+            if (lc !== "true") {
+              window.location.href = "login.html";
+              return;
+            }
+  
+            const productKey = this.getAttribute('data-key');
+            const cTitle = this.getAttribute('data-title');
+            const price = this.getAttribute('data-price');
+            const discount = this.getAttribute('data-discount');
+            const thumbnail_url = this.getAttribute('data-thumbnail');
+            const number = localStorage.getItem("number");
+            const quantity = 1;
+  
+            const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+  
+            cartRef.once("value", snapshot => {
+              if (snapshot.exists()) {
+                myFunction("Already in cart");
+              } else {
+                $("#cart-text", this).css("display", "none");
+                $("#cart-i", this).css("display", "none");
+                $("#cart-loader", this).css("display", "flex");
+  
+                cartRef.update({
+                  title: cTitle,
+                  description: '',
+                  key: productKey,
+                  quantity: quantity,
+                  price: price,
+                  discount: discount,
+                  thumbnail_url: thumbnail_url,
+                }, function (error) {
+                  $("#cart-text", this).css("display", "flex");
+                  $("#cart-i", this).css("display", "flex");
+                  $("#cart-loader", this).css("display", "none");
+  
+                  if (error) {
+                    console.error('Error adding to cart: ', error);
+                    myFunction("Error adding to cart");
+                  } else {
+                    myFunction("Added to cart");
+                  }
+                }.bind(this));
+              }
+            });
+          });
+        });
+  
+      })
+      .catch(function (error) {
+        console.error('Error fetching products:', error);
+        $("#loader-product").css("display", "none");
+        $("#all-data-div-product").css("display", "none");
+        $("#loader-product-main").css("display", "none");
+        mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
+      });
 }
+
+
 
 
 
 function loadProductMobile() {
-    var mydiv = document.getElementById("items-div-m");
-    mydiv.innerHTML = "";
-    $("#loader-product").css("display", "flex");
-    mydiv.classList.remove('grid-container');
-    var query = firebase.database().ref("CircuitSource/all_products");
-    
-    query.once("value", function(snapshot) {
-        if (!snapshot.exists()) {
-            $("#loader-product-m").css("display", "none");
-            $("#all-data-div-product-m").css("display", "none");
-            $("#loader-product-m").css("display", "none");
-            mydiv.innerHTML = "<p>No products found</p>";
-            return;
-        }
+  const mydiv = document.getElementById("items-div-m");
   
-        snapshot.forEach(function(childSnapshot) {
-            var product = childSnapshot.val();
-            var title = product.title;
-            var price = product.price;
-            var discount = product.discount;
-            var thumbnail = product.thumbnail_url;
-            var key = product.key;
-  
-            var discPrice = price - discount;
-  
-            $("#loader-product-m").css("display", "none");
-            $("#loader-productm").css("display", "none");
-            $("#loader-m").css("display", "none");
-            $(".main-div-m").css("display", "block");
-            $("#all-data-div-product-m").css("display", "flex");
-            $("#all-data-div-product-m").css("display", "block");
-  
-            mydiv.classList.add('grid-container');
-  
-            var productHTML = `
-                <div style="cursor: pointer;" onClick="openProduct('${key}')" class="product-div-one-search fade-in" style="background-color: white; border-radius: 5px; border: 0.2px solid grey;">
-                  <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
-                      <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
-                  </div>
-                  <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="120px" alt="">
-                  <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
-                  <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
-                      <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold; text-align: center;">₹${discPrice}</h5>
-                      <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: center;">₹${price}</h5>
-                  </div>
-                  <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
-                      <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
-                      <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
-                  </button>
-              </div>
-            `;
-  
-            mydiv.innerHTML += productHTML;
-        });
-  
-        // Attach event listeners to "Add to Cart" buttons
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.stopPropagation(); // Prevent the click from triggering the product open
-  
-                  // Check if user is logged in
-                  var lc = localStorage.getItem("userislogin");
-                  if (lc !== "true") {
-                      window.location.href = "login.html"; // Redirect to login page
-                      return;
-                  }
-    
-                  else{
-                    
-                  var productKey = this.getAttribute('data-key');
-                  var cTitle = this.getAttribute('data-title');
-                  var price = this.getAttribute('data-price');
-                  var discount = this.getAttribute('data-discount');
-                  var thumbnail_url = this.getAttribute('data-thumbnail');
-                  var quantity = 1; // Assuming default quantity is 1
-                  var number = localStorage.getItem("number");
-    
-                  var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
-    
-                  // Check if product is already in cart
-                  query.once("value", snapshot => {
-                      if (snapshot.exists()) {
-                          myFunction("Already in cart");
-                      } else {
-                          $("#cart-text", this).css("display", "none");
-                          $("#cart-i", this).css("display", "none");
-                          $("#cart-loader", this).css("display", "flex");
-    
-                          query.update({
-                              title: cTitle,
-                              description: '',
-                              key: productKey,
-                              quantity: quantity,
-                              price: price,
-                              discount: discount,
-                              thumbnail_url: thumbnail_url,
-                          }, function(error) {
-                              $("#cart-text", this).css("display", "flex");
-                              $("#cart-i", this).css("display", "flex");
-                              $("#cart-loader", this).css("display", "none");
-    
-                              if (error) {
-                                  console.error('Error adding to cart: ', error);
-                                  myFunction("Error adding to cart");
-                              } else {
-                                  myFunction("Added to cart");
-                              }
-                          }.bind(this));
-                      }
-                  });
-                  }
-            });
-        });
-    }).catch(function(error) {
-        console.error('Error fetching products: ', error);
-        $("#loader-product").css("display", "none");
-        $("#all-data-div-product").css("display", "none");
-        $("#loader-product-main").css("display", "none");
-        mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
-    });
-  }
-
-
-function loadSearchProduct(value) {
-  var query = firebase.database().ref("CircuitSource/all_products");
-  var mydiv = document.getElementById("items-div");
-
   mydiv.innerHTML = "";
+  productOffset = 0;
+  $("#loader-product-m").css("display", "flex");
+  mydiv.classList.remove("grid-container");
 
-  $("#loader-product").css("display", "flex");
-  mydiv.classList.remove('grid-container');
+  const paths = [
+    "Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products",
+    "Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products"
+  ];
 
-  query.once("value", function(snapshot) {
-      if (!snapshot.exists()) {
-          $("#loader-product").css("display", "none");
-          $("#all-data-div-product").css("display", "none");
-          $("#loader-product-main").css("display", "none");
-          mydiv.innerHTML = "<p>No products found</p>";
-          return;
+  const promises = paths.map(path => firebase.database().ref(path).once("value"));
+
+  Promise.all(promises)
+    .then(snapshots => {
+      allMobileProducts = [];
+      snapshots.forEach(snapshot => {
+        snapshot.forEach(childSnapshot => {
+          allMobileProducts.push(childSnapshot.val());
+        });
+      });
+
+      $("#loader-product-m").css("display", "none");
+      $(".main-div-m").css("display", "block");
+      $("#all-data-div-product-m").css("display", "flex");
+      mydiv.classList.add("grid-container");
+
+      if (allMobileProducts.length === 0) {
+        mydiv.innerHTML = "<p>No products found</p>";
+        return;
       }
 
-      snapshot.forEach(function(childSnapshot) {
-          var product = childSnapshot.val();
-          var title = product.title;
-          var price = product.price;
-          var discount = product.discount;
-          var thumbnail = product.thumbnail_url;
-          var key = product.key;
-
-          var discPrice = price - discount;
-
-          $("#loader-product-main").css("display", "none");
-          $("#loader-product").css("display", "none");
-          $("#all-data-div-product").css("display", "flex");
-
-          if (previousSearch != "") {
-              searchInput.value = previousSearch;
-          }
-
-          mydiv.classList.add('grid-container');
-
-          if (title.trim().toLowerCase().includes(value.trim().toLowerCase())) {
-              var productHTML = `
-                  <div style="cursor: pointer;" onClick="openProduct('${key}')" class="product-div-one-search fade-in" style="background-color: white; border-radius: 5px; border: 0.2px solid grey;">
-                      <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
-                          <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
-                      </div>
-                      <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="130px" alt="">
-                      <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
-                      <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
-                          <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold; text-align: center;">₹${discPrice}</h5>
-                          <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: center;">₹${price}</h5>
-                      </div>
-                      <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
-                          <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
-                          
-                          <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
-                      </button>
-                  </div>
-              `;
-
-              mydiv.innerHTML += productHTML;
-
-              $("#not-found").css("display", "none");
-          } else {
-              if (mydiv.innerHTML == "") {
-                  $("#not-found").css("display", "block");
-              }
-          }
-      });
-
-      // Attach event listeners to "Add to Cart" buttons
-      document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-          button.addEventListener('click', function(event) {
-              event.stopPropagation(); // Prevent the click from triggering the product open
-
-              // Check if user is logged in
-              var lc = localStorage.getItem("userislogin");
-              if (lc !== "true") {
-                  window.location.href = "login.html"; // Redirect to login page
-                  return;
-              }
-
-              else{
-                
-              var productKey = this.getAttribute('data-key');
-              var cTitle = this.getAttribute('data-title');
-              var price = this.getAttribute('data-price');
-              var discount = this.getAttribute('data-discount');
-              var thumbnail_url = this.getAttribute('data-thumbnail');
-              var quantity = 1; // Assuming default quantity is 1
-              var number = localStorage.getItem("number");
-
-              var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
-
-              // Check if product is already in cart
-              query.once("value", snapshot => {
-                  if (snapshot.exists()) {
-                      myFunction("Already in cart");
-                  } else {
-                      $("#cart-text", this).css("display", "none");
-                      $("#cart-i", this).css("display", "none");
-                      $("#cart-loader", this).css("display", "flex");
-
-                      query.update({
-                          title: cTitle,
-                          description: '',
-                          key: productKey,
-                          quantity: quantity,
-                          price: price,
-                          discount: discount,
-                          thumbnail_url: thumbnail_url,
-                      }, function(error) {
-                          $("#cart-text", this).css("display", "flex");
-                          $("#cart-i", this).css("display", "flex");
-                          $("#cart-loader", this).css("display", "none");
-
-                          if (error) {
-                              console.error('Error adding to cart: ', error);
-                              myFunction("Error adding to cart");
-                          } else {
-                              myFunction("Added to cart");
-                          }
-                      }.bind(this));
-                  }
-              });
-              }
-
-          });
-      });
-  }).catch(function(error) {
-      console.error('Error fetching products: ', error);
-      $("#loader-product").css("display", "none");
-      $("#all-data-div-product").css("display", "none");
-      $("#loader-product-main").css("display", "none");
+      renderMobileProducts();
+    })
+    .catch(function (error) {
+      console.error("Error fetching products:", error);
+      $("#loader-product-m").css("display", "none");
+      $("#all-data-div-product-m").css("display", "none");
+      $("#loader-product-main-m").css("display", "none");
       mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
+    });
+}
+
+function renderMobileProducts() {
+  const mydiv = document.getElementById("items-div-m");
+
+
+  const productsToShow = allMobileProducts.slice(productOffset, productOffset + 100);
+  productOffset += 100;
+
+  productsToShow.forEach(product => {
+    const title = product.title;
+    const price = product.price;
+    const discount = product.discount;
+    const thumbnail = product.thumbnail_url;
+    const key = product.key;
+    const category = product.category;
+    const discPrice = price - discount;
+
+    const productHTML = `
+      <div style="cursor: pointer;" onClick="openProduct('${key}','${category}')" class="product-div-one-search fade-in">
+        <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
+            <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
+        </div>
+        <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="120px" alt="">
+        <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
+        <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
+            <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold;">₹${discPrice}</h5>
+            <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal;">₹${price}</h5>
+        </div>
+        <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
+            <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
+            <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
+        </button>
+      </div>
+    `;
+
+    mydiv.innerHTML += productHTML;
+  });
+
+  // Add to cart logic
+  document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+    button.addEventListener('click', function (event) {
+      event.stopPropagation();
+
+      const lc = localStorage.getItem("userislogin");
+      if (lc !== "true") {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const productKey = this.getAttribute('data-key');
+      const cTitle = this.getAttribute('data-title');
+      const price = this.getAttribute('data-price');
+      const discount = this.getAttribute('data-discount');
+      const thumbnail_url = this.getAttribute('data-thumbnail');
+      const number = localStorage.getItem("number");
+      const quantity = 1;
+
+      const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+
+      cartRef.once("value", snapshot => {
+        if (snapshot.exists()) {
+          myFunction("Already in cart");
+        } else {
+          $("#cart-text", this).css("display", "none");
+          $("#cart-loader", this).css("display", "flex");
+
+          cartRef.update({
+            title: cTitle,
+            description: '',
+            key: productKey,
+            quantity: quantity,
+            price: price,
+            discount: discount,
+            thumbnail_url: thumbnail_url,
+          }, function (error) {
+            $("#cart-text", this).css("display", "flex");
+            $("#cart-loader", this).css("display", "none");
+
+            if (error) {
+              console.error('Error adding to cart: ', error);
+              myFunction("Error adding to cart");
+            } else {
+              myFunction("Added to cart");
+            }
+          }.bind(this));
+        }
+      });
+    });
   });
 }
 
+// Button in HTML:
+// <button id="show-more-btn" onclick="renderMobileProducts()" style="display:none; margin: 20px auto; padding: 10px 20px; background-color: orangered; color: white; border: none; border-radius: 5px;">Show More</button>
 
 
-function loadSearchProductMobile(value) {
-    var query = firebase.database().ref("CircuitSource/all_products");
-    var mydiv = document.getElementById("items-div-m");
-  
+
+  function loadSearchProduct(value) {
+    const mydiv = document.getElementById("items-div");
     mydiv.innerHTML = "";
+    $("#loader-product").css("display", "flex");
+    mydiv.classList.remove("grid-container");
   
-    $("#loader-product-m").css("display", "flex");
-    mydiv.classList.remove('grid-container');
+    const searchVal = value.trim().toLowerCase();
+    const allProducts = [];
   
-    query.once("value", function(snapshot) {
-        if (!snapshot.exists()) {
-            $("#loader-product-m").css("display", "none");
-            $("#all-data-div-product-m").css("display", "none");
-            $("#loader-product-main-m").css("display", "none");
-            mydiv.innerHTML = "<p>No products found</p>";
-            return;
+    const paths = [
+      "Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products", // Components
+      "Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products"  // Tools
+    ];
+  
+    const promises = paths.map(path => firebase.database().ref(path).once("value"));
+  
+    Promise.all(promises)
+      .then(snapshots => {
+        snapshots.forEach(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            allProducts.push(childSnapshot.val());
+          });
+        });
+  
+        $("#loader-product").css("display", "none");
+        $("#loader-product-main").css("display", "none");
+  
+        const matchingProducts = allProducts.filter(p => 
+          p.title && p.title.toLowerCase().includes(searchVal)
+        );
+  
+        if (matchingProducts.length === 0) {
+          $("#not-found").css("display", "block");
+          $("#all-data-div-product").css("display", "none");
+          mydiv.innerHTML = "<p>No products found</p>";
+          return;
         }
   
-        snapshot.forEach(function(childSnapshot) {
-            var product = childSnapshot.val();
-            var title = product.title;
-            var price = product.price;
-            var discount = product.discount;
-            var thumbnail = product.thumbnail_url;
-            var key = product.key;
+        $("#not-found").css("display", "none");
+        $("#all-data-div-product").css("display", "flex");
+        mydiv.classList.add("grid-container");
   
-            var discPrice = price - discount;
+        matchingProducts.forEach(product => {
+          const discPrice = product.price - product.discount;
   
-            $("#loader-m").css("display", "none");
-            $(".main-div-m").css("display", "block");
-            $("#loader-product-m").css("display", "none");
-            $("#all-data-div-product-m").css("display", "flex");
-            $("#all-data-div-product-m").css("display", "flex");
+          const productHTML = `
+            <div style="cursor: pointer;" onClick="openProduct('${product.key}','${product.category}')" class="product-div-one-search fade-in">
+              <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
+                <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
+              </div>
+              <img style="border-radius: 10px;" src="${product.thumbnail_url}" height="130px" width="130px" alt="">
+              <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${product.title}</h6>
+              <div style="display: flex; align-items: center; justify-content: center;">
+                <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; font-weight: bold;">₹${discPrice}</h5>
+                <h5 class="original-price" style="margin-top: 10px; margin-left: 10px; margin-bottom: 0px; font-family: Sans-serif;">₹${product.price}</h5>
+              </div>
+              <button class="add-to-cart-btn"
+                data-key="${product.key}" 
+                data-title="${product.title}" 
+                data-price="${product.price}" 
+                data-discount="${product.discount}" 
+                data-thumbnail="${product.thumbnail_url}"
+                style="border-radius:5px; display: flex; height: 30px; margin: 10px auto 0; background-color: orangered; color: white;">
+                <h6 id="cart-text" style="margin-right: 5px;">Add To Cart</h6>
+                <div id="cart-loader" class="loader-dots" style="margin-left: 10px; margin-right: 10px; display: none;"></div>
+              </button>
+            </div>
+          `;
   
-            if (previousSearch != "") {
-                searchInput.value = previousSearch;
-            }
-
-        
-  
-            mydiv.classList.add('grid-container');
-  
-            if (title.trim().toLowerCase().includes(value.trim().toLowerCase())) {
-                var productHTML = `
-                    <div style="cursor: pointer;" onClick="openProduct('${key}')" class="product-div-one-search fade-in" style="background-color: white; border-radius: 5px; border: 0.2px solid grey;">
-                        <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
-                            <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
-                        </div>
-                        <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="130px" alt="">
-                        <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
-                        <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
-                            <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold; text-align: center;">₹${discPrice}</h5>
-                            <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: center;">₹${price}</h5>
-                        </div>
-                        <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
-                            <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
-                            
-                            <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
-                        </button>
-                    </div>
-                `;
-  
-                mydiv.innerHTML += productHTML;
-  
-                $("#not-found-m").css("display", "none");
-            } else {
-                if (mydiv.innerHTML == "") {
-                    $("#not-found-m").css("display", "block");
-                }
-            }
+          mydiv.innerHTML += productHTML;
         });
   
-        // Attach event listeners to "Add to Cart" buttons
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.stopPropagation(); // Prevent the click from triggering the product open
+        // Add to cart functionality
+        document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+          button.addEventListener("click", function (event) {
+            event.stopPropagation();
   
-                // Check if user is logged in
-                var lc = localStorage.getItem("userislogin");
-                if (lc !== "true") {
-                    window.location.href = "login.html"; // Redirect to login page
-                    return;
-                }
+            const lc = localStorage.getItem("userislogin");
+            if (lc !== "true") {
+              window.location.href = "login.html";
+              return;
+            }
   
-                else{
-                  
-                var productKey = this.getAttribute('data-key');
-                var cTitle = this.getAttribute('data-title');
-                var price = this.getAttribute('data-price');
-                var discount = this.getAttribute('data-discount');
-                var thumbnail_url = this.getAttribute('data-thumbnail');
-                var quantity = 1; // Assuming default quantity is 1
-                var number = localStorage.getItem("number");
+            const productKey = this.getAttribute("data-key");
+            const cTitle = this.getAttribute("data-title");
+            const price = this.getAttribute("data-price");
+            const discount = this.getAttribute("data-discount");
+            const thumbnail_url = this.getAttribute("data-thumbnail");
+            const number = localStorage.getItem("number");
+            const quantity = 1;
   
-                var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+            const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
   
-                // Check if product is already in cart
-                query.once("value", snapshot => {
-                    if (snapshot.exists()) {
-                        myFunction("Already in cart");
-                    } else {
-                        $("#cart-text", this).css("display", "none");
-                        $("#cart-i", this).css("display", "none");
-                        $("#cart-loader", this).css("display", "flex");
+            cartRef.once("value", snapshot => {
+              if (snapshot.exists()) {
+                myFunction("Already in cart");
+              } else {
+                $(this).find("#cart-text").hide();
+                $(this).find("#cart-loader").show();
   
-                        query.update({
-                            title: cTitle,
-                            description: '',
-                            key: productKey,
-                            quantity: quantity,
-                            price: price,
-                            discount: discount,
-                            thumbnail_url: thumbnail_url,
-                        }, function(error) {
-                            $("#cart-text", this).css("display", "flex");
-                            $("#cart-i", this).css("display", "flex");
-                            $("#cart-loader", this).css("display", "none");
+                cartRef.set({
+                  title: cTitle,
+                  description: "",
+                  key: productKey,
+                  quantity: quantity,
+                  price: price,
+                  discount: discount,
+                  thumbnail_url: thumbnail_url
+                }, error => {
+                  $(this).find("#cart-text").show();
+                  $(this).find("#cart-loader").hide();
   
-                            if (error) {
-                                console.error('Error adding to cart: ', error);
-                                myFunction("Error adding to cart");
-                            } else {
-                                myFunction("Added to cart");
-                            }
-                        }.bind(this));
-                    }
+                  if (error) {
+                    console.error("Error adding to cart:", error);
+                    myFunction("Error adding to cart");
+                  } else {
+                    myFunction("Added to cart");
+                  }
                 });
-                }
-  
+              }
             });
+          });
         });
-    }).catch(function(error) {
-        console.error('Error fetching products: ', error);
+  
+      })
+      .catch(error => {
+        console.error("Error fetching products:", error);
         $("#loader-product").css("display", "none");
         $("#all-data-div-product").css("display", "none");
         $("#loader-product-main").css("display", "none");
         mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
-    });
+      });
+  }
+
+
+  function loadSearchProductMobile(value) {
+    const mydiv = document.getElementById("items-div-m");
+    mydiv.innerHTML = "";
+  
+    $("#loader-product-m").css("display", "flex");
+    mydiv.classList.remove("grid-container");
+  
+    const searchVal = value.trim().toLowerCase();
+    const allProducts = [];
+  
+    const paths = [
+      "Ecommerce/Categories/-N6l8PzgYxniHSJZK5-0/products", // Components
+      "Ecommerce/Categories/-N8lvCT5lnYJNUcWWlaB/products"  // Tools
+    ];
+  
+    const promises = paths.map(path => firebase.database().ref(path).once("value"));
+  
+    Promise.all(promises)
+      .then(snapshots => {
+        snapshots.forEach(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            allProducts.push(childSnapshot.val());
+          });
+        });
+  
+        $("#loader-product-m").css("display", "none");
+        $("#loader-product-main-m").css("display", "none");
+  
+        const matchingProducts = allProducts.filter(p =>
+          p.title && p.title.toLowerCase().includes(searchVal)
+        );
+  
+        if (matchingProducts.length === 0) {
+          $("#not-found-m").css("display", "block");
+          $("#all-data-div-product-m").css("display", "none");
+          mydiv.innerHTML = "<p>No products found</p>";
+          return;
+        }
+  
+        $("#not-found-m").css("display", "none");
+        $("#all-data-div-product-m").css("display", "flex");
+        mydiv.classList.add("grid-container");
+  
+        matchingProducts.slice(0, 100).forEach(product => {
+          const discPrice = product.price - product.discount;
+  
+          const productHTML = `
+            <div style="cursor: pointer;" onClick="openProduct('${product.key}','${product.category}')" class="product-div-one-search fade-in">
+                <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
+                    <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
+                </div>
+                <img style="border-radius: 10px;" src="${product.thumbnail_url}" height="130px" width="130px" alt="">
+                <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${product.title}</h6>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; font-weight: bold;">₹${discPrice}</h5>
+                    <h5 class="original-price" style="margin-top: 10px; margin-left: 10px; margin-bottom: 0px; font-family: Sans-serif;">₹${product.price}</h5>
+                </div>
+                <button class="add-to-cart-btn"
+                  data-key="${product.key}" 
+                  data-title="${product.title}" 
+                  data-price="${product.price}" 
+                  data-discount="${product.discount}" 
+                  data-thumbnail="${product.thumbnail_url}"
+                  style="border-radius:5px; display: flex; height: 30px; margin: 10px auto 0; background-color: orangered; color: white;">
+                  <h6 id="cart-text" style="margin-right: 5px;">Add To Cart</h6>
+                  <div id="cart-loader" class="loader-dots" style="margin-left: 10px; margin-right: 10px; display: none;"></div>
+                </button>
+            </div>
+          `;
+  
+          mydiv.innerHTML += productHTML;
+        });
+  
+        // Add to cart functionality
+        document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+          button.addEventListener("click", function (event) {
+            event.stopPropagation();
+  
+            const lc = localStorage.getItem("userislogin");
+            if (lc !== "true") {
+              window.location.href = "login.html";
+              return;
+            }
+  
+            const productKey = this.getAttribute("data-key");
+            const cTitle = this.getAttribute("data-title");
+            const price = this.getAttribute("data-price");
+            const discount = this.getAttribute("data-discount");
+            const thumbnail_url = this.getAttribute("data-thumbnail");
+            const number = localStorage.getItem("number");
+            const quantity = 1;
+  
+            const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+  
+            cartRef.once("value", snapshot => {
+              if (snapshot.exists()) {
+                myFunction("Already in cart");
+              } else {
+                $(this).find("#cart-text").hide();
+                $(this).find("#cart-loader").show();
+  
+                cartRef.set({
+                  title: cTitle,
+                  description: "",
+                  key: productKey,
+                  quantity: quantity,
+                  price: price,
+                  discount: discount,
+                  thumbnail_url: thumbnail_url
+                }, error => {
+                  $(this).find("#cart-text").show();
+                  $(this).find("#cart-loader").hide();
+  
+                  if (error) {
+                    console.error("Error adding to cart:", error);
+                    myFunction("Error adding to cart");
+                  } else {
+                    myFunction("Added to cart");
+                  }
+                });
+              }
+            });
+          });
+        });
+  
+      })
+      .catch(error => {
+        console.error("Error fetching products:", error);
+        $("#loader-product-m").css("display", "none");
+        $("#all-data-div-product-m").css("display", "none");
+        $("#loader-product-main-m").css("display", "none");
+        mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
+      });
   }
   
-  
 
 
-function openProduct(key){
+function openProduct(key,category){
   localStorage.setItem("search-key", key);
+  localStorage.setItem("search-category", category);
   window.location.href = "productoverview.html";
 }
 
@@ -665,28 +692,25 @@ function openProduct(key){
 var searchedCount = 0;
 
 function loadMostSearchd() {
-  var query = firebase.database().ref("CircuitSource/top_searched_web");
-  query.once("value", function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-      var mydiv = document.getElementById("most-searched-div");
-
-      var title = childSnapshot.val().title;
-      searchedCount++;
-
-       mydiv.innerHTML += 
-       `
-          <div style="cursor: pointer;" onClick="searchText(\`` +
-        title +
-        `\`,)" class="suggestion-text">
-              <h5 class="" style="margin: 0px; font-weight: normal; ">${searchedCount}. ${title}</h5>
-              <div style="width: auto;"></div>
-              <i class="fa-solid fa-arrow-right" style="float: right; right: 10px;"></i>
+    var query = firebase.database().ref("CircuitSource/top_searched_web");
+    query.once("value", function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+        var mydiv = document.getElementById("most-searched-div");
+  
+        var title = childSnapshot.val().title;
+        searchedCount++;
+  
+        mydiv.innerHTML += 
+        `
+          <div style="cursor: pointer; display: flex; align-items: center; justify-content: space-between; width: 70%;" 
+               onClick="searchText(\`${title}\`)" class="suggestion-text">
+              <h5 style="margin: 0px; font-weight: normal; text-align: left;">${searchedCount}. ${title}</h5>
+              <i class="fa-solid fa-arrow-right" style="margin-left: 10px;"></i>
           </div>
-       `;
-
+        `;
+      });
     });
-  });
-}
+  }
 
 
 var cCount = 0;
@@ -834,30 +858,29 @@ function loadSuggestionsMobile() {
   
   }
 
+   // Get the dropdown elements
+const dropdownButton = document.getElementById('login-done');
+const dropdownContent = document.getElementById('profile');
+
+
+
+
+// Function to show dropdown
+const showDropdown = () => {
+    dropdownContent.style.display = 'block';
+};
+
+// Function to hide dropdown
+const hideDropdown = () => {
+    dropdownContent.style.display = 'none';
+};
+
+// Event listeners for hover
+dropdownButton.addEventListener('mouseover', showDropdown);
+
+dropdownContent.addEventListener('mouseover', showDropdown);
+dropdownContent.addEventListener('mouseout', hideDropdown);
   
- // Get the dropdown elements
- const dropdownButton = document.getElementById('login-done');
- const dropdownContent = document.getElementById('profile');
- 
- 
- 
- 
- // Function to show dropdown
- const showDropdown = () => {
-     dropdownContent.style.display = 'block';
- };
- 
- // Function to hide dropdown
- const hideDropdown = () => {
-     dropdownContent.style.display = 'none';
- };
- 
- // Event listeners for hover
- dropdownButton.addEventListener('mouseover', showDropdown);
- 
- dropdownContent.addEventListener('mouseover', showDropdown);
- dropdownContent.addEventListener('mouseout', hideDropdown);
-   
 
 
  $("#search").click(function() {

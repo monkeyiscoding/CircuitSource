@@ -15,14 +15,14 @@ const firebaseConfig = {
       loadImagesMobile();
       loadDataMobile();
       loadPointsMobile();
-     getKeyWordsAndShowRelatedMobile();
+     
   }
 
   if(!isMobileScreen()){
     loadImages();
     loadPoints();
     loadData();
-  getKeyWordsAndShowRelated();
+  
   }
 
   checkLogin();
@@ -100,9 +100,17 @@ function checkLogin(){
 function loadImages() {
     var mydiv = document.getElementById("all-images");
     var mytitle = document.getElementById("title");
-   var key = localStorage.getItem("search-key")
+   var key = localStorage.getItem("search-key");
+   var category = localStorage.getItem("search-category");
   //mydiv.classList.remove('grid-container');
-  var query = firebase.database().ref("CircuitSource/all_products/"+key+"/Images");
+  var catKey = "";
+  if(category.toLowerCase().includes("tools")){
+    catKey = "-N8lvCT5lnYJNUcWWlaB";
+  }
+  else{
+    catKey = "-N6l8PzgYxniHSJZK5-0";
+  }
+  var query = firebase.database().ref("Ecommerce/Categories/"+catKey+"/products/"+key+"/Images");
   query.once("value", function (snapshot) {
 
 
@@ -131,7 +139,16 @@ function loadImagesMobile() {
   var mytitle = document.getElementById("title-m");
  var key = localStorage.getItem("search-key")
 //mydiv.classList.remove('grid-container');
-var query = firebase.database().ref("CircuitSource/all_products/"+key+"/Images");
+var category = localStorage.getItem("search-category");
+//mydiv.classList.remove('grid-container');
+var catKey = "";
+if(category.toLowerCase().includes("tools")){
+  catKey = "-N8lvCT5lnYJNUcWWlaB";
+}
+else{
+  catKey = "-N6l8PzgYxniHSJZK5-0";
+}
+var query = firebase.database().ref("Ecommerce/Categories/"+catKey+"/products/"+key+"/Images");
 query.once("value", function (snapshot) {
 
 
@@ -164,8 +181,18 @@ function setImage(url){
 function loadPoints() {
     var mydiv = document.getElementById("points-div");
    var key = localStorage.getItem("search-key")
+   var key = localStorage.getItem("search-key")
   //mydiv.classList.remove('grid-container');
-  var query = firebase.database().ref("CircuitSource/all_products/"+key+"/details");
+  var category = localStorage.getItem("search-category");
+  //mydiv.classList.remove('grid-container');
+  var catKey = "";
+  if(category.toLowerCase().includes("tools")){
+    catKey = "-N8lvCT5lnYJNUcWWlaB";
+  }
+  else{
+    catKey = "-N6l8PzgYxniHSJZK5-0";
+  }
+  var query = firebase.database().ref("Ecommerce/Categories/"+catKey+"/products/"+key+"/details");
   query.once("value", function (snapshot) {
 
 
@@ -192,30 +219,52 @@ function loadPoints() {
 
 function loadPointsMobile() {
   var mydiv = document.getElementById("points-div-m");
- var key = localStorage.getItem("search-key")
-//mydiv.classList.remove('grid-container');
-var query = firebase.database().ref("CircuitSource/all_products/"+key+"/details");
-query.once("value", function (snapshot) {
+  var key = localStorage.getItem("search-key");
+  var category = localStorage.getItem("search-category");
 
+  var catKey = category.toLowerCase().includes("tools")
+    ? "-N8lvCT5lnYJNUcWWlaB"
+    : "-N6l8PzgYxniHSJZK5-0";
 
-  snapshot.forEach(function (childSnapshot) {
+  var query = firebase.database().ref("Ecommerce/Categories/" + catKey + "/products/" + key + "/details");
 
-      
-   var title = childSnapshot.val().title;
+  query.once("value", function (snapshot) {
+    const details = [];
+    
+    snapshot.forEach(function (childSnapshot) {
+      details.push(childSnapshot.val().title);
+    });
 
-   // mydiv.classList.add('grid-container');
+    mydiv.innerHTML = ""; // Clear old content
 
-   mydiv.innerHTML  += `  <h5 style="font-weight: normal; margin-top: 0px; margin-bottom: 10px;"> <i class="fa-solid fa-check-to-slot" style="margin-right: 5px;" ></i>${title}</h5>
-                    
-                     
-                `
-  
+    if (details.length === 1 && details[0].trim() === ".") {
+      // Default points if only "." exists
+      const defaultPoints = [
+        "Verified Product",
+        "Tested Quality",
+        "Secure Packaging",
+        "Same Day Dispatch",
+        "7 Days Return Policy"
+      ];
 
+      defaultPoints.forEach(point => {
+        mydiv.innerHTML += `
+          <h5 style="font-weight: normal; margin-top: 0px; margin-bottom: 10px;">
+            <i class="fa-solid fa-check-to-slot" style="margin-right: 5px;"></i>${point}
+          </h5>
+        `;
+      });
+    } else {
+      // Show actual details
+      details.forEach(title => {
+        mydiv.innerHTML += `
+          <h5 style="font-weight: normal; margin-top: 0px; margin-bottom: 10px;">
+            <i class="fa-solid fa-check-to-slot" style="margin-right: 5px;"></i>${title}
+          </h5>
+        `;
+      });
+    }
   });
-});
-
-
-
 }
 
 var cTitle = "";
@@ -236,9 +285,23 @@ function loadData(){
 
     var key = localStorage.getItem("search-key")
 
-    var query = firebase.database().ref("CircuitSource/all_products/"+key);
+    var category = localStorage.getItem("search-category");
+    //mydiv.classList.remove('grid-container');
+    var catKey = "";
+    if(category.toLowerCase().includes("tools")){
+      catKey = "-N8lvCT5lnYJNUcWWlaB";
+    }
+    else{
+      catKey = "-N6l8PzgYxniHSJZK5-0";
+    }
+    var query = firebase.database().ref("Ecommerce/Categories/"+catKey+"/products/"+key+"");
+    console.log("Ecommerce/Categories/"+catKey+"/products/"+key+"");
   query.once("value", function (snapshot) {
 
+    if (!snapshot.exists()) {
+      console.error("Product not found!");
+      return;
+    }
     var title = snapshot.val().title;
     cTitle = title;
     des = snapshot.val().description;
@@ -269,7 +332,7 @@ function loadData(){
 
     $("#loader-product-main").css("display", "none")
     $("#main").css("display", "block")
-
+    getKeyWordsAndShowRelated(title);
   });
 }
 
@@ -284,7 +347,16 @@ function loadDataMobile(){
 
   var key = localStorage.getItem("search-key")
 
-  var query = firebase.database().ref("CircuitSource/all_products/"+key);
+  var category = localStorage.getItem("search-category");
+  //mydiv.classList.remove('grid-container');
+  var catKey = "";
+  if(category.toLowerCase().includes("tools")){
+    catKey = "-N8lvCT5lnYJNUcWWlaB";
+  }
+  else{
+    catKey = "-N6l8PzgYxniHSJZK5-0";
+  }
+  var query = firebase.database().ref("Ecommerce/Categories/"+catKey+"/products/"+key+"");
 query.once("value", function (snapshot) {
 
   var title = snapshot.val().title;
@@ -319,6 +391,7 @@ query.once("value", function (snapshot) {
   $("#main-m").css("display", "block")
 
   $(".main-div-m").css("display", "block")
+  getKeyWordsAndShowRelatedMobile(title);
 
 });
 }
@@ -385,90 +458,93 @@ $("#search-m").click(function() {
   
 
 
-  async function getKeyWordsAndShowRelated(cTitle){
-    var words = [];
-    var mydiv = document.getElementById("points-div");
-    var key = localStorage.getItem("search-key");
-  
-    // Get keywords
-    var query1 = firebase.database().ref("CircuitSource/all_products/"+key+"/keywords");
-    await query1.once("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var title = childSnapshot.val().title;
-        words.push(title);
-      });
-    });
-  
-    mydiv = document.getElementById("items-div");
-    mydiv.innerHTML= "";
-    $("#loader-product").css("display","flex");
-    mydiv.classList.remove('grid-container');
-  
-    var query = firebase.database().ref("CircuitSource/all_products");
-    query.once("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var product = childSnapshot.val();
-        var title = product.title;
-        var price = product.price;
-        var discount = product.discount;
-        var thumbnail = product.thumbnail_url;
-        var key = product.key;
-  
-        var discPrice = price - discount;
-  
-        $("#loader-product").css("display","none");
-        $("#items-div").css("display","flex");
-        $("#loader-product-main").css("display","none");
-  
-        words.forEach(word => {
-          if (title.trim().toLowerCase().includes(word.trim().toLowerCase()) && title != cTitle ) {
-            var productHTML = `
-              <div style="cursor: pointer; width: 180px;" onClick="openProduct('${key}')" class="product-div-one-search fade-in" style="background-color: white; border-radius: 5px; border: 0.2px solid grey;">
-                <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
-                  <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
-                </div>
-                <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="130px" alt="">
-                <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
-                <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
-                  <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold; text-align: center;">₹${discPrice}</h5>
-                  <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: center;">₹${price}</h5>
-                </div>
-                <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
-                  <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
-                  <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
-                </button>
+    async function getKeyWordsAndShowRelated(cTitle) {
+      let mydiv = document.getElementById("items-div");
+      const key = localStorage.getItem("search-key");
+      const category = localStorage.getItem("search-category");
+    
+      const catKey = category.toLowerCase().includes("tools")
+        ? "-N8lvCT5lnYJNUcWWlaB"
+        : "-N6l8PzgYxniHSJZK5-0";
+    
+      const words = cTitle
+        .split(" ")
+        .map(w => w.trim().toLowerCase())
+        .filter(w => w.length > 2); // ignore short/common words
+    
+      mydiv.innerHTML = "";
+      $("#loader-product").css("display", "flex");
+      mydiv.classList.remove("grid-container");
+    
+      const query = firebase.database().ref("Ecommerce/Categories/" + catKey + "/products");
+    
+      query.once("value", function (snapshot) {
+        $("#loader-product").css("display", "none");
+        $("#items-div").css("display", "flex");
+        $("#loader-product-main").css("display", "none");
+    
+        snapshot.forEach(function (childSnapshot) {
+          const product = childSnapshot.val();
+    
+          // Skip the same product
+          if (product.title === cTitle) return;
+    
+          const titleLower = product.title.toLowerCase();
+    
+          const matched = words.some(word => titleLower.includes(word));
+          if (!matched) return;
+    
+          const discPrice = product.price - product.discount;
+    
+          const productHTML = `
+            <div style="cursor: pointer; width: 180px;" onClick="openProduct('${product.key}')" class="product-div-one-search fade-in" style="background-color: white; border-radius: 5px; border: 0.2px solid grey;">
+              <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
+                <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
               </div>
-            `;
-  
-            mydiv.innerHTML += productHTML;
-          }
+              <img style="border-radius: 10px;" src="${product.thumbnail_url}" height="130px" width="130px" alt="">
+              <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${product.title}</h6>
+              <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
+                <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold;">₹${discPrice}</h5>
+                <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal;">₹${product.price}</h5>
+              </div>
+              <button class="add-to-cart-btn" 
+                      data-key="${product.key}" 
+                      data-title="${product.title}" 
+                      data-price="${product.price}" 
+                      data-discount="${product.discount}" 
+                      data-thumbnail="${product.thumbnail_url}" 
+                      style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
+                <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
+                <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
+              </button>
+            </div>
+          `;
+    
+          mydiv.innerHTML += productHTML;
         });
-      });
-  
-      // Attach event listeners to "Add to Cart" buttons
-      document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-        button.addEventListener('click', function(event) {
-          event.stopPropagation(); // Prevent the click from triggering the product open
-          var lc = localStorage.getItem("userislogin");
-          if (lc !== "true") {
-            window.location.href = "login.html";
-            return;
-          }
-
-          else{
-
-            var productKey = this.getAttribute('data-key');
-            var cTitle = this.getAttribute('data-title');
-            var price = this.getAttribute('data-price');
-            var discount = this.getAttribute('data-discount');
-            var thumbnail_url = this.getAttribute('data-thumbnail');
-            var quantity = 1; // Assuming default quantity is 1
-            var number = localStorage.getItem("number");
     
-            var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+        // Attach cart logic after rendering
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+          button.addEventListener('click', function (event) {
+            event.stopPropagation();
     
-            // Check if product is already in cart
-            query.once("value", snapshot => {
+            const lc = localStorage.getItem("userislogin");
+            if (lc !== "true") {
+              window.location.href = "login.html";
+              return;
+            }
+    
+            const productKey = this.getAttribute('data-key');
+            const cTitle = this.getAttribute('data-title');
+            const price = this.getAttribute('data-price');
+            const discount = this.getAttribute('data-discount');
+            const thumbnail_url = this.getAttribute('data-thumbnail');
+            const quantity = 1;
+            const number = localStorage.getItem("number");
+    
+            const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+    
+            cartRef.once("value", snapshot => {
               if (snapshot.exists()) {
                 myFunction("Already in cart");
               } else {
@@ -476,7 +552,7 @@ $("#search-m").click(function() {
                 $("#cart-i", this).css("display", "none");
                 $("#cart-loader", this).css("display", "flex");
     
-                query.update({
+                cartRef.update({
                   title: cTitle,
                   description: '',
                   key: productKey,
@@ -484,7 +560,7 @@ $("#search-m").click(function() {
                   price: price,
                   discount: discount,
                   thumbnail_url: thumbnail_url,
-                }, function(error) {
+                }, function (error) {
                   $("#cart-text", this).css("display", "flex");
                   $("#cart-i", this).css("display", "flex");
                   $("#cart-loader", this).css("display", "none");
@@ -498,111 +574,115 @@ $("#search-m").click(function() {
                 }.bind(this));
               }
             });
-          }
-  
+          });
         });
+      }).catch(function (error) {
+        console.error('Error fetching products: ', error);
+        $("#loader-product").css("display", "none");
+        $("#items-div").css("display", "none");
+        $("#loader-product-main").css("display", "none");
+        mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
       });
-    }).catch(function(error) {
-      console.error('Error fetching products: ', error);
-      $("#loader-product").css("display", "none");
-      $("#items-div").css("display", "none");
-      $("#loader-product-main").css("display", "none");
-      mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
-    });
-  }
-  
-  async function getKeyWordsAndShowRelatedMobile(cTitle){
-    var words = [];
-    var mydiv = document.getElementById("points-div-m");
-    var key = localStorage.getItem("search-key");
-  
-    // Get keywords
-    var query1 = firebase.database().ref("CircuitSource/all_products/"+key+"/keywords");
-    await query1.once("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var title = childSnapshot.val().title;
-        words.push(title);
-      });
-    });
-  
-    mydiv = document.getElementById("items-div-m");
-    mydiv.innerHTML= "";
-    $("#loader-product").css("display","flex");
-    mydiv.classList.remove('grid-container');
-  
-    var query = firebase.database().ref("CircuitSource/all_products");
-    query.once("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var product = childSnapshot.val();
-        var title = product.title;
-        var price = product.price;
-        var discount = product.discount;
-        var thumbnail = product.thumbnail_url;
-        var key = product.key;
-  
-        var discPrice = price - discount;
-  
-        $("#loader-product-m").css("display","none");
-        $("#items-div-m").css("display","flex");
-        $("#loader-m").css("display","none");
-  
-        words.forEach(word => {
-          if (title.trim().toLowerCase().includes(word.trim().toLowerCase()) && title != cTitle ) {
-            var productHTML = `
-              <div style="cursor: pointer; width: 180px; margin-right: 10px;" onClick="openProduct('${key}')" class="product-div-one-search fade-in" style="background-color: white; border-radius: 5px; border: 0.2px solid grey;">
-                <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
-                  <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
-                </div>
-                <img style="border-radius: 10px;" src="${thumbnail}" height="130px" width="130px" alt="">
-                <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${title}</h6>
-                <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
-                  <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; margin-right: 0px; font-weight: bold; text-align: center;">₹${discPrice}</h5>
-                  <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal; text-align: center;">₹${price}</h5>
-                </div>
-                <button class="add-to-cart-btn" data-key="${key}" data-title="${title}" data-price="${price}" data-discount="${discount}" data-thumbnail="${thumbnail}" style="border-radius:5px; display: flex; height: 30px; margin-left: auto; margin-right: auto; background-color: orangered; color: white;">
-                  <h6 id="cart-text" style="display: flex; margin-right: 5px;">Add To Cart</h6>
-                  <div style="margin-left: 10px; margin-right: 10px; display: none;" id="cart-loader" class="loader-dots"></div>
-                </button>
+    }
+    async function getKeyWordsAndShowRelatedMobile(cTitle) {
+      const mydiv = document.getElementById("items-div-m");
+      const key = localStorage.getItem("search-key");
+      const category = localStorage.getItem("search-category");
+    
+      let catKey = category.toLowerCase().includes("tools")
+        ? "-N8lvCT5lnYJNUcWWlaB"
+        : "-N6l8PzgYxniHSJZK5-0";
+    
+      const words = cTitle.split(" ")
+        .map(w => w.trim().toLowerCase())
+        .filter(w => w.length > 2);
+    
+      mydiv.innerHTML = "";
+      $("#loader-product-m").css("display", "flex");
+      $("#items-div-m").css("display", "none");
+    
+      const query = firebase.database().ref("Ecommerce/Categories/" + catKey + "/products");
+    
+      query.once("value", function (snapshot) {
+        $("#loader-product-m").css("display", "none");
+        $("#items-div-m").css("display", "flex");
+    
+        let hasResults = false;
+        let displayedCount = 0;
+        const maxItems = 30;
+    
+        snapshot.forEach(function (childSnapshot) {
+          if (displayedCount >= maxItems) return;
+    
+          const product = childSnapshot.val();
+          if (!product.title || product.title === cTitle) return;
+    
+          const titleLower = product.title.toLowerCase();
+          const matched = words.some(word => titleLower.includes(word));
+          if (!matched) return;
+    
+          const discPrice = product.price - product.discount;
+          hasResults = true;
+          displayedCount++;
+    
+          mydiv.innerHTML += `
+            <div style="cursor: pointer; width: 180px; margin-right: 10px;" 
+                 onClick="openProduct('${product.key}')" 
+                 class="product-div-one-search fade-in">
+              <div style="margin-right: auto; background-color: white; box-shadow: 0px 0px 5px rgb(213, 213, 213); border-radius: 100px; border: 0.5px solid orangered; width: 30px; height: 30px; align-items: center; text-align: center; justify-content: center; color: #000; margin-left: 10px;">
+                <i class="fa-regular fa-heart" style="margin-top:7px;"></i>
               </div>
-            `;
-  
-            mydiv.innerHTML += productHTML;
-          }
+              <img style="border-radius: 10px;" src="${product.thumbnail_url}" height="130px" width="130px" alt="">
+              <h6 style="height: 50px; margin-top: 20px; font-family: Sans-serif; margin-left: 15px; margin-right: 15px; font-weight: normal; text-align: center; margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; max-lines: 3; white-space: normal;">${product.title}</h6>
+              <div style="display: flex; align-items: center; text-align: center; width: 100%; justify-content: center;">
+                <h5 style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 15px; font-weight: bold;">₹${discPrice}</h5>
+                <h5 class="original-price" style="margin-top: 10px; margin-bottom: 0px; font-family: Sans-serif; margin-left: 5px; margin-right: 15px; font-weight: normal;">₹${product.price}</h5>
+              </div>
+              <button class="add-to-cart-btn-m" 
+                      data-key="${product.key}" 
+                      data-title="${product.title}" 
+                      data-price="${product.price}" 
+                      data-discount="${product.discount}" 
+                      data-thumbnail="${product.thumbnail_url}" 
+                      style="border-radius:5px; display: flex; height: 30px; margin: 10px auto 0; background-color: orangered; color: white; align-items: center; justify-content: center;">
+                <h6 style="margin-right: 5px;">Add To Cart</h6>
+                <div class="loader-dots" style="margin-left: 10px; margin-right: 10px; display: none;"></div>
+              </button>
+            </div>
+          `;
         });
-      });
-  
-      // Attach event listeners to "Add to Cart" buttons
-      document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-        button.addEventListener('click', function(event) {
-          event.stopPropagation(); // Prevent the click from triggering the product open
-          var lc = localStorage.getItem("userislogin");
-          if (lc !== "true") {
-            window.location.href = "login.html";
-            return;
-          }
-
-          else{
-
-            var productKey = this.getAttribute('data-key');
-            var cTitle = this.getAttribute('data-title');
-            var price = this.getAttribute('data-price');
-            var discount = this.getAttribute('data-discount');
-            var thumbnail_url = this.getAttribute('data-thumbnail');
-            var quantity = 1; // Assuming default quantity is 1
-            var number = localStorage.getItem("number");
     
-            var query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+        if (!hasResults) {
+          mydiv.innerHTML = `<p style="padding: 10px;">No related products found.</p>`;
+        }
     
-            // Check if product is already in cart
-            query.once("value", snapshot => {
+        document.querySelectorAll('.add-to-cart-btn-m').forEach(button => {
+          button.addEventListener('click', function (event) {
+            event.stopPropagation();
+    
+            const lc = localStorage.getItem("userislogin");
+            if (lc !== "true") {
+              window.location.href = "login.html";
+              return;
+            }
+    
+            const productKey = this.getAttribute("data-key");
+            const cTitle = this.getAttribute("data-title");
+            const price = this.getAttribute("data-price");
+            const discount = this.getAttribute("data-discount");
+            const thumbnail_url = this.getAttribute("data-thumbnail");
+            const number = localStorage.getItem("number");
+            const quantity = 1;
+    
+            const cartRef = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart/" + productKey);
+    
+            cartRef.once("value", snapshot => {
               if (snapshot.exists()) {
                 myFunction("Already in cart");
               } else {
-                $("#cart-text-m", this).css("display", "none");
-                $("#cart-i-m", this).css("display", "none");
-                $("#cart-loader-m", this).css("display", "flex");
+                $(this).find(".loader-dots").css("display", "flex");
     
-                query.update({
+                cartRef.update({
                   title: cTitle,
                   description: '',
                   key: productKey,
@@ -610,33 +690,27 @@ $("#search-m").click(function() {
                   price: price,
                   discount: discount,
                   thumbnail_url: thumbnail_url,
-                }, function(error) {
-                  $("#cart-text-m", this).css("display", "flex");
-                  $("#cart-i-m", this).css("display", "flex");
-                  $("#cart-loader-m", this).css("display", "none");
-    
+                }, (error) => {
+                  $(this).find(".loader-dots").css("display", "none");
                   if (error) {
                     console.error('Error adding to cart: ', error);
                     myFunction("Error adding to cart");
                   } else {
                     myFunction("Added to cart");
                   }
-                }.bind(this));
+                });
               }
             });
-          }
-  
+          });
         });
+      }).catch(function (error) {
+        console.error('Error fetching products:', error);
+        $("#loader-product-m").css("display", "none");
+        $("#items-div-m").css("display", "none");
+        mydiv.innerHTML = "<p>Error loading related products. Please try again later.</p>";
       });
-    }).catch(function(error) {
-      console.error('Error fetching products: ', error);
-      $("#loader-product-m").css("display", "none");
-      $("#items-div-m").css("display", "none");
-      $("#loader-m").css("display", "none");
-      mydiv.innerHTML = "<p>Error loading products. Please try again later.</p>";
-    });
-  }
-
+    }
+    
   $("#add-to-cart").click(function() {
     var lc = localStorage.getItem("userislogin");
 
