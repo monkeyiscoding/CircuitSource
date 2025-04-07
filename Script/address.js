@@ -63,14 +63,14 @@ function loardCartCount(){
 
 
   function loadDefaultAddress(){
-    var number = localStorage.getItem("number");
-  var query = firebase.database().ref("Users/"+number)
+  var number = localStorage.getItem("number");
+  var query = firebase.database().ref("Users/"+number+"/default_location/key")
   
   query.on("value", function(snapshot) {
   
     
-      var m = snapshot.val().default_location;
-     // myFunction(m);
+      var m = snapshot.val();
+      myFunction(m);
       loadAllAddress(m.toString());
 
   })
@@ -79,7 +79,7 @@ function loardCartCount(){
 var count = 0;
 function loadAllAddress(key) {
     var count = 0;
-    var number = localStorage.getItem("number");
+    var number =localStorage.getItem("number");
     var query = firebase.database().ref("Users/" + number + "/location");
 
     query.once("value", function(snapshot) {
@@ -138,7 +138,7 @@ function loadAllAddress(key) {
             addressHTML += `
                     </div>
                     <h5 style="margin-left: 10px; font-weight: normal;">${name}, ${address}, ${pin}</h5>
-                    <h5 style="margin-left: 10px; font-weight: normal;">Mobile - ${mobileNumber}</h5>
+                    <h5 style="margin-left: 10px; font-weight: normal;">Mobile: ${mobileNumber}</h5>
                 </div>
             `;
 
@@ -150,7 +150,7 @@ function loadAllAddress(key) {
         useButtons.forEach(function(button) {
             button.addEventListener('click', function() {
                 var adKey = this.getAttribute('data-key');
-                firebase.database().ref("Users/" + number + "/default_location").set(adKey)
+                firebase.database().ref("Users/" + number + "/default_location/key").set(adKey)
                 .then(function() {
                     myFunction('Primary address updated successfully');
                     loadAllAddress(adKey); // Refresh the address list to update the UI
@@ -194,12 +194,11 @@ function openDialog() {
 
   
     query2.update({
-        full_name: fullName,
-        address: addressLine,
+        location: addressLine+", "+landmark+", "+state+", "+city+", "+pincode,
         landmark: landmark,
         state: state,
         city: city,
-        pincode: pincode,
+        pin_code: pincode,
         key: key,
         mobileNumber: mobileNumber,
     }, function (error){
