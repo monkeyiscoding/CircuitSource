@@ -10,7 +10,12 @@ const firebaseConfig = {
   };
   
   firebase.initializeApp(firebaseConfig);
-
+  localStorage.setItem("recent-search","");
+  localStorage.setItem("number","+911111111111");
+  localStorage.setItem("userislogin","true");
+  localStorage.setItem("email","as8822977@gmail.com");
+  localStorage.setItem("username","Ayush Soni");
+  
 
 checkLogin();
 
@@ -52,7 +57,7 @@ function loardCartCount(){
       $("#login-pending").css("display","none");
      
       
-      checkDevice(deviceId);
+      //checkDevice(deviceId);
     }
   
   
@@ -64,6 +69,7 @@ function loardCartCount(){
 
   function loadDefaultAddress(){
   var number = localStorage.getItem("number");
+  myFunction(number);
   var query = firebase.database().ref("Users/"+number+"/default_location/key")
   
   query.on("value", function(snapshot) {

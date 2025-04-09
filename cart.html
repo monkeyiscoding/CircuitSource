@@ -189,7 +189,7 @@
         </div>
         <hr style="border: 1px dashed rgb(223, 222, 222);">
 
-        <button style="background-color: orangered; width: 100%; color: white; margin-top: 10px; box-shadow: 0px 0px 10px rgb(220, 219, 219);">Checkout</button>
+        <button onclick="openOrderDialog()" style="background-color: orangered; width: 100%; color: white; margin-top: 10px; box-shadow: 0px 0px 10px rgb(220, 219, 219);">Checkout</button>
         <div class="overlay" id="overlay">
             <div class="dialog">
               <h2>Enter Address Details</h2>
@@ -398,7 +398,7 @@
   
 
     <div id="bottomSheetBack" style="height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.3); position: absolute; top: 0px; display: none;">
- <div class="bottomSheet" id="bottomSheet" style="width: 90%; background-color: white;">
+ <div class="bottomSheet" id="bottomSheet" style="width: 90%; background-color: white;border-radius: 0px;padding-top: 20px;height: 90vh;  overflow-y: auto;">
 
       <h4 style="color: gray; font-weight: 500;">Address Details</h4>
   
@@ -427,6 +427,12 @@
             <h5 id="total-discount-m">0.00</h5>
   
         </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0px; height: 30px;align-items: center;" >
+  
+          <h5 style="color: gray; font-weight: normal;">Delivery Amount</h5>
+          <h5 id="delivery-amount">0.00</h5>
+
+      </div>
   
         <div style="display: flex; justify-content: space-between; margin-bottom: 0px; height: 30px;align-items: center;" >
   
@@ -446,7 +452,32 @@
         </div>
         <hr style="border: 1px dashed rgb(223, 222, 222);">
   
-        <button style="background-color: orangered; width: 100%; color: white; margin-top: 10px; box-shadow: 0px 0px 10px rgb(220, 219, 219);">Continue</button>
+        <div class="delivery-options-box">
+          <h4>Select Delivery Type</h4>
+        
+          <div class="delivery-card-container">
+     <!-- Normal Delivery (default selected) -->
+<div class="delivery-card">
+  <input type="radio" name="deliveryType" id="normal" onclick="setDeliveryAmount('normal')" checked>
+  <label for="normal">
+    <h5>Normal Delivery</h5>
+    <p>Estimated delivery in 3-5 days</p>
+    <div class="price" id="normalPrice">₹0.00</div>
+  </label>
+</div>
+        
+            <!-- Premium Delivery -->
+            <div class="delivery-card">
+              <input type="radio" name="deliveryType" id="premium" onclick="setDeliveryAmount('premium')">
+              <label for="premium">
+                <h5>Premium Delivery</h5>
+                <p>Faster delivery within 2-4 days</p>
+                <div class="price" id="premiumPrice">₹0.00</div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <button onclick="openOrderDialog()" style="background-color: orangered; width: 100%; color: white; margin-top: 10px; box-shadow: 0px 0px 10px rgb(220, 219, 219);">Continue</button>
         <button id="closeBottomSheetNow" style="background-color: rgb(0, 0, 0); width: 100%; color: white; margin-top: 10px; box-shadow: 0px 0px 10px rgb(220, 219, 219);">Cancel</button>
         
           
@@ -515,11 +546,73 @@
 
 
 
+  <div id="order-dialog" style="display: none" class="dialog-overlay">
+    <div class="dialog-box">
+      <h2 class="dialog-title">Business & GST Details</h2>
+  
+      <div class="form-group">
+        <label>Business Name</label>
+        <input type="text" id="businessName" placeholder="Enter business name">
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half">
+          <label>State</label>
+          <input style="width: 80%;" type="text" id="stategst" placeholder="Enter state">
+        </div>
+        <div class="form-group half">
+          <label>Pincode</label>
+          <input style="width: 80%;" type="text" id="pincodegst" placeholder="Enter pincode">
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Enter email">
+      </div>
+  
+      <div class="gst-card">
+        <label class="gst-checkbox">
+          <input type="checkbox" id="hasGST" onchange="toggleGSTFields()">
+          <span>I have GST</span>
+        </label>
+      </div>
+      <div id="gst-fields" style="display: none;">
+        <div class="form-group">
+          <label>GSTIN</label>
+          <input type="text" id="gstin" placeholder="Enter GSTIN">
+        </div>
+        <div class="form-group">
+          <label>Street Address</label>
+          <input type="text" id="street" placeholder="Enter street address">
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" id="city" placeholder="Enter city">
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button class="order-btn" style="background-color: grey;" onclick="closeOrderDialog()">Cancel</button>
+        <button class="order-btn" onclick="placeOrder()">Place Order</button>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="success-dialog" class="dialog-overlay" style="display: none;">
+    <div class="dialog-box-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" width="80" style="margin-bottom: 20px;">
+      <h3>Your order has been confirmed!</h3>
+      <h6>You can track or view your order by clicking on below button, Thanks for you purchase</h6>
+      <button onclick="viewOrder()" class="order-btn">View Order</button>
+    </div>
+  </div>
 <!-- The actual snackbar -->
 <div id="snackbar">Some text some message..</div>
 
  
-  
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>

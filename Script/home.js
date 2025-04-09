@@ -11,7 +11,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 var dataRef = firebase.database().ref("All");
-localStorage.setItem("recent-search","");
+
 const storage = firebase.storage();
 const database = firebase.database();
 
@@ -177,7 +177,7 @@ loadComponentsMobile();
 
 function loardCartCount(){
     number = localStorage.getItem("number");
-    query = firebase.database().ref("CircuitSource/Users/" + number + "/my_cart");
+    query = firebase.database().ref("Users/" + number + "/my_cart");
     query.on("value", function(snapshot) { 
         var childrenCount = snapshot.numChildren();
         if(snapshot.exists){
@@ -216,7 +216,7 @@ function checkLogin(){
     $("#profile-m").css("display","flex");
     $("#login-button-m").css("display","none");
     
-    checkDevice(deviceId);
+    //vice(deviceId);
   }
 
 
@@ -651,7 +651,7 @@ function saveUserData() {
   else{
 if (imageInput.files.length > 0) {
     const file = imageInput.files[0];
-    const storageRef = storage.ref(`circuitsource/users/${phoneNumber}/profile_url`);
+    const storageRef = storage.ref(`Users/${phoneNumber}/profile_url`);
     const uploadTask = storageRef.put(file);
     closeDialog();
     document.getElementById('overlay-saving').style.display = 'flex';
@@ -665,7 +665,7 @@ if (imageInput.files.length > 0) {
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
           // Save to Realtime Database
-          database.ref(`CircuitSource/Users/${phoneNumber}`).set({
+          database.ref(`Users/${phoneNumber}`).set({
             profile_url: downloadURL,
             username: username,
             email: email
@@ -688,7 +688,7 @@ if (imageInput.files.length > 0) {
   } else {
       closeDialog();
     // If no new image was selected, just save the username and email
-    database.ref(`CircuitSource/Users/${phoneNumber}`).set({
+    database.ref(`Users/${phoneNumber}`).set({
       profile_url: profileImage,
       username: username,
       email: email
@@ -717,7 +717,7 @@ function loadImage(event) {
 
 function checkDevice(deviceId) {
   // Reference to the path in your Realtime Database
-  const deviceRef = database.ref(`CircuitSource/Users/${number}/login_devices/${deviceId}`);
+  const deviceRef = database.ref(`Users/${number}/login_devices/${deviceId}`);
 
   deviceRef.once('value')
     .then(snapshot => {

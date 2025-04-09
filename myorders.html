@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>My Cart</title>
+
+    <script
+      src="https://kit.fontawesome.com/3b2cf0bb84.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="[path/to/css/feathericon.min.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="Style/cart.css"/>
+    <link rel="stylesheet" href="Style/home.css"/>
+
+    <link rel="icon" href="Images/logo.png" type="image/png">
+
+    <style>
+        body{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+    <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px;">
+      <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
+    </div>
+    <h3 style="padding-left: 10px; font-family: Sans-serif; color: orangered;">CircuitSourse.in</h3>
+
+    <div style="width: 700px; height: 30px; border: 1px solid grey; border-radius: 100px; margin-left: 20px; display: flex; align-items: center; justify-content: center;">
+
+      <i class="fa-solid fa-search" style="color: grey; margin-right: 8px;"></i>
+      <h5 style="font-family: sans-serif; font-weight: normal; color: gray;">Search Here..</h5>
+    </div>
+    <div style="width: 100%; height: 5px; ">
+     
+    </div>
+    
+
+    <h4 style=" font-family: Sans-serif; font-weight: 200; font-weight: 200; color: orangered; margin-right: 20px;"> <a class="a-menu" href="index.html">Home</a></h4>
+    <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
+    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;"><a class="a-menu" href="products.html">Products</a></h4>
+    <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
+    <h4 class="a-menu" style=" font-family: Sans-serif;  font-weight: 200;max-lines: 1; margin-right: 20px;"><a class="a-menu" href="address.html">Address</a></h4>
+    <!-- <hr style="width: 0.1px; height: 20px; background-color: grey; margin-left: 10px; margin-right: 10px;"> -->
+    <h4 class="a-menu" style=" font-family: Sans-serif; font-weight: 200; margin-right: 20px;font-weight: bold;"><a class="a-menu-active" href="">Orders</a></h4>
+  
+    <div style="width: 100%; height: 5px; margin-left: 150px;">
+    
+    </div>
+
+
+
+    <a href="cart.html">
+
+        <div>
+         
+         <div id="cart-icon" class="cart-container" >
+           <i class="fa-solid fa-cart-arrow-down"></i>
+           <span class="cart-indicator">0</span>
+     </div>
+ 
+     </a>
+     
+    
+
+
+  </div>
+    <a id="login-pending" href="login.html" class="a-menu" style="width: 150px; margin-left: 20px; margin-right: 20px; display: flex;">
+      <div class="login-box">
+      <h4 style="margin-left: 10px; font-weight: 200;">Sign In</h4>
+      <i class="fa-regular fa-user" style="margin-left: 10px;"></i>
+    </div></a>
+
+
+     </a>
+
+
+ 
+    
+  </div>
+
+
+  <div class="toolbar-m" style="box-shadow: 0px 0px 0px white; border: 1px solid rgb(221, 218, 218); padding-left: 10px;">
+    <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px; margin-left: 10px;">
+      <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
+    </div>
+
+    <h3 style="margin-left: 7px; color: orangered;">Orders</h3>
+    
+  <a href="cart.html" style="margin-left: auto;">
+
+
+     
+     <div class="cart-container" >
+       <i class="fa-solid fa-cart-arrow-down"></i>
+       <span class="cart-indicator">0</span>
+ </div>
+
+ </a>
+
+
+    <div style="height: 40px; width: 40px; background-color: rgb(244, 244, 244); margin-left: 15px; margin-right: 15px; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px; display: flex; align-items: center; justify-content: center;">
+      <div id="menuToggle">
+        <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+      <ul id="menu" style="background-color: white;">
+        <div style="align-items: center; margin-bottom: 20px; display: flex; ">
+          <div style="background-color: orangered; border-radius: 10px; padding-left: 3px; padding-right: 3px; height: 42px; width: 42px;">
+            <img style="width: 40px; color: orangered;" src="Images/logo.png" alt="">
+          </div>
+
+          <h3 style="margin-left: 10px; color: orangered;">CircuitSource.in</h3>
+        </div>
+        <a href="index.html" style="text-decoration: none; color: black;">
+
+          <div style="display: flex; align-items: center; margin-left: 10px; height: 40px; ">
+            <i class="fa-solid fa-home"></i>
+            <h4 style="margin-left: 10px; font-weight: normal;">Home</h4>
+         </div>
+        </a>
+
+
+        <a href="products.html" style="text-decoration: none; color: black;">
+<div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+          <i style="margin-left: 2px;" class="fa-solid fa-shopping-bag"></i>
+          <h4 style="margin-left: 10px; font-weight: normal;">Products</h4>
+       </div>
+
+        </a>
+
+
+        <a href="address.html" style="text-decoration: none; color: black;">
+<div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+        <i style="margin-left: 0px;" class="fa-solid fa-address-book"></i>
+        <h4 style="margin-left: 10px; font-weight: normal;">My Address</h4>
+     </div>
+        </a>
+        <a href="cart.html" style="text-decoration: none; color: black;">
+<div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+      <i style="margin-left: 0px;" class="fa-solid fa-shopping-cart"></i>
+      <h4 style="margin-left: 10px; font-weight: normal;">My Cart</h4>
+   </div>
+        </a>
+        <a href="orders.html" style="text-decoration: none; color: black;">
+<div style="display: flex; align-items: center; margin-left: 10px; height: 40px;">
+    <i style="margin-left: 2px;" class="fa-solid fa-bag-shopping"></i>
+    <h4 style="margin-left: 10px; font-weight: normal;">My Orders</h4>
+ </div>
+
+        </a>         
+        
+
+ <a href="login.html"> <button id="login-button-m" style="border-radius: 10px; margin-top: 30px;" class="button">Login</button>
+</a>
+ <div id="profile-m" class="" style="display: none; border-radius: 10px; box-shadow: 0px 0px 5px rgb(197, 196, 196); width: 200px; height: auto; background-color: rgb(255, 255, 255); margin-top: 50px; right: 45px; padding: 10px;">
+
+  <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGFjsxZCvbMuKnsJHFywAKXzJh6SsPWVsifY_z36wVT9p38WQ3IQPDPDjhFPDyxv6YQY&usqp=CAU" alt="" style="width: 40px; height: 40px;">
+
+  <div style="display: block;">
+     <h5 id="name" style="margin-left: 10px; margin-top: 5px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">Ayush Soni</h5>
+  <h6 id="number" style="margin-left: 10px; margin-top: 0px; font-family: sans-serif; font-weight: normal; margin-bottom: 0px;">+91 9521532447</h6>
+
+  </div>
+
+  <i style="margin-left: 30px;" class="fa-solid fa-right-from-bracket"></i>
+
+
+  </div>
+  
+  
+  </div>
+
+      </ul>
+     </div>
+    </div>
+  </div>
+
+  
+
+  <div style="width: 100%; height: 80vh; " class="list-address">
+
+  <h1 style="margin-bottom: 0px; margin-top: 30px;">My Orders</h1>
+  <h5 style="margin-top: 0px; color: gray;">Here you can manage or track all your orders</h5>
+
+  <div id="orders-div" style="margin-bottom: 100px; padding-bottom: 100px;" class="grid-container-address">
+
+    
+  </div>
+
+  <div id="no-orders" class="no-address" style="display: none;">
+    <img style="width: 100px;" src="Images/order.png" alt="">
+    <h4 style="margin: 0px;">No Orders Found</h4>
+    <h6 style="font-weight: normal; margin: 0px;">place a order to view and track here</h6>
+  </div>
+
+  <div id="loading" style="width: 100%; height: 30vh; display: flex; align-items: center; text-align: center; justify-content: center;" >
+  
+    <span class="loader" style="margin-bottom: 100px;"></span>
+
+    
+    
+
+  </div>
+  </div>
+
+
+ 
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="Script/orders.js" charset="utf-8"></script>
+
+</body>
+</html>
+
+
+

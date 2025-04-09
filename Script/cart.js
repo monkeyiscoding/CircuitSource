@@ -69,11 +69,12 @@ const hideDropdown = () => {
 
 var addressCheck = false;
 var count = 0;
+var delivery_amount = 0;
 var tPrice = 0;
 var cartTotal = 0;
 var cartTotalDiscount = 0;
 var totaltax = 0;
-
+let delivery = "";
 
 if(isMobileScreen()){
   loadCartProductMobile();
@@ -103,8 +104,11 @@ function loardCartCount(){
         else{
             $(".cart-indicator").html("0");
         }
+       
         
     });
+
+    
 
 }
 
@@ -451,10 +455,10 @@ function loadCartProduct() {
         var t = dp - discount + totaltax
         $("#total-amount").html("₹"+t.toFixed(2))
       
-  
+
       });
   
-     
+      setPrice();
   
     });
   }
@@ -501,7 +505,7 @@ function loadCartProduct() {
   
       });
   
-     
+      setPrice();
   
     });
   }
@@ -594,6 +598,8 @@ var isChecked = checkbox.checked;
   }
   
 
+  var address = "";
+
 
   var number = localStorage.getItem("number");
   function loadDefaultAddress(){
@@ -601,7 +607,7 @@ var isChecked = checkbox.checked;
     
     query.on("value", function(snapshot) {
     
-        var key = snapshot.val().primary_address;
+        var key = snapshot.val().default_location.key;
        
         var query2 = firebase.database().ref("Users/"+number+"/location/"+key)
 
@@ -610,14 +616,12 @@ var isChecked = checkbox.checked;
             if(snapshot.exists()){
                 addressCheck = true;
             }
-            var address = snapshot.val().address;
-            var pin = snapshot.val().pincode;
-            var city = snapshot.val().city;
-            var state = snapshot.val().state;
-            var phone = snapshot.val().mobileNumber;
+            address = snapshot.val().location;
+            var pin = snapshot.val().pin_code;
+          
 
-            $("#default-address").html(address+"\n\n"+city+", "+state+", "+pin);
-            $("#default-address-m").html(address+"<br>"+city+", "+state+", "+pin+"<br><br>PH: "+phone);
+            $("#default-address").html(address+", "+pin+",<br> <br>\n\nPhone: "+number);
+            $("#default-address-m").html(address+", "+pin+",<br> <br>\n\nPhone: "+number);
         })
 
     })
@@ -644,4 +648,203 @@ document.getElementById('closeBottomSheetNow').addEventListener('click', functio
  // Check if the screen width is less than a certain threshold (e.g., 768px for tablets)
  function isMobileScreen() {
   return window.innerWidth < 908;
+}
+
+function openOrderDialog() {
+  document.getElementById("order-dialog").style.display = "flex";
+}
+function closeOrderDialog() {
+  document.getElementById("order-dialog").style.display = "none";
+}
+
+function toggleGSTFields() {
+  const gstFields = document.getElementById("gst-fields");
+  gstFields.style.display = document.getElementById("hasGST").checked ? "block" : "none";
+}
+
+window.onload = function () {
+  // Load saved values from localStorage
+  const fields = ["businessName", "stategst", "email", "pincodegst", "gstin", "street", "city"];
+  fields.forEach(field => {
+    const value = localStorage.getItem(field);
+    if (value) {
+      document.getElementById(field).value = value;
+    }
+  });
+
+  const hasGST = localStorage.getItem("hasGST") === "true";
+  document.getElementById("hasGST").checked = hasGST;
+
+  // Show GST fields if previously checked
+  document.getElementById("gst-fields").style.display = hasGST ? "block" : "none";
+};
+
+document.getElementById("hasGST").addEventListener("change", function () {
+  document.getElementById("gst-fields").style.display = this.checked ? "block" : "none";
+});
+
+function placeOrder() {
+  const businessName = document.getElementById("businessName").value.trim();
+  const state = document.getElementById("stategst").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const pincode = document.getElementById("pincodegst").value.trim();
+  const hasGST = document.getElementById("hasGST").checked;
+
+  const gstin = hasGST ? document.getElementById("gstin").value.trim() : "";
+  const street = hasGST ? document.getElementById("street").value.trim() : "";
+  const city = hasGST ? document.getElementById("city").value.trim() : "";
+
+
+  var finalAmount = 0;
+
+  // Validation
+if (!businessName.trim() || !state.trim() || !email.trim() || !pincode.trim()) {
+  alert("Please fill all required fields.");
+  return;
+}
+
+if (hasGST && (!gstin.trim() || !street.trim() || !city.trim())) {
+  alert("Please fill all GST-related fields.");
+  return;
+}
+
+closeOrderDialog();
+  // Save all to localStorage
+  localStorage.setItem("businessName", businessName);
+  localStorage.setItem("stategst", state);
+  localStorage.setItem("email", email);
+  localStorage.setItem("pincodegst", pincode);
+  localStorage.setItem("hasGST", hasGST);
+
+  if (hasGST) {
+    localStorage.setItem("gstin", gstin);
+    localStorage.setItem("street", street);
+    localStorage.setItem("city", city);
+  }
+
+  // Razorpay Payment Integration
+  const number = localStorage.getItem("number") || "";
+  const username = localStorage.getItem("username") || "Customer";
+
+  var a = (delivery_amount + cartTotal) * 0.18;
+  var b = delivery_amount + cartTotal + a;
+  var finalAmount = Math.round(b);
+
+  const amountInPaise = Math.round(finalAmount * 100);
+
+  const options = {
+    key: "rzp_test_im4RuRGqzvOD57", // replace with live key in production
+    amount: amountInPaise,
+    currency: "INR",
+    name: "Qphix",
+    description: "Qphix Institution",
+    image: "https://yourdomain.com/logo.png",
+    handler: function (response) {
+      console.log("Payment Success:", response);
+      // Show success dialog
+    showSuccessDialog();
+    },
+    prefill: {
+      contact: number,
+      email: email,
+    },
+    notes: {
+      username: username,
+      business_name: businessName,
+      email: email,
+      gstCheck: hasGST,
+      shipping_address: address,
+      pin_code: pincode,
+      delivery_amount: delivery_amount,
+      gst_number: gstin,
+      street_address: street,
+      city: city,
+      delivery: delivery,
+      finalT: tPrice,
+      phone: number,
+      itemTotal: cartTotal,
+      cartCheck: "true",
+    },
+    theme: {
+      color: "#c7451a",
+    },
+
+  modal: {
+    // ❌ When closed without payment
+    ondismiss: function () {
+      alert("Payment failed or was cancelled.");
+    }
+  }
+  };
+
+  const rzp = new Razorpay(options);
+  rzp.open();
+}
+
+function showSuccessDialog() {
+  document.getElementById("success-dialog").style.display = "flex";
+}
+
+function viewOrder() {
+  window.location.href = "myorders.html"; // change to your actual order page
+}
+
+let normal, premium;
+function setPrice(){
+   // "Normal" or "Premium"
+ totaltax += delivery_amount * 0.18;
+ var a = tPrice + totaltax;
+
+
+if (cartTotal < 5000) {
+  premium = 199.00;
+  normal = 149.00;
+} else if (cartTotal <= 8000) {
+  premium = 299.00;
+  normal = 199.00;
+} else if (cartTotal <= 10000) {
+  premium = 299.00;
+  normal = 199.00;
+} else {
+  premium = 349.00;
+  normal = 249.00;
+}
+
+delivery_amount = normal;
+document.getElementById("delivery-amount").innerHTML = `₹${delivery_amount.toFixed(2)}`;
+var a = (delivery_amount + cartTotal) * 0.18;
+var b = delivery_amount + cartTotal + a;
+
+$("#total-tax-m").html("₹"+a.toFixed(2))
+$("#total-amount-m").html("₹"+b.toFixed(2))
+
+finalAmount = b;
+// Show prices in UI
+document.getElementById("normalPrice").textContent = `₹${normal.toFixed(2)}`;
+document.getElementById("premiumPrice").textContent = `₹${premium.toFixed(2)}`;
+
+
+}
+
+// Handle selection
+function setDeliveryAmount(type) {
+  if (type === "normal") {
+    delivery_amount = normal;
+    delivery = "Normal delivery";
+    
+  } else {
+    delivery_amount = premium;
+    delivery = "Premium delivery";
+  }
+
+  var a = (delivery_amount + cartTotal) * 0.18;
+  var b = delivery_amount + cartTotal + a;
+
+  $("#total-tax-m").html("₹"+a.toFixed(2))
+  $("#total-amount-m").html("₹"+b.toFixed(2))
+  finalAmount = b;
+
+  document.getElementById("delivery-amount").innerHTML = `₹${delivery_amount.toFixed(2)}`;
+  console.log("Delivery Type:", delivery.toFixed(2));
+  console.log("Delivery Amount:", delivery_amount.toFixed(2));
 }
