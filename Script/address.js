@@ -10,11 +10,7 @@ const firebaseConfig = {
   };
   
   firebase.initializeApp(firebaseConfig);
-  localStorage.setItem("recent-search","");
-  localStorage.setItem("number","+911111111111");
-  localStorage.setItem("userislogin","true");
-  localStorage.setItem("email","as8822977@gmail.com");
-  localStorage.setItem("username","Ayush Soni");
+
   
 
 checkLogin();

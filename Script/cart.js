@@ -44,6 +44,8 @@ const hideDropdown = () => {
   var email = localStorage.getItem("email");
   var number = localStorage.getItem("number");
 
+  alert(number)
+
 
 
   if(lc == "true"){
@@ -733,7 +735,7 @@ closeOrderDialog();
   const amountInPaise = Math.round(finalAmount * 100);
 
   const options = {
-    key: "rzp_test_im4RuRGqzvOD57", // replace with live key in production
+    key: "rzp_live_FzUTMPEhyYsa7d", // replace with live key in production
     amount: amountInPaise,
     currency: "INR",
     name: "Qphix",
