@@ -1,4 +1,4 @@
-const firebaseConfig = {
+  const firebaseConfig = {
     apiKey: "AIzaSyBpRrmTK4449iHbUW_jNE1CjaWYTdmGdaY",
     authDomain: "qphix-training-193c9.firebaseapp.com",
     databaseURL: "https://qphix-training-193c9-default-rtdb.firebaseio.com",
@@ -8,11 +8,12 @@ const firebaseConfig = {
     appId: "1:343406672827:web:f2c02f8cfdb6c9afa3e29e",
     measurementId: "G-E7PMVRGH0C"
   };
-  
+
+
   firebase.initializeApp(firebaseConfig);
 
 
-checkLogin();
+  checkLogin();
 
 
   // Get the dropdown elements
@@ -43,9 +44,6 @@ const hideDropdown = () => {
   var name = localStorage.getItem("username");
   var email = localStorage.getItem("email");
   var number = localStorage.getItem("number");
-
-  alert(number)
-
 
 
   if(lc == "true"){
@@ -80,12 +78,13 @@ let delivery = "";
 
 if(isMobileScreen()){
   loadCartProductMobile();
-
 }
 
 if(!isMobileScreen()){
   loadCartProduct();
 }
+
+
 
 //updateCart();
 loardCartCount();
@@ -700,17 +699,18 @@ function placeOrder() {
   var finalAmount = 0;
 
   // Validation
-if (!businessName.trim() || !state.trim() || !email.trim() || !pincode.trim()) {
-  alert("Please fill all required fields.");
-  return;
-}
+  if (!businessName.trim() || !state.trim() || !email.trim() || !pincode.trim()) {
+    alert("Please fill all required fields.");
+    return;
+  }
 
-if (hasGST && (!gstin.trim() || !street.trim() || !city.trim())) {
-  alert("Please fill all GST-related fields.");
-  return;
-}
+  if (hasGST && (!gstin.trim() || !street.trim() || !city.trim())) {
+    alert("Please fill all GST-related fields.");
+    return;
+  }
 
-closeOrderDialog();
+
+  closeOrderDialog();
   // Save all to localStorage
   localStorage.setItem("businessName", businessName);
   localStorage.setItem("stategst", state);
@@ -762,7 +762,7 @@ closeOrderDialog();
       street_address: street,
       city: city,
       delivery: delivery,
-      finalT: tPrice,
+      finalT: b,
       phone: number,
       itemTotal: cartTotal,
       cartCheck: "true",

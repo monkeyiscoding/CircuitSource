@@ -17,10 +17,11 @@ const firebaseConfig = {
   // Call on page load or tab switch
   loadMyOrders();
   checkLogin();
+  checkLogin();
 
   function checkLogin(){
     var lc = localStorage.getItem("userislogin");
-   //var lc = "true";
+  // var lc = "true";
    
   
     if(lc == "true"){
@@ -28,7 +29,11 @@ const firebaseConfig = {
       $("#login-pending").css("display","none");
      
       
-      checkDevice(deviceId);
+      //checkDevice(deviceId);
+    }
+
+    else{
+      location.href = "login.html";
     }
   
   

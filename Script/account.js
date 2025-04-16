@@ -86,6 +86,8 @@ fetch('https://ipinfo.io/json?token=b9158001bffcc8')
     location.href = "login.html";
   }
 
+
+
   function saveUserData() {
     const imageInput = document.getElementById('image-input');
     const profileImage = document.getElementById('profile-image').src;

@@ -30,6 +30,7 @@
                     onclick="login()">Login</button>
         </div>
 
+
         <a onclick="openDialogCheck()">
             <div class="options-div" style="margin-top: 155px;">
                 <i class="icon-bottom-bar-deselected" data-feather="edit"></i>
@@ -42,12 +43,26 @@
             </div>
         </a>
 
-        <a href="orders.html">
+
+
+        <a href="myorders.html">
             <div class="options-div">
                 <i class="icon-bottom-bar-deselected" data-feather="shopping-bag"></i>
                 <div>
                     <h4>My Orders</h4>
-                    <h6 style="color: gray; font-weight: 300;">Click here to view your previous orders</h6>
+                    <h6 style="color: gray; font-weight: 300;">Click here to view your all orders</h6>
+                </div>
+                <i class="icon-bottom-bar-deselected" style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" 
+                   data-feather="chevron-right"></i>
+            </div>
+        </a>
+
+        <a href="myorders.html">
+            <div class="options-div">
+                <i class="icon-bottom-bar-deselected" data-feather="shopping-cart"></i>
+                <div>
+                    <h4>My Cart</h4>
+                    <h6 style="color: gray; font-weight: 300;">Click here to view your all your cart products</h6>
                 </div>
                 <i class="icon-bottom-bar-deselected" style="margin-left: auto; color: rgb(184, 184, 184); margin-right: 10px;" 
                    data-feather="chevron-right"></i>
@@ -162,7 +177,7 @@
     <div id="snackbar">Some text some message..</div>
 
     <!-- Bottom Navigation Bar -->
-    <div class="wrapper-2" style="z-index: 1000; width: 100%; position: absolute; height: 60px;">
+    <div class="wrapper-2" style=" width: 100%; position: absolute; height: 1000px;">
         <div id="bottom-bar" style="height: 70px;">
             <a href="index.html" style="margin-left: auto;">
                 <div class="bottom-bar-element" style="color: white;">
@@ -176,9 +191,12 @@
                 </div>
             </a>
 
-            <div class="bottom-bar-element">
-                <i class="icon-bottom-bar-deselected" data-feather="bell"></i>
-            </div>
+            
+            <a href="myorders.html" style="margin-left: auto;">
+                <div class="bottom-bar-element">
+                            <i class="icon-bottom-bar-deselected" data-feather="briefcase" style="color: black;"></i>
+                        </div>
+                          </a>
 
             <a href="cart.html" style="margin-left: auto;">
                 <div class="bottom-bar-element cart-icon-container">
